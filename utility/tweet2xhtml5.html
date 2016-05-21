@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="ja" xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tweet2XHTML5</title>
+    <meta name="author" content="SENOO, Ken" />
+    <script>
+      function convert() {
+        var value = document.getElementById("input").value;
+        value = value.replace(/<br>/g, "<br />");
+        value = value.replace(/&mdash;/g, "—");
+        value = value.replace(/<script.*<\/script>/g, "");
+          var target = document.getElementById("output");
+          target.value = value;
+      }
+        </script>
+      </head>
+      <body>
+        <h1>Tweet2XHTML5</h1>
+        <main>
+          <p>Twitterの埋め込みツイートの形式をHTML5からXHTML5に変換する。これによりXHTML5文書中にツイートをコピー・ペーストで簡単に取り込めるようにする。</p>
+          <p>変換内容は以下3点。</p>
+          <ol>
+            <li>br要素に終端スラッシュを付与（<code>&lt;br&gt;</code> -&gt; <code>&lt;br /&gt;</code>）。</li>
+            <li>文字実体参照<code>&amp;mdash;</code>の置換（<code>&amp;mdash;</code> -&gt; <code>— </code>）。</li>
+            <li>script要素の削除。</li>
+          </ol>
+          <form>
+            <fieldset>
+              <legend>変換元HTML </legend>
+              <textarea id="input" placeholder="ここに記入してね。" style="width: 100%; height: 10em;"></textarea>
+              <button type="button" onclick="convert();">変換</button>
+            </fieldset>
+          </form>
+          <form>
+            <fieldset>
+              <legend>変換後HTML</legend>
+              <output id="output" style="font-family: monospace;">ここに表示される。</output>
+            </fieldset>
+          </form>
+        </main>
+        <footer>
+          <p> <small>Author: SENOO, Ken;  License: CC0; Created date: <time>2016-05-21</time></small></p>
+        </footer>
+      </body>
+    </html>
