@@ -6,13 +6,13 @@
     <title>Tweet2XHTML</title>
     <meta name="author" content="SENOO, Ken" />
     <script>
-      function convert() {
+      function tweet2xhtml() {
         var value = document.getElementById("input").value;
         value = value.replace(/<br>/g, "<br />");
         value = value.replace(/&mdash;/g, "—");
         value = value.replace(/<script.*<\/script>/g, "");
-          var target = document.getElementById("output");
-          target.value = value;
+        var target = document.getElementById("output");
+        target.value = value;
       }
     </script>
   </head>
@@ -20,6 +20,7 @@
     <h1>Tweet2XHTML</h1>
     <main>
       <p>Twitterの埋め込みツイートの形式をHTMLからXHTMLに変換する。これによりXHTML文書中にツイートをコピー・ペーストで簡単に取り込めるようにする。</p>
+      <p>紹介記事：<a href="http://myfuturesightforpast.blogspot.jp/2016/05/twitterxhtmltweet2xhtml.html">My Future Sight for Past: Twitterの埋め込みツイートのXHTMLへの変換ページTweet2XHTML</a>a></p>
       <p>変換内容は以下3点。</p>
       <ol>
         <li>br要素に終端スラッシュを付与（<code>&lt;br&gt;</code> -&gt; <code>&lt;br /&gt;</code>）。</li>
@@ -30,7 +31,7 @@
         <fieldset>
           <legend>変換元HTML</legend>
           <textarea id="input" placeholder="ここに記入してね。" style="width: 100%; height: 10em;"></textarea>
-          <button type="button" onclick="convert();">変換</button>
+          <button type="button" onclick="tweet2xhtml();">変換</button>
         </fieldset>
       </form>
       <form>
