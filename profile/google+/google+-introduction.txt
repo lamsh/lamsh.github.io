@@ -1,0 +1,83 @@
+Start on 2012-04.
+
+==My Google+ policy==
+* 備忘録として活用。
+* 他人の役に立つように公開で投稿。
+* 投稿の行頭に「@Notebook#Tag1#Tag2#...#Tagn#タイトル」という書式でノートブック名とタグを書いています。これはEvernoteへの自分の投稿内容の記録と整理のため。
+
+* サークルは自分の興味（解析、研究、LaTeX、フリーソフト、ライフハック、趣味、動物愛護、菜食主義（ベジタリアン））に関する投稿者を勝手に追加。
+* 公開されている投稿内容や基本情報で追加するか判断。
+* 投稿の共有や+1、コメントはご自由にどうぞ。
+Post as my memo. Basically open.
+Circle is my interest (famous, analysis, study, LaTeX, Open Souce Soft (OSS), life hack).
+
+==Study==
+===Master===
+テーマ：副次的効果のための大気質モデルの精度向上の検討
+「地球温暖化防止」のため低炭素社会（LCS: Low Carbon Society）実現が必要。
+*  LCS実現の付随利益の評価により実施を支援
+* 排出量と大気質の関係を明らかにする。
+  解析の使用モデル
+* 気象モデルWRF (Weather Research and Forecasting model)
+* 大気化学モデルCMAQ (Community Multiscale Air Quality)
+* 排出処理モデルSMOKE (Sparse Matrix Operator Kernel Emisions)
+* 植生起源排出モデルMEGAN（Model of Emissions Gases and Aerosol from Nature）
+
+===Bachelor===
+テーマ：有限要素法（Finite Element Method:FEM）により，熱の2次元定常移流拡散問題の解析。
+* 具体的にはFortran77言語で解析するためのプログラムを作成。
+
+==Hobby==
+===Game===
+I love video games.
+自分に影響を与えたゲーム(My effected video games)
+* MOTHER2
+* 天地創造
+* 天外魔境ZERO
+
+===Interest===
+* 自由ソフト(free software)
+* オープンデータ(open data)
+* FOSS4G
+* CSS組版
+* OpenCAE (OpenFOAM)
+* 大気質(air quality)
+* 菜食主義(vegetarism)
+* 動物愛護(animal welfare)
+
+===Free software===
+学部時代にLaTeXを習い，大学院で，有料ソフトがいけないことに気付く。知名度とシェアから高い有料ソフトの使用を強制されている。
+  文書作成に必要なOfficeソフトや，GISソフトは有料であるべきでない。そして，フリーでそれらは存在している！OSにLinux，OfficeソフトにLibreOffice、GISもGRASSやQGISを使えば無料でできる！
+
+===Favorite software===
+* Python
+* C++
+* QGIS
+* Vim
+* LibreOffice
+* zsh
+* tmux
+* Amaya
+* LyX
+* JabRef
+
+==Personality==
+*  周りの人からは，おとなしそう，まじめ，理屈っぽそう，変わった人という印象をよくもたれる。
+*  人見知りで控えめな態度をとることが多い。
+* みんな違った方が絶対におもしろい。みんな自分だったら，とてもつまらない世界。
+
+==Goal==
+* にこにこしながら毎日過ごすこと
+* 優しくて，強くて，賢くて，思いやりがあって，あきらめない『いい人』になること
+* 自由ソフト主義
+* 菜食主義
+* 脱Google
+
+==嫌いなもの(Hatred)==
+* 権力(power)
+* 独占(monopoly)
+
+==雑感==
+* 世の中にはルールがある。しかし、明らかにされていない。知っている人と知らない人とで格差ができ，不公平な世の中になっている。
+* お金持ちがよりお金持ちになりやすい仕組みの世の中。何か変。
+* 将来のことなんて誰にもわからない。正しいかどうかなんて誰にもわからない。できることは全てをオープンにして誰でも検証できるようにすることだ。クローズドで一部の人間だけの手でなされ，誰にも検証できない成果に正義などあるはずがない。
