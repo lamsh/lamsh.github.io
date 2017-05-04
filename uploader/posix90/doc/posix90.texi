@@ -1,0 +1,1422 @@
+\input texinfo @c -*-texinfo-*-
+@c %**start of header
+@setfilename posix90.info
+@settitle Fortran 95 Posix bindings
+@setchapternewpage odd
+@c %**end of header
+
+@titlepage
+@title Posix90
+@subtitle Fortran 95 Posix bindings
+@author by Klaus Ramstock
+@end titlepage
+
+@c    Node, Next, Previous, Up
+@node Top ,     ,         , (dir)
+
+@ifinfo
+This file documents the Fortran 95 Posix bindings which can be used to
+interact with the OS from within Fortran.
+@end ifinfo
+
+@menu
+* Overview::              Overview of Posix90
+* Linking::               How to bind the library
+* Using::                 Using the library
+* Modules::               What is there
+* Examples::              Example programs
+* Concept Index::         Index of concepts
+* Copying::               Your rights
+@end menu
+
+@c    Node,     Next,    Previous, Up
+@node Overview, Linking,        , Top
+@chapter Overview of @code{Posix90}
+
+@section About @code{Posix90}
+Why Posix90? After all, you who read this document know most likely
+enough about mixed-language programming so you could write your own
+stubs. But such things tend to be quick hacks, and I wanted a clean
+solution: Here it is!
+
+@section Portability
+At present, @code{Posix90} is limited to gfortran and GNU/Linux. This
+might change if volunteers are found which port.
+
+@node Linking, Using, Overview, Top 
+@chapter Linking against the @code{Posix90} library
+
+It is assumed here that you build the library from source. This is
+necessary, as the .mod files@footnote{.mod files hold the information
+which data and which routines constitute a module. They are created as
+a module is compiled and are needed when this module is used
+elsewhere} which gfortran emits are still in a state of flux. It is
+too much work to provide them for all formats, compiling yourself is
+by far the best solution. 
+
+Place all .mod files in one directory, say /usr/local/include/f90 and
+place libposix90.a in another- say /usr/local/lib. You then need three
+compiler switches:
+@itemize @bullet
+@item
+-I /usr/local/include/f90 , to tell the compiler where to search for
+.mod files
+
+@item
+-lposix90, to tell the compiler to bind against libposix90.a 
+
+@item
+-L/usr/local/lib , to tell the compiler where to find libposix90.a
+@end itemize
+Note that there is a space after -I, but no space after -L.
+
+@node Using, Modules, Linking, Top
+@chapter Using the library
+@section Calling and naming conventions
+
+Wherever possible, the names of the original posix routines are
+used. char * arguments are mapped to character(len=*)@footnote{Be
+carefull with trailing spaces, use trim() or string(1:len) a lot}. If
+the string is intent(out), an optional len argument is given to allow
+for trailing blanks. Int simply maps to integer. Small typedef'ed
+types like pid_t map to integer(pid_kind). More complex types like
+FILE map to type(FILE). Note that you should never pass derived types
+directly to C, as they are build alike their C pendants, but lack
+padding, makeing them assignment incompatible! Another issue here is
+the -fpackderived compiler switch.
+
+All routines which possibly fail have an optional errno argument. If
+present, an error condition ( 0 == no error) is returned. If not
+present, an error message is printed if appropriate and execution
+stopped. All routines reset errno on entry. This behaviour is
+different from C, but makes it much easier to attribute an error to
+the offending routine.
+
+@node Modules, Examples, Using, Top
+@chapter @code{Posix90} modules available
+@menu
+* f90_unix_dir::        Directories and files
+* f90_unix_dirent::     Directory reading
+* f90_unix_env::        Environment
+* f90_unix_errno::      Error codes
+* f90_unix_file::       File characteristics
+* f90_unix_io::         Input/Output
+* f90_unix_proc::       Process management
+* f90_unix_regexp::     Regular expressions
+* f90_unix_signal::     Signal management
+* f90_unix_time::       Time types & conversion
+@end menu
+
+
+
+@node f90_unix_dir, f90_unix_dirent, , Modules
+@section Module f90_unix_dir
+@cindex f90_unix_dir
+
+@subsection Parameters and Types
+
+@cindex mode_kind
+@smallexample
+integer, parameter :: mode_kind
+@end smallexample
+Integer kind used for file permissions.
+
+@subsection Subroutines and Functions
+
+@cindex chdir
+@smallexample
+subroutine chdir(path, errno)
+character(len=*), intent(in) :: path
+integer, intent(out), optional :: errno
+@end smallexample
+See man 2 chdir
+
+@cindex getcwd
+@smallexample
+subroutine getcwd(path, lenpath, errno)
+character(len=*), intent(out) :: path
+integer, intent(out), optional :: lenpath, errno
+@end smallexample
+See man 2 getcwd
+
+@cindex link
+@smallexample
+subroutine link(existing, new, errno)
+character(len=*), intent(in) :: existing, new
+integer, intent(out), optional :: errno
+@end smallexample
+See man 2 link
+
+@cindex subroutine mkdir
+@smallexample
+subroutine mkdir(path, mode, errno)
+character(len=*), intent(in) :: path
+integer(mode_kind), intent(in) :: mode
+integer, intent(out), optional :: errno
+@end smallexample
+See man 2 mkdir
+  
+@cindex mkfifo
+@smallexample
+subroutine mkfifo(path, mode, errno)
+character(len=*), intent(in) :: path
+integer(mode_kind), intent(in) :: mode
+integer, intent(out), optional :: errno
+@end smallexample
+See man 2 mkfifo
+ 
+@cindex rmdir
+@smallexample
+subroutine rmdir(path, errno)
+character(len=*), intent(in) :: path
+integer, intent(out), optional :: errno
+@end smallexample
+See man 2 rmdir
+
+@cindex unlink
+@smallexample
+subroutine unlink(path, errno)
+character(len=*), intent(in) :: path
+integer, intent(out), optional :: errno
+@end smallexample
+See man 2 unlink
+
+@node f90_unix_dirent, f90_unix_env, f90_unix_dir, Modules
+@section Module f90_unix_dirent
+@cindex f90_unix_dirent
+
+@subsection Parameters and Types
+@cindex dir_kind
+@smallexample
+integer, parameter :: dir_kind
+@end smallexample
+
+@cindex DIR
+@smallexample
+type DIR
+   integer(dir_kind):: dir
+end type DIR
+@end smallexample
+Complex type handled by the routines in this section. You should not
+need to access its components directly.
+
+@subsection Subroutines and Functions
+
+@cindex closedir
+@smallexample
+subroutine closedir(dirp, errno)
+  type(dir), intent(inout) :: dirp
+  integer, intent(out), optional :: errno
+@end smallexample
+See man 3 closedir.
+
+@cindex opendir
+@smallexample
+subroutine opendir(dirname, dirp, errno)
+  character(len=*), intent(in) :: dirname
+  type(dir), intent(inout) :: dirp
+  integer, intent(out), optional :: errno
+@end smallexample
+See man 3 opendir.
+
+@cindex readdir
+@smallexample
+subroutine readdir(dirp, name, lenname, errno)
+  type(dir), intent(inout) :: dirp
+  character(len=*), intent(out) :: name
+  integer, intent(out) :: lenname
+  integer, intent(out), optional :: errno
+@end smallexample
+See man 3 readdir. The lenname argument is needed in case of trailing
+blanks in @code{name}.
+
+@cindex rewinddir
+@smallexample
+subroutine rewinddir(dirp, errno)
+  type(dir), intent(inout) :: dirp
+  integer, intent(out), optional :: errno
+@end smallexample
+See man 3 rewinddir.
+
+@node f90_unix_env, f90_unix_errno, f90_unix_dirent, Modules
+@section Module f90_unix_env
+@cindex f90_unix_env
+@subsection Parameters and Types
+@cindex CLOCK_KIND 
+@cindex LONG_KIND 
+@cindex GID_KIND 
+@cindex UID_KIND 
+@cindex PID_KIND 
+@cindex SIZET_KIND 
+@smallexample
+integer, parameter :: CLOCK_KIND 
+integer, parameter :: LONG_KIND 
+integer, parameter :: GID_KIND 
+integer, parameter :: UID_KIND 
+integer, parameter :: PID_KIND 
+integer, parameter :: SIZET_KIND 
+@end smallexample
+Integer kind parameters for various data types.
+
+@cindex NULL 
+@smallexample
+integer, parameter :: NULL 
+@end smallexample
+
+@cindex L_CTERMID 
+@smallexample
+integer, parameter :: L_CTERMID 
+@end smallexample
+Max. length of the result of @code{ctermid()}.
+
+@cindex SC_ARG_MAX 
+@cindex SC_CHILD_MAX 
+@cindex SC_HOST_NAME_MAX 
+@cindex SC_LOGIN_NAME_MAX 
+@cindex SC_CLK_TCK 
+@cindex SC_OPEN_MAX 
+@cindex SC_PAGESIZE 
+@cindex SC_RE_DUP_MAX 
+@cindex SC_STREAM_MAX 
+@cindex SC_SYMLOOP_MAX 
+@cindex SC_TTY_NAME_MAX 
+@cindex SC_TZNAME_MAX 
+@cindex SC_VERSION 
+@smallexample
+integer, parameter :: SC_ARG_MAX 
+integer, parameter :: SC_CHILD_MAX 
+integer, parameter :: SC_HOST_NAME_MAX 
+integer, parameter :: SC_LOGIN_NAME_MAX 
+integer, parameter :: SC_CLK_TCK 
+integer, parameter :: SC_OPEN_MAX 
+integer, parameter :: SC_PAGESIZE 
+integer, parameter :: SC_RE_DUP_MAX 
+integer, parameter :: SC_STREAM_MAX 
+integer, parameter :: SC_SYMLOOP_MAX 
+integer, parameter :: SC_TTY_NAME_MAX 
+integer, parameter :: SC_TZNAME_MAX 
+integer, parameter :: SC_VERSION 
+@end smallexample
+Possible values for the name argument to @code{sysconf()}.
+
+@smallexample
+type tms
+   sequence
+   integer(clock_kind):: utime, stime,cutime,cstime
+end type tms
+@end smallexample
+Structure used in @code{times()}. See man 2 times.
+  
+@smallexample
+type utsname
+   sequence
+   character(len=80):: sysname, nodename, release, version, machine
+end type utsname
+@end smallexample
+Structure used in uname(). See man 2 uname.
+
+@subsection Subroutines and Functions
+@cindex clk_tck
+@smallexample
+integer(kind=clock_kind) function clk_tck()
+@end smallexample
+Returns the clock ticks per second.
+ 
+@cindex ctermid
+@smallexample
+character(len=L_CTERMID) function ctermid(len)
+  integer, intent(out), optional :: len
+@end smallexample
+  
+@cindex getarg2
+@smallexample
+subroutine getarg2(k, arg, lenarg, errno)
+  integer, intent(in) :: K
+  character(len=*), intent(out), optional :: arg
+  integer, intent(out), optional :: lenarg, errno
+@end smallexample
+This routine is called @code{getarg2} to avoid a name clash with the build-in
+@code{getarg}. Note that @code{lenarg} is at present always
+@code{len_trim(arg)} .
+
+@cindex getegid
+@smallexample
+integer(GID_KIND) function getegid()
+@end smallexample
+  
+@cindex getenv2
+@smallexample
+subroutine getenv2(name, value, lenvalue, errno)
+  character(len=*), intent(in) :: name
+  character(len=*), intent(out), optional :: value
+  integer, intent(out), optional :: lenvalue, errno
+@end smallexample
+This routine is called @code{getenv2} to avoid a name clash with the build-in
+@code{getenv}. Note that @code{lenvalue} is at present always
+@code{len_trim(value)} .
+
+@cindex geteuid
+@smallexample
+integer(uid_kind) function geteuid()
+  integer(uid_kind),external::c_geteuid
+  geteuid = c_geteuid()
+@end smallexample
+
+@cindex getgid
+@smallexample
+integer(gid_kind) function getgid()
+@end smallexample
+ 
+@cindex getgroups
+@smallexample
+subroutine getgroups(grouplist, ngroups, errno)
+  integer(gid_kind), optional :: grouplist(:)
+  integer, optional, intent(out) :: ngroups, errno
+@end smallexample
+
+@cindex gethostname
+@smallexample
+subroutine gethostname(name, lenname, errno)
+  character(len=*), optional, intent(out) :: name
+  integer, optional, intent(out) :: lenname, errno
+@end smallexample
+
+@cindex getlogin
+@smallexample
+subroutine getlogin(name, lenname, errno)
+  character(len=*), optional, intent(out) :: name
+  integer, optional, intent(out) :: lenname, errno
+@end smallexample
+    
+@cindex getpgrp
+@smallexample
+integer(PID_KIND) function getpgrp()
+@end smallexample
+ 
+@cindex getppid
+@smallexample
+integer(PID_KIND) function getppid()
+@end smallexample
+  
+@cindex getuid
+@smallexample
+integer(UID_KIND) function getuid()
+@end smallexample
+  
+@cindex setgid
+@smallexample
+subroutine setgid(gid, errno)
+    integer(GID_KIND), intent(in) :: gid
+    integer, intent(out), optional :: errno
+@end smallexample
+
+@cindex setpgid
+@smallexample
+subroutine setpgid(gid, pgid, errno)
+  integer(GID_KIND), intent(in) :: gid, pgid
+  integer, intent(out), optional :: errno
+@end smallexample
+  
+@cindex setsid
+@smallexample
+subroutine setsid(errno)
+  integer, intent(out), optional :: errno
+@end smallexample
+  
+@cindex setuid
+@smallexample
+subroutine setuid(gid, errno)
+  integer(UID_KIND), intent(in) :: gid
+  integer, intent(out), optional :: errno
+@end smallexample
+  
+@cindex sysconf
+@smallexample
+subroutine sysconf(name, val,errno)
+    integer, intent(in) :: name
+    integer(long_kind), intent(out) :: val
+    integer, intent(out), optional :: errno
+@end smallexample
+
+@cindex time
+@smallexample
+integer(TIME_KIND) function time(errno)
+  integer, optional, intent(out) :: errno
+  integer(TIME_KIND), external :: c_time
+@end smallexample
+  
+@cindex times
+@smallexample
+integer(CLOCK_KIND) function times(buffer, errno)
+    type(tms) :: buffer
+    integer, optional, intent(out) :: errno
+@end smallexample
+  
+@cindex uname
+@smallexample
+subroutine uname(name, errno)
+  type(utsname), intent(out) :: name
+  integer, optional, intent(out) :: errno
+@end smallexample
+
+@node f90_unix_errno, f90_unix_file, f90_unix_env, Modules
+@section Module f90_unix_errno
+@cindex f90_unix_errno
+@subsection Parameters and Types
+@cindex E2BIG
+@cindex EACCES 
+@cindex EAGAIN 
+@cindex EBADF 
+@cindex EBUSY 
+@cindex ECHILD 
+@cindex EDEADLK 
+@cindex EDOM 
+@cindex EEXIST 
+@cindex EFAULT 
+@cindex EFBIG 
+@cindex EINTR 
+@cindex EINVAL 
+@cindex EIO 
+@cindex EISDIR 
+@cindex EMFILE 
+@cindex EMLINK 
+@cindex ENAMETOOLONG 
+@cindex ENFILE 
+@cindex ENODEV 
+@cindex ENOENT 
+@cindex ENOEXEC 
+@cindex ENOLCK 
+@cindex ENOMEM 
+@cindex ENOSPC 
+@cindex ENOSYS 
+@cindex ENOTDIR 
+@cindex ENOTEMPTY 
+@cindex ENOTTY 
+@cindex ENXIO 
+@cindex EPERM 
+@cindex EPIPE 
+@cindex ERANGE 
+@cindex EROFS 
+@cindex ESPIPE 
+@cindex ESRCH 
+@cindex EXDEV 
+@smallexample
+integer, parameter :: E2BIG
+integer, parameter :: EACCES 
+integer, parameter :: EAGAIN 
+integer, parameter :: EBADF 
+integer, parameter :: EBUSY 
+integer, parameter :: ECHILD 
+integer, parameter :: EDEADLK 
+integer, parameter :: EDOM 
+integer, parameter :: EEXIST 
+integer, parameter :: EFAULT 
+integer, parameter :: EFBIG 
+integer, parameter :: EINTR 
+integer, parameter :: EINVAL 
+integer, parameter :: EIO 
+integer, parameter :: EISDIR 
+integer, parameter :: EMFILE 
+integer, parameter :: EMLINK 
+integer, parameter :: ENAMETOOLONG 
+integer, parameter :: ENFILE 
+integer, parameter :: ENODEV 
+integer, parameter :: ENOENT 
+integer, parameter :: ENOEXEC 
+integer, parameter :: ENOLCK 
+integer, parameter :: ENOMEM 
+integer, parameter :: ENOSPC 
+integer, parameter :: ENOSYS 
+integer, parameter :: ENOTDIR 
+integer, parameter :: ENOTEMPTY 
+integer, parameter :: ENOTTY 
+integer, parameter :: ENXIO 
+integer, parameter :: EPERM 
+integer, parameter :: EPIPE 
+integer, parameter :: ERANGE 
+integer, parameter :: EROFS 
+integer, parameter :: ESPIPE 
+integer, parameter :: ESRCH 
+integer, parameter :: EXDEV 
+@end smallexample
+Error codes known to the module. Their names match the C equivalents.
+
+@subsection Subroutines and Functions
+
+@cindex strerror
+@smallexample
+character(len=80) function strerror(err, errno)
+  integer, intent(in) :: err
+  integer, intent(out), optional :: errno
+@end smallexample
+See man 3 strerror.
+
+@cindex perror
+@smallexample
+subroutine perror(str, errc)
+  character(len=*), intent(in) :: str
+  integer, intent(in), optional :: errc
+@end smallexample
+See man 3 perror.
+
+@cindex get_errno
+@smallexample
+integer function get_errno()
+@end smallexample
+Get the value of errno.
+
+@cindex set_errno
+@smallexample
+subroutine set_errno(errc)
+  integer, intent(in), optional :: errc
+@end smallexample
+Set the value of errno to @code{errc} or 0, if @code{errc} is missing.
+
+@node f90_unix_file, f90_unix_io, f90_unix_errno, Modules
+@section Module f90_unix_file
+@cindex f90_unix_file
+
+@subsection Parameters and Types
+@smallexample
+use f90_unix_tools, only : C0
+use f90_unix_dir, only : mode_kind
+use f90_unix_env, only : uid_kind, gid_kind
+use f90_unix_time, only : time_kind
+@end smallexample
+Constants used from other modules.
+
+@cindex f_ok
+@cindex r_ok
+@cindex W_ok
+@cindex X_ok
+@smallexample
+integer, parameter :: f_ok
+integer, parameter :: r_ok
+integer, parameter :: W_ok
+integer, parameter :: X_ok
+@end smallexample
+Constants used for access.
+
+@cindex S_IRGRP
+@cindex S_IROTH
+@cindex S_IRUSR
+@cindex S_IRWXG
+@cindex S_IRWXO
+@cindex S_IRWXU
+@cindex S_ISGID
+@cindex S_ISUID
+@cindex S_IWGRP
+@cindex S_IWOTH
+@cindex S_IWUSR
+@cindex S_IXGRP
+@cindex S_IXOTH
+@cindex S_IXUSR
+@smallexample
+integer, parameter :: S_IRGRP
+integer, parameter :: S_IROTH
+integer, parameter :: S_IRUSR
+integer, parameter :: S_IRWXG
+integer, parameter :: S_IRWXO
+integer, parameter :: S_IRWXU
+integer, parameter :: S_ISGID
+integer, parameter :: S_ISUID
+integer, parameter :: S_IWGRP
+integer, parameter :: S_IWOTH
+integer, parameter :: S_IWUSR
+integer, parameter :: S_IXGRP
+integer, parameter :: S_IXOTH
+integer, parameter :: S_IXUSR
+@end smallexample
+Constants used for chmod.
+
+@cindex dev_kind
+@cindex ino_kind
+@cindex off_kind
+@cindex nlink_kind
+@smallexample
+integer, parameter :: dev_kind 
+integer, parameter :: ino_kind 
+integer, parameter :: off_kind 
+integer, parameter :: nlink_kind
+@end smallexample
+Various kinds used in stat_t
+
+@cindex stat_t
+@smallexample
+type stat_t
+   integer(dev_kind) ::     st_dev
+   integer(ino_kind) ::     st_ino
+   integer(mode_kind) ::    st_mode
+   integer(nlink_kind) ::   st_nlink
+   integer(uid_kind) ::     st_uid
+   integer(gid_kind) ::     st_gid
+   integer(dev_kind) ::     st_rdev
+   integer(off_kind) ::     st_size
+   integer(time_kind) ::    st_atime
+   integer(time_kind) ::    st_mtime
+   integer(time_kind) ::    st_ctime
+end type stat_t
+@end smallexample
+Type returned from stat. See man 2 stat for a field description.
+
+@cindex utimbuf
+@smallexample
+type utimbuf
+   integer(time_kind) :: actime, modtime
+end type utimbuf
+@end smallexample
+
+@subsection Subroutines and Functions
+
+@cindex access
+@smallexample
+subroutine access(path, amode, errno)
+  character(len=*), intent(in) :: path
+  integer, intent(in) :: amode
+  integer, intent(out) :: errno
+@end smallexample
+See man 2 access. Use of this function can often be replaced by iostat().
+
+@cindex chmod
+@smallexample
+subroutine chmod(path, mode, errno)
+  character(len=*), intent(in) :: path
+  integer(mode_kind), intent(in) :: mode
+  integer, optional, intent(out) :: errno
+@end smallexample
+See man 2 chmod.
+
+@cindex chown
+@smallexample
+subroutine chown(path, owner, group, errno)
+  character(len=*), intent(in) :: path
+  integer(UID_KIND), intent(in) :: owner
+  integer(GID_KIND), intent(in) :: group
+  integer, optional, intent(out) :: errno
+@end smallexample
+See man 2 chown
+
+@cindex stat
+@smallexample
+subroutine stat(path, buf, errno)
+  character(len=*), intent(in) :: path
+  type(stat_t), intent(out) :: buf
+  integer, optional, intent(out) :: errno
+@end smallexample
+See man 2 stat.
+
+@node f90_unix_io, f90_unix_proc, f90_unix_file, Modules
+@section Module f90_unix_io
+@cindex f90_unix_io
+@subsection Parameters and Types
+
+@smallexample
+use f90_unix_errno
+use f90_unix_env, only : sizet_kind, NULL
+use f90_unix_tools, only : C0
+@end smallexample
+Constants used in this module.
+
+@cindex EOF
+@smallexample
+integer, parameter :: EOF=-1
+@end smallexample
+Definition of EOF
+
+@cindex FILE_KIND
+@cindex LONG_KIND
+@smallexample
+integer, parameter :: FILE_KIND
+integer, parameter :: LONG_KIND
+@end smallexample
+Kinds used in this module.
+
+@cindex SEEK_SET
+@cindex SEEK_CUR
+@cindex SEEK_END
+@smallexample
+integer, parameter :: SEEK_SET
+integer, parameter :: SEEK_CUR
+integer, parameter :: SEEK_END
+@end smallexample
+Constants used for fseek.
+
+@cindex double
+@smallexample
+integer, parameter :: double
+@end smallexample
+kind of 1.D0.
+
+@cindex FILE
+@smallexample
+type FILE
+   integer(file_kind) :: fp
+end type FILE
+@end smallexample
+Definition of FILE. There is no need to access fp directly.
+
+@cindex fread
+@smallexample
+interface fread
+   module procedure fread_str, fread_str_array
+   module procedure fread_real, fread_real_array
+   module procedure fread_double, fread_double_array
+   module procedure fread_int, fread_int_array
+end interface
+@end smallexample
+Interface for fread.
+
+@cindex fwrite
+@smallexample
+interface fwrite
+   module procedure fwrite_str, fwrite_str_array
+   module procedure fwrite_real, fwrite_real_array
+   module procedure fwrite_double, fwrite_double_array
+   module procedure fwrite_int, fwrite_int_array
+end interface
+@end smallexample
+Interface for fwrite.
+
+@cindex associated
+@smallexample
+interface associated
+   module procedure fassociated
+end interface
+@end smallexample
+Function to do a fp!=NULL equivalent.
+
+@subsection Subroutines and Functions
+
+@cindex feof
+@smallexample
+logical function feof(stream, errno)
+  type(FILE), intent(in) :: stream
+  integer, intent(out), optional :: errno
+  logical, external :: c_feof
+@end smallexample
+Determine if stream is at eof. See man 3 feof.
+
+@cindex rewind
+@smallexample
+subroutine rewind(stream, errno)
+  type(FILE), intent(inout) :: stream
+  integer, intent(out), optional :: errno
+@end smallexample
+Rewind a stream. See man 3 rewind.
+
+@cindex fseek
+@smallexample
+subroutine fseek(stream, offset, whence, errno)
+  type(FILE), intent(inout) :: stream
+  integer(long_kind), intent(in) :: offset
+  integer, intent(in), optional :: whence
+  integer, intent(out), optional :: errno
+@end smallexample
+Seek a stream at a position. See man 3 fseek
+
+@cindex ftell
+@smallexample
+integer(long_kind) function ftell(stream, errno)
+  type(FILE), intent(inout) :: stream
+  integer, intent(out), optional :: errno
+@end smallexample
+Get stream position. See man 3 ftell.
+
+@cindex fassociated
+@smallexample
+logical function fassociated(fp)
+  type(FILE), intent(in) :: fp
+@end smallexample
+Check that a stream is non-NULL.
+
+@cindex fopen
+@smallexample
+type(FILE) function fopen(path, mode, errno)
+  character(len=*), intent(in) :: path, mode
+  integer, intent(out), optional :: errno
+@end smallexample
+Open a stream. Use associated(FILE) to check the result is non-NULL.
+See man 3 fopen.
+
+@cindex fclose
+@smallexample
+subroutine fclose(fp, errno)
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+Close a stream. See man 3 fclose.
+
+@cindex popen
+@smallexample
+type(FILE) function popen(command, mode, errno)
+  character(len=*), intent(in) :: command, mode
+  integer, intent(out), optional :: errno
+@end smallexample
+Open a pipe to a command. See man 3 popen. Streams opened with popen must be
+pclosed.
+
+@cindex pclose
+@smallexample
+subroutine pclose(fp, errno)
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+Close a stream opened with popen. See man 3 pclose.
+
+@cindex fread_str
+@smallexample
+integer(sizet_kind) function fread_str(str, length, fp, errno)
+  character(len=*), intent(out) :: str
+  integer(sizet_kind), intent(in) :: length
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fread() interface.
+
+@cindex fread_str_array
+@smallexample
+integer(sizet_kind) function fread_str_array(str, length, fp, errno)
+  character(len=*), intent(out) :: str(:)
+  integer(sizet_kind), intent(in) :: length
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fread() interface.
+
+@cindex fread_real
+@smallexample
+integer(sizet_kind) function fread_real(r, fp, errno)
+  real, intent(out) :: r
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fread() interface.
+
+@cindex fread_real_array
+@smallexample
+integer(sizet_kind) function fread_real_array(r, fp, errno)
+  real, intent(out) :: r(:)
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fread() interface.
+
+@cindex fread_double
+@smallexample
+integer(sizet_kind) function fread_double(d, fp, errno)
+  real(double), intent(out) :: d
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fread() interface.
+
+@cindex fread_double_array
+@smallexample
+integer(sizet_kind) function fread_double_array(d, fp, errno)
+  real(double), intent(out) :: d(:)
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fread() interface.
+
+@cindex fread_int
+@smallexample
+integer(sizet_kind) function fread_int(i, fp, errno)
+  integer, intent(out) :: i
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fread() interface.
+
+@cindex fread_int_array
+@smallexample
+integer(sizet_kind) function fread_int_array(i, fp, errno)
+  integer, intent(out) :: i(:)
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fread() interface.
+
+@cindex fwrite_str
+@smallexample
+integer(sizet_kind) function fwrite_str(str, length, fp, errno)
+  character(len=*), intent(in) :: str
+  integer(sizet_kind), intent(in) :: length
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fwrite() interface.
+
+@cindex fwrite_str_array
+@smallexample
+integer(sizet_kind) function fwrite_str_array(str, length, fp, errno)
+  character(len=*), intent(in) :: str(:)
+  integer(sizet_kind), intent(in) :: length
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fwrite() interface.
+
+@cindex fwrite_real
+@smallexample
+integer(sizet_kind) function fwrite_real(r, fp, errno)
+  real, intent(in) :: r
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fwrite() interface.
+
+@cindex fwrite_real_array
+@smallexample
+integer(sizet_kind) function fwrite_real_array(r, fp, errno)
+  real, intent(in) :: r(:)
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fwrite() interface.
+
+@cindex fwrite_double
+@smallexample
+integer(sizet_kind) function fwrite_double(r, fp, errno)
+  real(double), intent(in) :: r
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fwrite() interface.
+
+@cindex fwrite_double_array
+@smallexample
+integer(sizet_kind) function fwrite_double_array(r, fp, errno)
+  real(double), intent(in) :: r(:)
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fwrite() interface.
+
+@cindex fwrite_int
+@smallexample
+integer(sizet_kind) function fwrite_int(i, fp, errno)
+  integer, intent(in) :: i
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fwrite() interface.
+
+@cindex fwrite_int_array
+@smallexample
+integer(sizet_kind) function fwrite_int_array(i, fp, errno)
+  integer, intent(in) :: i(:)
+  type(FILE), intent(inout) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+One form of the fwrite() interface.
+
+@cindex fgets
+@smallexample
+subroutine fgets(str, strlen, fp, errno)
+  character(len=*), intent(inout) :: str
+  integer, intent(out) :: strlen
+  type(FILE), intent(in) :: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+See man 3 fgets.
+
+@cindex fputs
+@smallexample
+subroutine fputs(str, fp, errno)
+  character(len=*), intent(in) :: str
+  type(FILE):: fp
+  integer, intent(out), optional :: errno
+@end smallexample
+See man 3 fputs.
+
+@cindex stdin
+@smallexample
+type(FILE) function stdin()
+@end smallexample
+Get stream stdin.
+
+@cindex stdout
+@smallexample
+type(FILE) function stdout()
+@end smallexample
+Get stream stdout.
+
+@cindex stderr
+@smallexample
+type(FILE) function stderr()
+@end smallexample
+Get stream stderr.
+
+
+@node f90_unix_proc, f90_unix_regexp, f90_unix_io, Modules
+@section Module f90_unix_proc
+@cindex f90_unix_proc
+
+@node f90_unix_regexp, f90_unix_signal, f90_unix_proc, Modules
+@section Module f90_unix_regexp
+@cindex f90_unix_regexp
+
+@subsection Parameters and Types
+@smallexample
+integer, parameter :: REG_EXTENDED 
+integer, parameter :: REG_ICASE 
+integer, parameter :: REG_NOSUB 
+integer, parameter :: REG_NEWLINE 
+integer, parameter :: REG_NOTBOL
+integer, parameter :: REG_NOTEOL 
+@end smallexample
+
+Flags for regcomp and regexec. See man 3 regcomp
+
+@smallexample
+integer, parameter :: REGEX_KIND 
+integer, parameter :: REGMATCH_KIND
+integer, parameter :: REGOFF_KIND
+@end smallexample
+Kinds used in the module. You should not need to use these direcly.
+
+@smallexample
+type regex_t
+   integer(regex_kind) :: rp
+end type regex_t
+@end smallexample
+Type used to hold compiled regular expressions. You should not need to
+access its components directly.
+
+@smallexample 
+type regmatch_t
+   integer(regoff_kind) :: rm_so, rm_eo
+end type regmatch_t
+@end smallexample
+Type used to hold indices of matches. Note that these indices are
+adjusted to fortran numbering.
+
+@subsection Subroutines and Functions
+
+@cindex regcomp
+@smallexample 
+subroutine regcomp(preg, regex, cflags, errc)
+  type(regex_t) :: preg
+  character(len=*), intent(in) :: regex
+  integer, intent(in) :: cflags
+  integer, intent(out), optional :: errc
+@end smallexample
+See man 3 regcomp. Missing errc argument aborts on error.
+
+@cindex regexec
+@smallexample 
+subroutine regexec(preg, string, pmatch, eflags, errc)
+  type(regex_t), intent(in) :: preg
+  character(len=*), intent(in) :: string
+  type(regmatch_t) :: pmatch(:)
+  integer, intent(in) :: eflags
+  integer, intent(out), optional :: errc
+@end smallexample
+See man 3 regexec. Note that the offsets in pmatch are adjusted to fortran
+conventions, aka the first char has index 1, not 0. Missing errc
+argument aborts on error. No match is considered an error.
+
+@cindex regerror
+@smallexample 
+subroutine regerror(e, preg, msg)
+  integer, intent(in) :: e
+  type(regex_t), intent(in) :: preg
+  character(len=*), intent(out) :: msg
+@end smallexample 
+See man 3 regerror.
+
+@cindex regfree
+@smallexample
+subroutine regfree(preg)
+  type(regex_t), intent(in) :: preg
+@end smallexample
+See man 3 regfree.
+
+@node f90_unix_signal, f90_unix_time, f90_unix_regexp, Modules
+@section Module f90_unix_signal
+@cindex f90_unix_signal
+@subsection Introduction to fortran signal handling
+Signal handling in Fortran faces an obstacle: The system calls the
+signal handler passing it an integer, whereas fortran expects a
+pointer to an integer. The library adresses this problem by installing
+a wrapper instead which accepts an integer and calls the fortran
+signal handler passing it a pointer to an integer. This is completly
+transparent to the user, except fot the special case where the signal
+handler is written in C. In this case, the SA_NOWRAPPER flag must be
+used which prevents installation of the wrapper. Note that sigaction
+passes back (in oldaction) the actual handler, not the wrapper. The
+SA_NOWRAPPER flag is automatically set if an action requires no
+wrapper. 
+@subsection Parameters and Types
+
+@cindex funcp_kind
+@smallexample
+integer, parameter :: funcp_kind 
+@end smallexample
+Integer kind to hold a function adress
+
+@cindex SIG_IGN 
+@cindex SIG_DFL
+@smallexample
+integer, parameter :: SIG_IGN 
+integer, parameter :: SIG_DFL
+@end smallexample
+Action codes to ignore a signal or use the default action.
+
+@cindex SIGHUP 
+@cindex SIGINT 
+@cindex SIGQUIT 
+@cindex SIGILL 
+@cindex SIGTRAP 
+@cindex SIGABRT 
+@cindex SIGIOT 
+@cindex SIGBUS 
+@cindex SIGFPE 
+@cindex SIGKILL 
+@cindex SIGUSR1 
+@cindex SIGSEGV 
+@cindex SIGUSR2 
+@cindex SIGPIPE 
+@cindex SIGALRM 
+@cindex SIGTERM 
+@cindex SIGSTKFLT 
+@cindex SIGCLD 
+@cindex SIGCHLD 
+@cindex SIGCONT 
+@cindex SIGSTOP 
+@cindex SIGTSTP 
+@cindex SIGTTIN 
+@cindex SIGTTOU 
+@cindex SIGURG 
+@cindex SIGXCPU 
+@cindex SIGXFSZ 
+@cindex SIGVTALRM 
+@cindex SIGPROF 
+@cindex SIGWINCH 
+@cindex SIGPOLL 
+@cindex SIGIO 
+@cindex SIGPWR 
+@cindex SIGSYS 
+@cindex SIGUNUSED 
+@cindex NSIG 
+@smallexample
+integer, parameter :: SIGHUP 
+integer, parameter :: SIGINT 
+integer, parameter :: SIGQUIT 
+integer, parameter :: SIGILL 
+integer, parameter :: SIGTRAP 
+integer, parameter :: SIGABRT 
+integer, parameter :: SIGIOT 
+integer, parameter :: SIGBUS 
+integer, parameter :: SIGFPE 
+integer, parameter :: SIGKILL 
+integer, parameter :: SIGUSR1 
+integer, parameter :: SIGSEGV 
+integer, parameter :: SIGUSR2 
+integer, parameter :: SIGPIPE 
+integer, parameter :: SIGALRM 
+integer, parameter :: SIGTERM 
+integer, parameter :: SIGSTKFLT 
+integer, parameter :: SIGCLD 
+integer, parameter :: SIGCHLD 
+integer, parameter :: SIGCONT 
+integer, parameter :: SIGSTOP 
+integer, parameter :: SIGTSTP 
+integer, parameter :: SIGTTIN 
+integer, parameter :: SIGTTOU 
+integer, parameter :: SIGURG 
+integer, parameter :: SIGXCPU 
+integer, parameter :: SIGXFSZ 
+integer, parameter :: SIGVTALRM 
+integer, parameter :: SIGPROF 
+integer, parameter :: SIGWINCH 
+integer, parameter :: SIGPOLL 
+integer, parameter :: SIGIO 
+integer, parameter :: SIGPWR 
+integer, parameter :: SIGSYS 
+integer, parameter :: SIGUNUSED 
+integer, parameter :: NSIG 
+@end smallexample
+Signal codes. See man 7 signal
+
+@cindex SA_NOCLDSTOP 
+@cindex SA_NOCLDWAIT 
+@cindex SA_RESETHAND 
+@cindex SA_ONSTACK 
+@cindex SA_RESTART 
+@cindex SA_NODEFER 
+@cindex SA_NOWRAPPER 
+@cindex SIG_BLOCK 
+@cindex SIG_UNBLOCK 
+@cindex SIG_SETMASK 
+@smallexample
+integer, parameter :: SA_NOCLDSTOP 
+integer, parameter :: SA_NOCLDWAIT 
+integer, parameter :: SA_RESETHAND 
+integer, parameter :: SA_ONSTACK 
+integer, parameter :: SA_RESTART 
+integer, parameter :: SA_NODEFER 
+integer, parameter :: SA_NOWRAPPER 
+integer, parameter :: SIG_BLOCK 
+integer, parameter :: SIG_UNBLOCK 
+integer, parameter :: SIG_SETMASK 
+@end smallexample
+Flags and other constants for sigaction.
+
+Note that SA_SIGINFO is intentionally undefined- it cannot be used from within
+posix90.
+
+@cindex sigset_type
+@smallexample
+type sigset_type
+  character(len=128) :: sigset
+end type
+@end smallexample
+Type used to hold signal sets. See man 3 sigsetops.
+
+@cindex sigaction_type
+@smallexample
+type sigaction_type
+   integer(funcp_kind) :: sa_handler
+   type(sigset_type) :: sa_mask
+   integer :: sa_flags 
+end type sigaction_type
+@end smallexample
+Type to hold signal actions. Constructed using sigaction_compile. See
+sigaction.
+
+@cindex sigaction_compile
+@smallexample
+interface sigaction_compile
+   module procedure sigaction_compile_handler
+   module procedure sigaction_compile_integer
+end interface
+@end smallexample
+Interface to construct a sigaction_type.
+
+@cindex sigaction_compile_handler
+@smallexample
+type(sigaction_type) function sigaction_compile_handler(handler, mask, flags, errno)
+  interface
+     subroutine handler(sig)
+       integer, intent(in) :: sig
+     end subroutine handler       
+  end interface
+  type(sigset_type), intent(in), optional :: mask
+  integer, intent(in), optional :: flags
+  integer, intent(out), optional :: errno
+@end smallexample
+Construct a sigaction_type. mask defaults to sigemptyset, flags to 0. Note the
+interface sigaction_compile; this routine should not be called directly.
+
+@cindex sigaction_compile_integer
+@smallexample
+type(sigaction_type) function sigaction_compile_integer(action_code, mask, flags, errno)
+  integer, intent(in) :: action_code
+  type(sigset_type), intent(in), optional :: mask
+  integer, intent(in), optional :: flags
+  integer, intent(out), optional :: errno
+@end smallexample
+Construct a sigaction_type like action = sigaction_compile(SIG_IGN). Note the
+interface sigaction_compile. Errno EINVAL is set if action_code is neither
+SIG_IGN nor SIG_DFL.
+
+@cindex sigaction
+@smallexample
+subroutine sigaction(signum, action, oldaction, errno)
+  integer :: signum
+  type(sigaction_type), intent(in), optional :: action
+  type(sigaction_type), intent(out), optional :: oldaction
+  integer, intent(out), optional :: errno
+@end smallexample
+See man 2 sigaction.
+
+@cindex sigemptyset
+@smallexample
+subroutine sigemptyset(set)
+  type(sigset_type), intent(in):: set
+@end smallexample
+See man 3 sigsetops.  
+
+@cindex sigfillset
+@smallexample
+subroutine sigfillset(set)
+  type(sigset_type), intent(in):: set
+@end smallexample
+See man 3 sigsetops.  
+
+@cindex sigaddset
+@smallexample
+subroutine sigaddset(set, sig1, sig2, sig3, sig4, sig5, sig6, sig7, sig8)
+  type(sigset_type), intent(in):: set
+  integer, intent(in) :: sig1
+  integer, intent(in), optional :: sig2, sig3, sig4, sig5, sig6, sig7, sig8
+@end smallexample
+See man 3 sigsetops.  
+
+@cindex sigdelset
+@smallexample
+subroutine sigdelset(set, sig1, sig2, sig3, sig4, sig5, sig6, sig7, sig8)
+  type(sigset_type), intent(in):: set
+  integer, intent(in) :: sig1
+  integer, intent(in), optional :: sig2, sig3, sig4, sig5, sig6, sig7, sig8
+@end smallexample
+See man 3 sigsetops.  
+
+@cindex sigismember
+@smallexample
+logical function sigismember(set, sig)
+  type(sigset_type), intent(in):: set
+  integer, intent(in) :: sig
+@end smallexample
+See man 3 sigsetops.
+
+@cindex kill
+@smallexample
+subroutine kill(pid, sig, errno)
+  integer(pid_kind), intent(in) :: pid
+  integer, intent(in) :: sig
+  integer, intent(out), optional :: errno
+@end smallexample
+See man 2 kill.
+
+@cindex raise
+@smallexample
+subroutine raise(sig,errno)
+  integer, intent(in) :: sig
+  integer, intent(out), optional :: errno
+@end smallexample
+See man 3 raise.
+
+@node f90_unix_time, , f90_unix_signal, Modules
+@section Module f90_unix_time
+@cindex f90_unix_time
+@subsection Parameters and Types
+@cindex TIME_KIND
+@smallexample
+integer, parameter :: TIME_KIND
+@end smallexample
+integer kind equivalent to C time_t.
+
+@subsection Subroutines and Functions
+@cindex ctimes
+@smallexample
+character(len=30) function ctime(time)
+  integer(time_kind), intent(in) :: time
+@end smallexample
+See man 3 ctime.
+
+@node Examples, Concept Index, Modules, Top
+
+@include gpl.texi
+
+@node Concept Index, , Examples, Top
+@unnumbered Concept Index
+
+@printindex cp
+
+@shortcontents
+@contents
+@bye
+

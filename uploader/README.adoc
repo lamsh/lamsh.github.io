@@ -1,0 +1,8 @@
+// (File name: README.adoc)
+// (Author: SENOO, Ken)
+// (Last update: 2014-12-28T15:47+09:00)
+
+= README.adoc
+Ken SENOO
+
+このリポジトリでは一般的に公開して配布したいようなファイル類をアップロードしている。

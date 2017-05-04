@@ -1,0 +1,9 @@
+// (File name: README.adoc)
+// (Author: SENOO, Ken)
+// (Last update: 2014-12-28T15:48+09:00)
+
+= README.adoc
+Ken SENOO
+
+ここではFortran 90 Posix API version 1.1.1.1（最終更新日：2008-06-10）（http://savannah.nongnu.org/projects/posix90/ ）のマニュアルをビルドしたhtmlやpdfを公開しています。
+配布元ではソースであるtexi形式のファイルしか公開されておらず，利便性が悪いと思い，インストールするときにできたhtmlとpdfのマニュアルを公開しました。
