@@ -1,0 +1,489 @@
+/****************************************************************************
+ \file      default.css
+ \author    SENOO, Ken
+ \copyright CC0
+ \date      first created date: 2016-12-09T23:58+09:00
+ \date      last  updated date: 2016-12-10T10:55+09:00
+ ****************************************************************************/
+
+@charset "UTF-8";
+
+/** caption */
+caption::before {
+  counter-increment: table;
+  content: "表" counter(table) " ";
+}
+figure>figcaption::before {
+  counter-increment: figure;
+  content: "図" counter(figure) " ";
+}
+/* subfigureの開始時だけリセット */
+figure>figure:first-of-type {
+  counter-reset: subfigure;
+}
+/* そのままやると，subfigureの番号が先に登場するのでfigureと番号が不一致 */
+/* だから，subfigure内ではfigureの番号を増加させ，抜けるときに減らす */
+figure>figure>figcaption::before {
+  counter-increment: figure subfigure;
+  counter-reset: subsubfigure;
+  content: "図" counter(heading1) "." counter(figure) "(" counter(subfigure, lower-alpha) ") ";
+}
+/* 増やしたfigureの番号を減らして元に戻す */
+figure>figure figcaption::after {
+  content: "";
+  counter-increment: figure -1;
+}
+
+figure pre~figcaption::before,
+figure figcaption:first-child::before {
+  counter-increment: listing;
+  content: "リスト" counter(heading1) "." counter(listing) " ";
+}
+figure blockquote~figcaption::before {
+  content: "—";
+}
+
+/* list */
+/* listが見出し設定の後にあると見出し番号がリセットされる? */
+/* ol {                                 */
+/*   counter-reset: enum;               */
+/*   list-style-type: none;             */
+/* }                                    */
+/* li::before {                         */
+/*   counter-increment: enum;           */
+/*   content: counters(enum, ".") ". "; */
+/* }                                    */
+ol {
+  counter-reset: enum1;
+  padding-left: 1em;
+}
+ol>li {
+  list-style-type: none;
+  padding-left: 0.5em;
+  text-indent: -0.5em;
+}
+ol>li::before {
+  counter-increment: enum1;
+  content: counter(enum1) ". ";
+}
+ol>li>ol{
+  counter-reset: enum2;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li::before {
+  counter-increment: enum2;
+  content: counter(enum1) "." counter(enum2) ". ";
+}
+ol>li>ol>li>ol{
+  counter-reset: enum3;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li::before {
+  counter-increment: enum3;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) ". ";
+}
+ol>li>ol>li>ol>li>ol{
+  counter-reset: enum4;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum4;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) ". ";
+}
+ol>li>ol>li>ol>li>ol>li>ol{
+  counter-reset: enum5;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum5;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) "." counter(enum5) ". ";
+}
+ol>li>ol>li>ol>li>ol>li>ol>li>ol{
+  counter-reset: enum6;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum6;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) "." counter(enum5) "." counter(enum6) ". ";
+}
+
+
+/* title */
+body>h1:first-of-type {
+  text-align: center;
+  font-size: xx-large;
+}
+
+/* 節番号の設定 */
+body { counter-reset: heading1; }
+
+/** article要素の見出しでカウンターをリセット */
+/* article要素はそんなに入れ子にならないから最上位の見出しだけリセット */
+
+
+
+h1
+{
+  font-size: 2.0em;
+}
+
+
+h2
+{
+  font-size: 1.83em;
+}
+
+h3
+{
+  counter-increment: heading3; counter-reset: heading4;
+  font-size: 1.67em;
+}
+h3::before,
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3) " ";
+}
+
+section>section>section>section>h1:first-of-type,
+section>section>section>section>h2:first-of-type,
+section>section>section>section>h3:first-of-type,
+section>section>section>section>h4:first-of-type,
+section>section>section>section>h5:first-of-type,
+section>section>section>section>h6:first-of-type {
+  counter-increment: heading4; counter-reset: heading5;
+  font-size: 1.50em;
+}
+section>section>section>section>h1:first-of-type::before,
+section>section>section>section>h2:first-of-type::before,
+section>section>section>section>h3:first-of-type::before,
+section>section>section>section>h4:first-of-type::before,
+section>section>section>section>h5:first-of-type::before,
+section>section>section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) "." counter(heading3) "."
+           counter(heading4) " ";
+}
+
+section>section>section>section>section>h1:first-of-type,
+section>section>section>section>section>h2:first-of-type,
+section>section>section>section>section>h3:first-of-type,
+section>section>section>section>section>h4:first-of-type,
+section>section>section>section>section>h5:first-of-type,
+section>section>section>section>section>h6:first-of-type {
+  counter-increment: heading5; counter-reset: heading6;
+  font-size: 1.33em;
+}
+section>section>section>section>section>h1:first-of-type::before,
+section>section>section>section>section>h2:first-of-type::before,
+section>section>section>section>section>h3:first-of-type::before,
+section>section>section>section>section>h4:first-of-type::before,
+section>section>section>section>section>h5:first-of-type::before,
+section>section>section>section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) "." counter(heading3) "."
+           counter(heading4) "." counter(heading5) " ";
+}
+/** heading6 だけカウンターが増えない？ */
+section>section>section>section>section>section>h1:first-of-type,
+section>section>section>section>section>section>h2:first-of-type,
+section>section>section>section>section>section>h3:first-of-type,
+section>section>section>section>section>section>h4:first-of-type,
+section>section>section>section>section>section>h5:first-of-type,
+section>section>section>section>section>section>h6:first-of-type {
+  /* 使っていなくてもheading7をリセットしないとheading6が増えないっぽい */
+  counter-increment: heading6; counter-reset: heading7;
+  font-size: 1.17em;
+}
+section>section>section>section>section>section>h1:first-of-type::before,
+section>section>section>section>section>section>h2:first-of-type::before,
+section>section>section>section>section>section>h3:first-of-type::before,
+section>section>section>section>section>section>h4:first-of-type::before,
+section>section>section>section>section>section>h5:first-of-type::before,
+section>section>section>section>section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) "." counter(heading3) "."
+           counter(heading4) "." counter(heading5) "." counter(heading6) " ";
+}
+
+
+/** Table */
+table {
+  border-collapse: collapse;
+  border: none;
+  /** centering **/
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+/** Table color **/
+tbody>tr:nth-of-type(even) {
+  background: #ffffaa;
+}
+thead>tr>th {
+  background: #ffcc99;
+  text-align: center;
+  font-weight: bold
+}
+/** Column margin **/
+td {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+/** Table border **/
+td, th {
+  border-style: none;
+}
+
+thead>tr:first-of-type {
+  border-top-style: solid;
+  border-top-width: medium;
+}
+thead>tr:last-of-type {
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+}
+tbody>tr:first-of-type {
+  border-top-style: solid;
+  border-top-width: thin;
+}
+tbody>tr:last-of-type {
+  border-bottom-style: solid;
+  border-bottom-width: medium;
+}
+
+th, td {
+  word-wrap: break-all;
+}
+
+/** Cross reference */
+[href^="#chap:"]::before {
+  content: "第";
+}
+[href^="#chap:"]::after {
+  content: "章";
+}
+[href^="#sec:"]::after, [href^="#sub"]::after {
+  content: "節";
+}
+[href^="#par:"]::after {
+  content: "段落";
+}
+[href^="#enu:"]::before {
+  content: "項目";
+}
+[href^="#eq:"]::before {
+  content: "式(";
+}
+[href^="#eq:"]::after {
+  content: ")";
+}
+[href^="#fig:"]::before {
+  content: "図";
+}
+[href^="#tab:"]::before {
+  content: "表";
+}
+[href^="#lis:"]::before {
+  content: "リスト";
+}
+
+/** Font */
+body {
+  font-family: "TeX Gyre Heros", "FreeSans", "Migu 1P", "TakaoGothic", "VL Gothic", "Yu Gothic", "Meiryo UI", sans-serif;
+}
+p {
+  text-indent: 1em;
+  word-break: break-all;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "TeX Gyre Heros", "Migu 1P", "TakaoGothic", "VL Gothic", "Yu Gothic", "Meiryo UI", sans-serif;
+  font-weight: bold;
+  /* orange */
+  /* background-color: rgb(100%,80%,0%); */
+  background-color: #e6e6ff;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+em, strong {
+  color: red;
+  font-weight: bold;
+}
+strong {background-color: yellow;}
+
+/** PC */
+kbd, code, samp, var {
+  font-family: "Migu 1M", "Inconsolata", "DejaVu Sans Mono", "Consolas", "TakaoGothic", "VL Gothic", "HGGothicM", "MS Gothic",  monospace;
+  border-width: thin;
+  border-style: solid;
+  border-color: #cccccc;
+  border-radius: 5px;
+}
+kbd {
+  background-color: #ffe6e6;
+}
+code {
+  background-color: #e6ffe6;
+}
+samp {
+  background-color: #e6e6e6;
+}
+var {
+  background-color: #e6ffff;
+}
+pre {
+  font-family: "Migu 1M", "Inconsolata", "DejaVu Sans Mono", "Consolas", "TakaoGothic", "VL Gothic", "HGGothicM", "MS Gothic",  monospace;
+  background-color: #ffffe6;
+  overflow: auto;
+}
+
+/** Line number for source code */
+pre>code, pre>samp {
+  display: block;
+  border-style: none;
+  position: relative;
+  padding-left: 3em;
+  overflow-x: auto;
+}
+
+pre>code::before, pre>samp::before {
+  content: "   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100";
+  display: block;
+  width: 2.5em;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-y: hidden;
+  border-right: 1px solid;
+}
+
+/** Blockquote */
+blockquote {
+  background-color: #eee;
+  padding: 1.0em;
+  padding-left: 3em;
+  position: relative;
+}
+blockquote::before {
+  content: "“";
+  font-size: 600%;
+  line-height: 1em;
+  font-family: serif;
+  color: #999;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+blockquote p {
+  margin: 0;
+}
+
+/** Description element */
+dt {
+  font-weight: bold;
+  font-family: sans-serif;
+  padding-left: 0.5em;
+}
+dt, dd {
+  line-height: 1.5em;
+  word-wrap: break-word;
+}
+
+dt {
+  float: left;
+  width: 20%;
+}
+dd {
+  margin-left: 22%;
+}
+dd::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/** figure */
+figure {
+  text-align: center;
+}
+
+figure blockquote~figcaption {
+  text-align: right;
+}
+figure blockquote {
+  text-align: left;
+}
+figure pre {
+  text-align: left;
+}
+figure>dl {
+  border-radius: 0.4em;
+  border: solid  thin rgb(10%,10%,10%);
+  background-color: rgb(90%,90%,90%);
+  text-align: left;
+}
+figure>dl>dt {
+  display: block;
+  width: 100%;
+  border-top-left-radius: 0.2em;
+  border-top-right-radius: 0.2em;
+  color: white;
+  background-color: rgb(30%,30%,30%);
+  box-sizing: border-box;
+}
+figure>dl>dd {
+  padding-left: 0.5em;
+  margin: auto;
+}
+figure>dl>dd:nth-of-type(n+2) {
+  border-top-style: dashed;
+  border-top-width: thin;
+}
+.column-2 {
+  width: 45%;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.column-3 {
+  width: 30%;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.column-4 {
+  width: 20%;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.column-5 {
+  width: 15%;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+
+/** Page style */
+/*
+@page {
+  size: A4 portrait;
+  margin: 2cm;
+
+  @top-left {content: "Chapter";}
+  @top-center {content: "Title";}
+  @top-right {content: "Section";}
+  @bottom-left {content: "SENOO, Ken";}
+  @bottom-center {content: "- " counter(page) "/" counter(pages) " -";}
+  @bottom-right {content: "Date";}
+}
+*/

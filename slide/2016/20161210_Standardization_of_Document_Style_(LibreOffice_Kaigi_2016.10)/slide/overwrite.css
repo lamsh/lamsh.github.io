@@ -1,0 +1,88 @@
+/****************************************************************************
+ \file      overwrite.css
+ \author    SENOO, Ken
+ \copyright CC0
+ \date      first created date: 2016-12-10T00:01+09:00
+ \date      last  updated date: 2016-12-11T00:02+09:00
+ ****************************************************************************/
+
+@charset "UTF-8";
+
+.slide {
+  padding: 0;
+}
+
+.slide::after {
+  right: 0.5em;
+  height: 4em;
+  width: 2em;
+}
+
+.slide table {
+  margin-left: auto;
+}
+
+.slide table td:first-child,
+.slide table th:first-child {
+  padding-left: 0.5em;
+}
+
+.slide table td:last-child,
+.slide table th:last-child {
+  padding-right: 0;
+}
+
+.slide blockquote::before {
+  font-size: 4em;
+  margin: 0;
+}
+.slide blockquote {
+  padding-left: 3em;
+}
+
+blockquote {
+  padding: 0.2em;
+}
+
+#cover::after{
+  visibility: hidden;
+}
+
+figure {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+figcaption {
+  font-size: 0.5em;
+}
+
+h1, h2, h3, h4, h5, h5 {
+  margin-top: 0em;
+}
+
+section>* {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+pre>code, pre>samp {
+  display: block;
+  border-style: none;
+  position: relative;
+  padding-left: 3em;
+  overflow-x: auto;
+}
+
+.slide code {
+  background-color: #e6ffe6;
+}
+.slide p {
+  margin-bottom: 0.2em;
+}
+
+@media print {
+  table>thead:first-of-type {
+    display: table-row-group;
+  }
+}

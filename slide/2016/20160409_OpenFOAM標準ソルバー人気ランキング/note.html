@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html><html lang="ja" xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <meta name="author" content="SENOO, Ken" />
+    <!-- <meta name="description" contents="" /> -->
+    <!-- <meta name="keywords" contents="" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="default.css" /> -->
+    <style>
+@charset "UTF-8";
+
+/* caption */
+caption::before {
+  counter-increment: table;
+  content: "表" counter(heading1) "." counter(table) " ";
+}
+figcaption::before {
+  counter-increment: figure;
+  content: "図" counter(heading1) "." counter(figure) " ";
+}
+body {counter-reset: listing;}
+figcaption[id^="lis:"]::before {
+  counter-increment: listing;
+  content: "リスト" counter(heading1) "." counter(listing) " ";
+}
+figcaption[class^="lis"]::before {
+  counter-increment: listing;
+  content: "リスト" counter(section1) "." counter(listing) " ";
+}
+
+/* list */
+/* listが見出し設定の後にあると見出し番号がリセットされる? */
+/* ol { counter-reset: enum; } */
+/* ol li { list-style-type: none; } */
+/* ol li::before {                    */
+/* counter-increment: enum;           */
+/* content: counters(enum, ".") ". "; */
+/* }                                  */
+ol {
+  counter-reset: enum1;
+  padding-left: 1em;
+}
+ol>li {
+  list-style-type: none;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li::before {
+  counter-increment: enum1;
+  content: counter(enum1) ". ";
+}
+ol>li>ol{
+  counter-reset: enum2;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li::before {
+  counter-increment: enum2;
+  content: counter(enum1) "." counter(enum2) ". ";
+}
+ol>li>ol>li>ol{
+  counter-reset: enum3;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li::before {
+  counter-increment: enum3;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) ". ";
+}
+ol>li>ol>li>ol>li>ol{
+  counter-reset: enum4;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum4;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) ". ";
+}
+ol>li>ol>li>ol>li>ol>li>ol{
+  counter-reset: enum5;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum5;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) "." counter(enum5) ". ";
+}
+ol>li>ol>li>ol>li>ol>li>ol>li>ol{
+  counter-reset: enum6;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum6;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) "." counter(enum5) "." counter(enum6) ". ";
+}
+
+
+/* title */
+body>h1:first-child {
+  text-align: center;
+  font-size: xx-large;
+}
+
+/* 節番号の設定 */
+body { counter-reset: heading1; }
+
+section>h1:first-child,
+section>h2:first-child,
+section>h3:first-child,
+section>h4:first-child,
+section>h5:first-child,
+section>h6:first-child
+{
+  counter-increment: heading1; counter-reset: heading2 table figure;
+}
+
+section>h1:first-child::before,
+section>h2:first-child::before,
+section>h3:first-child::before,
+section>h4:first-child::before,
+section>h5:first-child::before,
+section>h6:first-child::before
+{
+  content: counter(heading1) " ";
+}
+
+section>section>h1:first-child,
+section>section>h2:first-child,
+section>section>h3:first-child,
+section>section>h4:first-child,
+section>section>h5:first-child,
+section>section>h6:first-child
+{
+  counter-increment: heading2; counter-reset: heading3;
+}
+section>section>h1:first-child::before,
+section>section>h2:first-child::before,
+section>section>h3:first-child::before,
+section>section>h4:first-child::before,
+section>section>h5:first-child::before,
+section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2)  " ";
+}
+
+section>section>section>h1:first-child,
+section>section>section>h2:first-child,
+section>section>section>h3:first-child,
+section>section>section>h4:first-child,
+section>section>section>h5:first-child,
+section>section>section>h6:first-child
+{
+  counter-increment: heading3; counter-reset: heading4;
+}
+section>section>section>h1:first-child::before,
+section>section>section>h2:first-child::before,
+section>section>section>h3:first-child::before,
+section>section>section>h4:first-child::before,
+section>section>section>h5:first-child::before,
+section>section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3)
+ " ";
+}
+
+section>section>section>section>h1:first-child,
+section>section>section>section>h2:first-child,
+section>section>section>section>h3:first-child,
+section>section>section>section>h4:first-child,
+section>section>section>section>h5:first-child,
+section>section>section>section>h6:first-child
+{
+  counter-increment: heading4; counter-reset: heading5;
+}
+section>section>section>section>h1:first-child::before,
+section>section>section>section>h2:first-child::before,
+section>section>section>section>h3:first-child::before,
+section>section>section>section>h4:first-child::before,
+section>section>section>section>h5:first-child::before,
+section>section>section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3)
+"." counter(heading4)  " ";
+}
+
+section>section>section>section>section>h1:first-child,
+section>section>section>section>section>h2:first-child,
+section>section>section>section>section>h3:first-child,
+section>section>section>section>section>h4:first-child,
+section>section>section>section>section>h5:first-child,
+section>section>section>section>section>h6:first-child
+{
+  counter-increment: heading5; counter-reset: heading6;
+}
+section>section>section>section>section>h1:first-child::before,
+section>section>section>section>section>h2:first-child::before,
+section>section>section>section>section>h3:first-child::before,
+section>section>section>section>section>h4:first-child::before,
+section>section>section>section>section>h5:first-child::before,
+section>section>section>section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3)
+"." counter(heading4) "." counter(heading5)  " ";
+}
+
+section>section>section>section>section>section>h1:first-child,
+section>section>section>section>section>section>h2:first-child,
+section>section>section>section>section>section>h3:first-child,
+section>section>section>section>section>section>h4:first-child,
+section>section>section>section>section>section>h5:first-child,
+section>section>section>section>section>section>h6:first-child
+{
+  counter-increment: heading5; counter-reset: heading6;
+}
+section>section>section>section>section>section>h1:first-child::before,
+section>section>section>section>section>section>h2:first-child::before,
+section>section>section>section>section>section>h3:first-child::before,
+section>section>section>section>section>section>h4:first-child::before,
+section>section>section>section>section>section>h5:first-child::before,
+section>section>section>section>section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3)
+"." counter(heading4) "." counter(heading5) "." counter(heading5) " ";
+}
+
+
+/* table */
+table {
+  border-collapse: collapse;
+  border: none;
+  /** centering **/
+  margin-left: auto;
+  margin-right: auto;
+}
+/** table color **/
+tbody>tr:nth-child(even) {
+  background: #ffffaa;
+}
+thead>tr>th {
+  background: #ffcc99;
+  text-align: center;
+  font-weight: bold
+}
+/** column margin **/
+td {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+/** table border **/
+td, th {
+  border-style: none;
+}
+
+thead>tr:first-child {
+  border-top-style: solid;
+  border-top-width: medium;
+}
+thead>tr:last-child {
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+}
+tbody>tr:first-child {
+  border-top-style: solid;
+  border-top-width: thin;
+}
+tbody>tr:last-child {
+  border-bottom-style: solid;
+  border-bottom-width: medium;
+}
+
+th, td {
+  word-wrap: break-all;
+}
+
+/* cross reference */
+[href^="#chap:"]::before {
+  content: "第";
+}
+[href^="#chap:"]::after {
+  content: "章";
+}
+[href^="#sec:"]::after, [href^="#sub"]::after {
+  content: "節";
+}
+[href^="#par:"]::after {
+  content: "段落";
+}
+[href^="#enu:"]::before {
+  content: "項目";
+}
+[href^="#eq:"]::before {
+  content: "式(";
+}
+[href^="#eq:"]::after {
+  content: ")";
+}
+[href^="#fig:"]::before {
+  content: "図";
+}
+[href^="#tab:"]::before {
+  content: "表";
+}
+[href^="#lis:"]::before {
+  content: "リスト";
+}
+
+/* フォント設定 */
+p {
+  text-indent: 1em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "TeX Gyre Heros", "Migu 1P", sans-serif;
+  background-color: #e6e6ff;
+}
+em, strong {
+  color: red;
+  font-weight: bold;
+}
+strong {
+  background-color: yellow;
+}
+
+/* PC語句 */
+kbd, code, samp, var {
+  font-family: Inconsolata, "Migu 1M", monospace;
+  border-width: thin;
+  border-style: solid;
+  border-color: #cccccc;
+  border-radius: 5px;
+}
+kbd {
+  background-color: #ffe6e6;
+}
+code {
+  background-color: #e6ffe6;
+}
+samp {
+  background-color: #e6e6e6;
+}
+var {
+  font-style: normal;
+  background-color: #e6ffff;
+}
+pre {
+  font-family: Inconsolata, "Migu 1M", monospace;
+  background-color: #ffffe6;
+  overflow: auto;
+}
+
+/* line number for source code */
+pre>code, pre>samp {
+  display: block;
+  border-style: none;
+  position: relative;
+  padding-left: 2.5em;
+  overflow-x: auto;
+}
+
+pre>code::before, pre>samp::before {
+  content: "  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100";
+  display: block;
+  width: 2em;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  overflow-y: hidden;
+  border-right: 1px solid;
+}
+
+/* blockquote */
+blockquote{
+  background-color: #eee;
+  padding: 1.0em;
+  padding-left: 3em;
+  position: relative;
+}
+blockquote::before{
+  content:"“";
+  font-size: 600%;
+  line-height: 1em;
+  font-family: serif;
+  color: #999;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+dt {
+  font-weight: bold;
+  padding-left: 0.5em;
+}
+dt, dd {
+  line-height: 1.5em;
+}
+
+:not(figure)>dl>dt {
+  float: left;
+  width: 20%;
+}
+:not(figure)>dl>dd {
+  margin-left: 22%;
+}
+
+figure dl {
+  border-radius: 0.4em;
+  border: solid  thin rgb(10%,10%,10%);
+  background-color: rgb(90%,90%,90%);
+}
+figure dt {
+  border-top-left-radius: 0.2em;
+  border-top-right-radius: 0.2em;
+  color: white;
+  background-color: rgb(30%,30%,30%);
+}
+figure dd {
+  padding-left: 0.5em;
+  margin: auto;
+}
+figure dl dd:nth-of-type(n+2) {
+  border-top-style: dashed;
+  border-top-width: thin;
+}
+    </style>
+  </head>
+  <body><br />
+    <section>
+      <h1>平林純さん</h1>
+      <p>雑学科学研究者</p>
+      <p>大玉をスキージャンプ台からどこまで飛ぶかとか。</p>
+      <p>出川さんとかはリアクションは、温度とか</p>
+      <p>錯視を使って胸を大きく見せるための下着を使う。</p>
+      <p>2012年頃にOpenFOAMと出会う。</p>
+      <p>早稲田で10本くらい、ネタをもち合って発表会。</p>
+      <section>
+        <h2>これからの話</h2>
+        <p>でんじろう先生が妬ましい。</p>
+        <p>ただ真似ただけでは、こども好きには負けるだろう、</p>
+        <p>空気砲</p>
+        <ul>
+          <li>科学好き大人のOpenFOAM</li>
+          <li>アートの枠組みOpenFrameworks</li>
+        </ul>
+        <p>ゴムの膜の振動数とマイクの周波数とで、計算してParaViewで表示。</p>
+        <p>空気の動きを見えるようになる。手の動きと映像を組み合わせる。</p>
+        <p>マイクの周期で、それに応じたケースファイルを切り変えて表示。</p>
+        <p><br />
+        </p>
+        <p>Kinectで動きと併せて三次元で表示させる。</p>
+        <p>ANDはたすじゃなくて、乗算</p>
+        <p>こども+科学好き大人+アート好き女子</p>
+        <p>こどもx科学好きxアート好き≒ゼロ</p>
+        <p><br />
+        </p>
+        <p>計算結果が画面の中じゃつまらない。</p>
+        <ul>
+          <li>Unity</li>
+          <li>Belender</li>
+          <li>OpenFOAM</li>
+          <li>ParaView</li>
+          <li>Oculus</li>
+        </ul>
+        <p><br />
+        </p>
+        <ol>
+          <li>UnityのZENRINデータ</li>
+          <li>Blenderでエクスポート</li>
+          <li>OpenFOAMでBlockMesh、snapyyHexmesh</li>
+          <li>計算</li>
+          <li>ParaView</li>
+          <li>Unity</li>
+          <li>OculusRift</li>
+        </ol>
+        <p><br />
+        </p>
+        <p>実際の風景とOpenFOAM計算結果を重ねてみる。</p>
+        <p><br />
+        </p>
+      </section>
+      <br />
+      <section>
+        <h2>これから先</h2>
+        <p>計算結果の世界を歩く</p>
+        <p>刻々の風を体感する</p>
+        <p>非定常計算結果</p>
+        <p>3D映像も実写風景動画を取る。</p>
+        <p>どんなことが動いているか定性的にみれたらいいのだから、OpenFOAMでたくさん計算しなくてもいいかなと。</p>
+        <p><br />
+        </p>
+        <p><br />
+        </p>
+      </section>
+      <section>
+        <h2>ミニプレゼン</h2>
+        <p>JISL4006</p>
+        <p>ファンデーションのサイズ</p>
+        <p>ブラジャーのサイズはアンダーとトップの差で決まる。</p>
+        <p>阪急とした時の直径で決まる。</p>
+        <p><br />
+        </p>
+        <p><br />
+        </p>
+      </section>
+      <section>
+        <h2>質疑</h2>
+        <p>Q.入力はどれくらいの距離で。</p>
+        <p>A.120 mくらい。メッシュサイズは200 mくらい。</p>
+        <p>Q. 計算時間はどれくらい？</p>
+        <p>A. 200x200x120の計算で、4時間くらい。</p>
+        <p>15年くらい前に気流の可視化ができるようになった。6万円くらいでできるようになったらすごいなと。</p>
+        <p>都市の計算でやるなら膨大な気流計算とか、突風を考慮しないといけないなと。</p>
+        <p> Q.そういう人間の形状データはどうする。</p>
+        <p>A. Blenderで書いたり、Kinectポイントでやったり。ポーザー（ポーズを決めるソフトがある）</p>
+        <p>Q. OpenFOAMを最初に触った印象は？挫折する人も多い。</p>
+        <p>A. 最初に落ちこぼれて、今も落ちこぼれている。C++の書き方が勉強になった。チュートリアルをやってどうやって動いているのが理解できなかった。ウルトラビギナーズ勉強会とかあったら参加したいな。</p>
+        <p>Q. どこかで勉強会をやっているの？</p>
+        <p>A. 数回やった。シミュレーションをやった数人でOpenFOAMのチュートリアルをやる勉強。簡単にチュートリアルができるようになって終わった。日本画像学会のシミューレション技術会の何人か。10年くらいExcelで現象理解しようというのがあった。しかし、今はとりあえず使えることが重要になってきている。アプリとして使えるほうがいいかなと。</p>
+      </section>
+    </section>
+    <br />
+    <section>
+      <h1>勉強会の紹介</h1>
+      <p>THINK。</p>
+      <p>つくばの日本自動車研究所（JARI）に勤務。</p>
+      <p>過去は燃焼関連のCFD。現在は大気環境のシミュレーションがメイン。</p>
+      <p>2013年8月に2代目幹事になった。</p>
+      <p>オープンCAEとの出会い。</p>
+      <p>2009年ごろ燃焼シミュレーションをやっていて興味を持った。</p>
+      <p>2009年頃に勉強会ができた。</p>
+      <p>最初はオガタとシバタが幹事だった。</p>
+      <p>勉強会の内容</p>
+      <ul>
+        <li>トピック紹介と質問コーナー（毎回）</li>
+        <li>輪読会（ほぼ毎回）</li>
+        <li>講習会（不定期）</li>
+        <li>特別講演会（不定期）</li>
+      </ul>
+      <p>数値流体力学の輪読。もう2年くらいやっている。</p>
+      <p>平均14名程度の参加。内輪で盛り上がる感がある。</p>
+      <p><br />
+      </p>
+      <br />
+    </section>
+    <br />
+    <section>
+      <h1>自己紹介</h1>
+      <p>初参加8人。</p>
+      <p>年度が変わったのもあるので、勉強会について紹介。</p>
+      <p>花井</p>
+      <p>シングルリード研究室</p>
+      <p>サックスフォンとかの周辺機器の製造。</p>
+      <p>6/24に総会がある。そこで、FreeCADをツボタさんが講演会する。</p>
+      <p><br />
+      </p>
+      <p>大原　ゆういち</p>
+      <p>千葉医大学機械コース</p>
+      <p><br />
+      </p>
+      <p>りゅう</p>
+      <p>東京大学情報理工学D2</p>
+      <p>コンピューター科学関係。流体のシミュレーション、CADアルゴリズムの効率改善。</p>
+      <p>ラプラスデフォメーションとかポアソンデフォメーション。</p>
+      <p>SPHというアルゴリズムを研究中。</p>
+      <p>よりよいレンダリング</p>
+      <ul>
+        <li>Blender</li>
+        <li>AutoCAD</li>
+        <li>Unity</li>
+      </ul>
+      <p>もともと、機械ではなく。コンピューター科学の人。流体とか物理に興味がある。</p>
+      <p><br />
+      </p>
+      <p>奥野　KKE</p>
+      <ul>
+        <li>津波</li>
+        <li>スロッシング</li>
+      </ul>
+      <p>SPHとMPSは今はどちらがいいとかなくなってきている。</p>
+      <p>お互いがよいところをとりあっている。</p>
+      <p>DesignSpark Mechanica（3Dプリンタ向けのCAD）</p>
+      <p>CADMASの開発元の港湾海岸もOpenFOAM使っている。</p>
+      <p><br />
+      </p>
+      <p>海上技術安全研究所</p>
+      <p>FLIPのところ？</p>
+    </section>
+    <br />
+    <p> 植田</p>
+    <p>CAEが楽しいって。</p>
+    <br />
+  </body>
+</html>

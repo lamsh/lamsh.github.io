@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html><html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <meta content="SENOO, Ken" name="author" />
+    <!-- <meta name="description" contents="" /> -->
+    <!-- <meta name="keywords" contents="" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="default.css" /> -->
+    <style>
+@charset "UTF-8";
+
+/* caption */
+caption::before {
+  counter-increment: table;
+  content: "表" counter(heading1) "." counter(table) " ";
+}
+figcaption::before {
+  counter-increment: figure;
+  content: "図" counter(heading1) "." counter(figure) " ";
+}
+body {counter-reset: listing;}
+figcaption[id^="lis:"]::before {
+  counter-increment: listing;
+  content: "リスト" counter(heading1) "." counter(listing) " ";
+}
+figcaption[class^="lis"]::before {
+  counter-increment: listing;
+  content: "リスト" counter(section1) "." counter(listing) " ";
+}
+
+/* list */
+/* listが見出し設定の後にあると見出し番号がリセットされる? */
+/* ol { counter-reset: enum; } */
+/* ol li { list-style-type: none; } */
+/* ol li::before {                    */
+/* counter-increment: enum;           */
+/* content: counters(enum, ".") ". "; */
+/* }                                  */
+ol {
+  counter-reset: enum1;
+  padding-left: 1em;
+}
+ol>li {
+  list-style-type: none;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li::before {
+  counter-increment: enum1;
+  content: counter(enum1) ". ";
+}
+ol>li>ol{
+  counter-reset: enum2;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li::before {
+  counter-increment: enum2;
+  content: counter(enum1) "." counter(enum2) ". ";
+}
+ol>li>ol>li>ol{
+  counter-reset: enum3;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li::before {
+  counter-increment: enum3;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) ". ";
+}
+ol>li>ol>li>ol>li>ol{
+  counter-reset: enum4;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum4;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) ". ";
+}
+ol>li>ol>li>ol>li>ol>li>ol{
+  counter-reset: enum5;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum5;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) "." counter(enum5) ". ";
+}
+ol>li>ol>li>ol>li>ol>li>ol>li>ol{
+  counter-reset: enum6;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum6;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) "." counter(enum5) "." counter(enum6) ". ";
+}
+
+
+/* title */
+body>h1:first-child {
+  text-align: center;
+  font-size: xx-large;
+}
+
+/* 節番号の設定 */
+body { counter-reset: heading1; }
+
+section>h1:first-child,
+section>h2:first-child,
+section>h3:first-child,
+section>h4:first-child,
+section>h5:first-child,
+section>h6:first-child
+{
+  counter-increment: heading1; counter-reset: heading2 table figure;
+}
+
+section>h1:first-child::before,
+section>h2:first-child::before,
+section>h3:first-child::before,
+section>h4:first-child::before,
+section>h5:first-child::before,
+section>h6:first-child::before
+{
+  content: counter(heading1) " ";
+}
+
+section>section>h1:first-child,
+section>section>h2:first-child,
+section>section>h3:first-child,
+section>section>h4:first-child,
+section>section>h5:first-child,
+section>section>h6:first-child
+{
+  counter-increment: heading2; counter-reset: heading3;
+}
+section>section>h1:first-child::before,
+section>section>h2:first-child::before,
+section>section>h3:first-child::before,
+section>section>h4:first-child::before,
+section>section>h5:first-child::before,
+section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2)  " ";
+}
+
+section>section>section>h1:first-child,
+section>section>section>h2:first-child,
+section>section>section>h3:first-child,
+section>section>section>h4:first-child,
+section>section>section>h5:first-child,
+section>section>section>h6:first-child
+{
+  counter-increment: heading3; counter-reset: heading4;
+}
+section>section>section>h1:first-child::before,
+section>section>section>h2:first-child::before,
+section>section>section>h3:first-child::before,
+section>section>section>h4:first-child::before,
+section>section>section>h5:first-child::before,
+section>section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3)
+ " ";
+}
+
+section>section>section>section>h1:first-child,
+section>section>section>section>h2:first-child,
+section>section>section>section>h3:first-child,
+section>section>section>section>h4:first-child,
+section>section>section>section>h5:first-child,
+section>section>section>section>h6:first-child
+{
+  counter-increment: heading4; counter-reset: heading5;
+}
+section>section>section>section>h1:first-child::before,
+section>section>section>section>h2:first-child::before,
+section>section>section>section>h3:first-child::before,
+section>section>section>section>h4:first-child::before,
+section>section>section>section>h5:first-child::before,
+section>section>section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3)
+"." counter(heading4)  " ";
+}
+
+section>section>section>section>section>h1:first-child,
+section>section>section>section>section>h2:first-child,
+section>section>section>section>section>h3:first-child,
+section>section>section>section>section>h4:first-child,
+section>section>section>section>section>h5:first-child,
+section>section>section>section>section>h6:first-child
+{
+  counter-increment: heading5; counter-reset: heading6;
+}
+section>section>section>section>section>h1:first-child::before,
+section>section>section>section>section>h2:first-child::before,
+section>section>section>section>section>h3:first-child::before,
+section>section>section>section>section>h4:first-child::before,
+section>section>section>section>section>h5:first-child::before,
+section>section>section>section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3)
+"." counter(heading4) "." counter(heading5)  " ";
+}
+
+section>section>section>section>section>section>h1:first-child,
+section>section>section>section>section>section>h2:first-child,
+section>section>section>section>section>section>h3:first-child,
+section>section>section>section>section>section>h4:first-child,
+section>section>section>section>section>section>h5:first-child,
+section>section>section>section>section>section>h6:first-child
+{
+  counter-increment: heading5; counter-reset: heading6;
+}
+section>section>section>section>section>section>h1:first-child::before,
+section>section>section>section>section>section>h2:first-child::before,
+section>section>section>section>section>section>h3:first-child::before,
+section>section>section>section>section>section>h4:first-child::before,
+section>section>section>section>section>section>h5:first-child::before,
+section>section>section>section>section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3)
+"." counter(heading4) "." counter(heading5) "." counter(heading5) " ";
+}
+
+
+/* table */
+table {
+  border-collapse: collapse;
+  border: none;
+  /** centering **/
+  margin-left: auto;
+  margin-right: auto;
+}
+/** table color **/
+tbody>tr:nth-child(even) {
+  background: #ffffaa;
+}
+thead>tr>th {
+  background: #ffcc99;
+  text-align: center;
+  font-weight: bold
+}
+/** column margin **/
+td {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+/** table border **/
+td, th {
+  border-style: none;
+}
+
+thead>tr:first-child {
+  border-top-style: solid;
+  border-top-width: medium;
+}
+thead>tr:last-child {
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+}
+tbody>tr:first-child {
+  border-top-style: solid;
+  border-top-width: thin;
+}
+tbody>tr:last-child {
+  border-bottom-style: solid;
+  border-bottom-width: medium;
+}
+
+th, td {
+  word-wrap: break-all;
+}
+
+/* cross reference */
+[href^="#chap:"]::before {
+  content: "第";
+}
+[href^="#chap:"]::after {
+  content: "章";
+}
+[href^="#sec:"]::after, [href^="#sub"]::after {
+  content: "節";
+}
+[href^="#par:"]::after {
+  content: "段落";
+}
+[href^="#enu:"]::before {
+  content: "項目";
+}
+[href^="#eq:"]::before {
+  content: "式(";
+}
+[href^="#eq:"]::after {
+  content: ")";
+}
+[href^="#fig:"]::before {
+  content: "図";
+}
+[href^="#tab:"]::before {
+  content: "表";
+}
+[href^="#lis:"]::before {
+  content: "リスト";
+}
+
+/* フォント設定 */
+p {
+  text-indent: 1em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "TeX Gyre Heros", "Migu 1P", sans-serif;
+  background-color: #e6e6ff;
+}
+em, strong {
+  color: red;
+  font-weight: bold;
+}
+strong {
+  background-color: yellow;
+}
+
+/* PC語句 */
+kbd, code, samp, var {
+  font-family: Inconsolata, "Migu 1M", monospace;
+  border-width: thin;
+  border-style: solid;
+  border-color: #cccccc;
+  border-radius: 5px;
+}
+kbd {
+  background-color: #ffe6e6;
+}
+code {
+  background-color: #e6ffe6;
+}
+samp {
+  background-color: #e6e6e6;
+}
+var {
+  font-style: normal;
+  background-color: #e6ffff;
+}
+pre {
+  font-family: Inconsolata, "Migu 1M", monospace;
+  background-color: #ffffe6;
+  overflow: auto;
+}
+
+/* line number for source code */
+pre>code, pre>samp {
+  display: block;
+  border-style: none;
+  position: relative;
+  padding-left: 2.5em;
+  overflow-x: auto;
+}
+
+pre>code::before, pre>samp::before {
+  content: "  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100";
+  display: block;
+  width: 2em;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  overflow-y: hidden;
+  border-right: 1px solid;
+}
+
+/* blockquote */
+blockquote{
+  background-color: #eee;
+  padding: 1.0em;
+  padding-left: 3em;
+  position: relative;
+}
+blockquote::before{
+  content:"“";
+  font-size: 600%;
+  line-height: 1em;
+  font-family: serif;
+  color: #999;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+dt {
+  font-weight: bold;
+  padding-left: 0.5em;
+}
+dt, dd {
+  line-height: 1.5em;
+}
+
+:not(figure)>dl>dt {
+  float: left;
+  width: 20%;
+}
+:not(figure)>dl>dd {
+  margin-left: 22%;
+}
+
+figure dl {
+  border-radius: 0.4em;
+  border: solid  thin rgb(10%,10%,10%);
+  background-color: rgb(90%,90%,90%);
+}
+figure dt {
+  border-top-left-radius: 0.2em;
+  border-top-right-radius: 0.2em;
+  color: white;
+  background-color: rgb(30%,30%,30%);
+}
+figure dd {
+  padding-left: 0.5em;
+  margin: auto;
+}
+figure dl dd:nth-of-type(n+2) {
+  border-top-style: dashed;
+  border-top-width: thin;
+}
+
+/* Page style */
+@page {
+  size: A4 portrait;
+  margin: 2cm;
+
+  @top-left {
+    content: "Chapter";
+  }
+  @top-center {
+    content: "Title";
+  }
+  @top-right {
+    content: "Section";
+  }
+  @bottom-left {
+    content: "SENOO, Ken";
+  }
+  @bottom-center {
+    content: "- " counter(page) "/" counter(pages) " -";
+  }
+  @bottom-right {
+    content: "Date";
+  }
+}
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>2016-04-09第56回オープンCAE勉強会@関東での発表「OpenFOAM標準ソルバー人気ランキング」の感想</h1>
+      <p>2016-04-09に <a href="http://opencae-kanto.connpass.com/event/29193/">第56回オープンCAE勉強会＠関東（流体など）+平林純様特別講演</a>に参加して，「OpenFOAM標準ソルバー人気ランキング」という題で発表した。参加・発表の感想を記す。</p>
+      <p>少し長いので以下に目次を記しておく。</p>
+      <ol id="mozToc">
+        <!--mozToc h1 1 h2 2 h3 3 h4 4 h5 5 h6 6-->
+        <li><a href="#mozTocId108397">参加・発表の背景</a></li>
+        <li><a href="#mozTocId846730">発表資料</a></li>
+        <li><a href="#mozTocId492909">参加・発表の感想</a></li>
+        <li><a href="#mozTocId702655">発表後の指摘</a></li>
+        <li><a href="#mozTocId329374">スライド作成</a>
+          <ol>
+            <li><a href="#mozTocId651723">作成フロー</a></li>
+            <li><a href="#mozTocId156249">HTML作成</a></li>
+            <li><a href="#mozTocId643884">PDF生成</a></li>
+            <li><a href="#mozTocId339853">残る問題点</a></li>
+            <li><a href="#mozTocId507899">公開先</a></li>
+          </ol>
+        </li>
+        <li><a href="#mozTocId567634">動画作成</a>
+          <ol>
+            <li><a href="#mozTocId698059">動画を作成・公開した意図</a></li>
+            <li><a href="#mozTocId976218">動画作成方法</a></li>
+          </ol>
+        </li>
+        <li><a href="#mozTocId467112">まとめ</a></li>
+      </ol>
+      <section>
+        <h2>参加・発表の背景</h2>
+        <p>発表時に口頭でも説明したが，今回の発表の主な目的は以下3点だ。</p>
+        <ol>
+          <li>転職して東京に引っ越してきた挨拶。</li>
+          <li>OpenFOAMの標準ソルバーの利用状況について自分が調べたことを発表するという自己満足。</li>
+          <li><a href="https://github.com/hakimel/reveal.js/">Reveal.js</a>を使った僕の初めてのCSS組版の技術的挑戦。</li>
+        </ol>
+        <p>以下で各目的について簡単に説明する。</p>
+        <p>1点目。大阪の会社に勤務していたのだが，2016-03-31で会社を退職して，東京の会社に転職することにした。この先当分東京にいるので，ひとまず引っ越しの挨拶をしておいたほうがいいかなとおもった。</p>
+        <p>2点目。オープンCAE勉強会@関東には今まで2回参加していたが，CAEといえるような内容の発表はあまりしていなかった。発表内容としては，OpenCAE勉強会のメインテーマの一つと思っているOpenFOAMに関するものをそろそろやったほうがいいかなと思った。単純に今後OpenFOAMで何かやるときの参考にしたいなと思ったし，新しく始める人にとっては需要があるんじゃないかなと思った。</p>
+        <p>3点目。自分の関心の一つに「CSS組版」がある。2016-03-31にHTML5プロフェッショナルレベル1の試験に合格して，HTMLに関する知識の自信がついた。CSS組版の探求として，HTMLでスライドを作ってみたいと思っていた。HTMLでスライドを作るにあたって，いくつかライブラリがある。そのうち，比較的人気のReveal.jsがどんなものか試してみたかった。</p>
+        <p>主でないが以下の項目も今回の参加の目的だ。</p>
+        <ol>
+          <li>会場提供者への挨拶・お礼。</li>
+          <li>2015-05頃にできた<a href="http://www.opencae.or.jp/%E4%BA%8B%E6%A5%AD%E3%81%AE%E3%81%94%E6%A1%88%E5%86%85/%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3cae%E5%8B%89%E5%BC%B7%E4%BC%9A/">オープンCAE勉強会のロゴ</a>の使用。</li>
+        </ol>
+        <p>1点目。今回でこの勉強会には3回目の参加だ。勉強会幹事には既に挨拶をしていたが，会場の提供者には挨拶をしていなかった。挨拶したほうがいいなと思ったので名刺を渡して挨拶した。</p>
+        <p>2点目。2回目に参加した2014-11-29に参加・発表した第44回オープンCAE勉強会@関東（流体など）で，勉強会のロゴがほしいなとツイートした。そこから話が発展して，2015-05頃にオープンCAE勉強会のロゴが作られた。この一連の経緯は以下でまとめている。</p>
+        <p> <a href="http://togetter.com/li/926515">オープンCAE勉強会のロゴができるまでの経緯 - Togetterまとめ</a></p>
+        <p>言い出しっぺとして，使わないわけにはいかなかったし，かっこいいあのロゴを使いたかった（スライド表紙の右側に配置）。</p>
+        <p>以上が今回の勉強会の参加・発表の経緯だ。</p>
+        <hr />
+        <p>たまたま今回の勉強会では平林純という雑学科学研究者を名乗る人の特別講演会があった。僕は知らなかったのだけど，一部で有名な人らしくこの人目当ての参加者もいたようで，最初は参加者が多かった。</p>
+        <p>参加前にこの人について調べていたのだけど，いくつか本を出しているようで，以下の本は購入して読んでいた。</p>
+        <p> <a href="http://www.amazon.co.jp/%E8%AB%96%E7%90%86%E7%9A%84%E3%81%AB%E3%83%97%E3%83%AC%E3%82%BC%E3%83%B3%E3%81%99%E3%82%8B%E6%8A%80%E8%A1%93-%E8%81%B4%E3%81%8D%E6%89%8B%E3%81%AE%E8%A8%98%E6%86%B6%E3%81%AB%E6%AE%8B%E3%82%8B%E8%A9%B1%E3%81%97%E6%96%B9%E3%81%AE%E6%A5%B5%E6%84%8F-%E3%82%B5%E3%82%A4%E3%82%A8%E3%83%B3%E3%82%B9%E3%83%BB%E3%82%A2%E3%82%A4%E6%96%B0%E6%9B%B8-%E5%B9%B3%E6%9E%97-%E7%B4%94/dp/4797349778/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1462082182&amp;sr=1-1">論理的にプレゼンする技術 聴き手の記憶に残る話し方の極意 (サイエンス・アイ新書) | 平林 純 | 本 | Amazon.co.jp</a></p>
+        <p>大学院生のときにプレゼンテーションをうまくやる方法について片っ端から調べていた時に読んだ本だ。2013-11-02に手元に読了記録があり，「悪くはなかった。」とメモがあった。</p>
+        <p>この人は数値解析を使ってなんかいろいろ遊んでいるみたいだった。数値解析を日常で役に立てられないことを自分の中で大きな問題と思っていたので参考にできたらいいなと少し興味をもった。</p>
+      </section>
+      <section>
+        <h2>発表資料</h2>
+        <p>今回のスライドはReveal.jsで作ったのでHTML版とPDF版の2種類の媒体が存在する。発表にはHTML版を使った。こちらのほうがレイアウトが僕の意図通りなのでこちらで見たほうがよいだろう。PDF版はスライドシェアで公開している。</p>
+        <p>HTML版：<a href="http://lamsh.github.io/slide/2016/20160409_OpenFOAM%E6%A8%99%E6%BA%96%E3%82%BD%E3%83%AB%E3%83%90%E3%83%BC%E4%BA%BA%E6%B0%97%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0/index.html">OpenFOAM標準ソルバー人気ランキング</a> </p>
+        <p>PDF版：<br />
+        </p>
+        <p style="text-align: center;"><iframe height="485" frameborder="0"
+            width="595" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/key/qINSPhX5k9103x"
+            marginwidth="0" marginheight="0" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;"
+            allowfullscrenn="allowfullscreen"> </iframe> </p>
+        <p style="text-align: center;"> <strong> <a href="//www.slideshare.net/iesli/20160409-openfoam56cae"
+              title="OpenFOAM標準ソルバー人気ランキング（第56回オープンCAE勉強会＠関東（流体など））" target="_blank">OpenFOAM標準ソルバー人気ランキング（第56回オープンCAE勉強会＠関東（流体など））</a> </strong> from <strong><a
+              href="//www.slideshare.net/iesli" target="_blank">Ken SENOO</a></strong> </p>
+        <p>動画：</p>
+        <p>また，今回は発表時の音声と画面を自分で動画にして<a href="https://www.youtube.com/watch?v=LnpITC9lzm0">Youtubeで公開</a>することにした。オープンCAE勉強会では発表者の許可を得て，Vimeoで発表動画を公開している。僕の発表も<a
+            href="https://vimeo.com/162830088">こちらで公開</a>されている。他の発表動画など自分のことは自分で一元管理したいなと思って自分で動画にしてみた。</p>
+        <p style="text-align: center;"> <iframe height="360" frameborder="0"
+            width="640" allowfullscreen="allowfullscreen" src="https://www.youtube.com/embed/LnpITC9lzm0"></iframe> </p>
+        <p>なお，今回調査した検索ヒット数の一覧は<a href="http://lamsh.github.io/slide/2016/20160409_OpenFOAM%E6%A8%99%E6%BA%96%E3%82%BD%E3%83%AB%E3%83%90%E3%83%BC%E4%BA%BA%E6%B0%97%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0/OpenFOAM%E6%A8%99%E6%BA%96%E3%82%BD%E3%83%AB%E3%83%90%E3%83%BC%E6%A4%9C%E7%B4%A2%E3%83%92%E3%83%83%E3%83%88%E6%95%B0.ods">ここにods形式で格納</a>しているので必要であればお持ちください。</p>
+      </section>
+      <section>
+        <h2>参加・発表の感想</h2>
+        <p>今回は参加者が多く，初参加の人が8人だった。その人たちの自己紹介とそれに対する質疑がそれぞれ20分くらいだった。自分の発表は17:00頃で待ち時間が長くて退屈だった。この勉強会自体の経緯や説明があったのは参考になった。ゲストに質問してみたが，自分が納得いくような回答は得られなかった。CAEが楽しいという人がいて珍しく思った。</p>
+        <p>勉強会の最後に，なんかCAEと全く無関係な内容の発表している人がいた。小学校の数学の教科書に江戸しぐさという言葉が間違った意味で伝えられてしまっているので，この問題への啓蒙とかそんな内容だったと思う。インターネットがつながらないとかを理由に，きちんと資料も掲示せずに，何が言いたいのか・なぜここで発表するのかの説明がなくて，何考えているのかよくわからなかった。発表するならきちんとやってほしいなと思った。</p>
+        <hr />
+        <p>今回の発表スライドは4/3日から作成を開始した。テーマ自体はそんなに難しくないが，今回は初めてHTMLでスライドを作るということで，あまり余裕はなかった。Reveal.jsの使い方の学習や，ツールの作成で日曜日は終わり，平日夜間にスライドの大部分を作らざるを得なくなった。今回の勉強会は，引っ越してきて一発目ということでタイミング的にも<strong>何がなんでも</strong>発表したかった。数値解析と無関係な職業に就くことにしたので，もう当分は参加することがないだろうと思っていたからだ。</p>
+        <p>一年ぶりの勉強会での発表で少し緊張した。発表スライドはきっちりしたものが作れた。テーマも含めて，発表自体はまあまあうまくできたんじゃないかなと自分では思っていた。最初に掲げた3+2の自分の今回の発表の目的も果たせたのでよかった。</p>
+        <p>質問されたが，Vivliostyleを知っている人がいて，びっくりした。ランキングに対して怪しいとの声があったが，示している条件で検索すると実際になっている。会場で検索してくれた人がいたが，<em>実際にdsmcFoamの検索数を再現できていた</em>。なので，調査結果自体は間違っていなかった。こういうのは，社会実験とか数値実験みたいなものだと考えている。きちんと条件・手順を示してトレーサビリティーを確保しておくことは大事だと思った。</p>
+        <p>今回調べた内容は実際のところは<em>OpenFOAMv2.3系の標準ソルバー</em>だったようだ。参照していたマニュアルが古くて，古い情報を元にしていたようだった。別に僕はOpenFOAMのユーザーでも専門家でもないし，そんな細かい情報は知りようがない。他の人がわかるように，公式文書にはきちんと明記してほしいなと思った。</p>
+        <p>今回の標準ソルバーの検索数の調査は，手作業で行った。自分でGoogle検索でコピーペーストして一個ずつ検索して，ヒット数を控えるということをやった。全部で69ソルバーあり，途中で検索条件を間違えていたのもあり，検索数の調査自体は約2時間かかった。</p>
+        <p>手作業でやること自体は効率が悪いだろうとは思っていた。しかし，今までやったことがないので自動化するにも試行錯誤が必要だ。イベントまで時間があまりない。時間以内に検索数の取得が間に合う保証はなかったし，<em>自動化着手から2時間以内</em>に完了できる気はしなかった。だから今回は手作業で行った。Google検索を自動化することは今回の発表の趣旨とは無関係であり，これからも継続的に調べるつもりもなかったので，自分としては別に何も問題なかった。</p>
+        <p>懇親会でこの検索方法の話をふられて，手動でやったといったらその場にいた5人くらいの人全員に驚かれた。「てっきり自動化してるもんだと思っていた」とか，「それくらい調べればすぐにスクリプト組めるでしょ？」とかいろいろ言われた。できる自信がなかったとか，時間が足りなかったとか，手動でやった理由を説明したが理解してもらえなかったようだった。</p>
+        <p>何も悪い子としていないし，誰にも迷惑をかけていないのに，本題と関係ないところで周りの全員から集中的に批判を受けて，無能扱いされたみたいで不愉快だった。</p>
+        <p>ちょっとくらいからかわれたり，馬鹿にされたり，笑いものにされたりするのは，わかっていても平気な顔していちいち気にしない。そんな人間相手にせずに，あまり気にしないようにしていた。しかし，今回は許容限界を越えたようで残念だった。</p>
+      </section>
+      <section>
+        <h2>発表後の指摘</h2>
+        <p>今回の発表では，手作業でOpenFOAM標準ソルバー69個をGoogle検索で検索してヒット数を集計した。</p>
+        <p>勉強会終了後に，この検索ヒット数を自動化する方法を教えてくれた。</p>
+        <blockquote data-conversation="none" class="twitter-tweet" data-partner="tweetdeck">
+          <p lang="ja" dir="ltr"><a href="https://twitter.com/senopen">@senopen</a> 全ソルバに対してGoogleの検索ヒット数を取得するbashスクリプトを作ってみました．ただし，Google側が途中で遮断する可能性あり． sol;U="<a
+              href="https://t.co/wbgv8v8uGW">https://t.co/wbgv8v8uGW</a>"; (続く)</p>
+          今野 雅 / Masashi IMANO (@_masaz) <a href="https://twitter.com/_masaz/status/719695110498164736">April 12, 2016</a></blockquote>
+        <blockquote data-conversation="none" class="twitter-tweet" data-lang="ja">
+          <p lang="en" dir="ltr"><a href="https://twitter.com/senopen">@senopen</a> for CS in `find . -name files | xargs grep EXE | sed "s/\.\/\([^\/]*\).*\/\(.*\)\/Make\/.*/\1,\2/"`;do S=${CS#*,}; (続く)</p>
+          今野 雅 / Masashi IMANO (@_masaz) <a href="https://twitter.com/_masaz/status/719695392623886336">2016年4月12日</a></blockquote>
+        <blockquote data-conversation="none" class="twitter-tweet" data-lang="ja">
+          <p lang="en" dir="ltr"><a href="https://twitter.com/senopen">@senopen</a> R=`curl -s -e <a
+              href="https://twitter.com/search?q=%24U&amp;src=ctag">$U</a> -A "Mozilla/4.0 (compatible; MSIE 5.5; Windows 95)" <a
+              href="https://twitter.com/search?q=%24U&amp;src=ctag">$U</a>/search?q=%22$S%22+%22OpenFOAM%22 | (続く)</p>
+          今野 雅 / Masashi IMANO (@_masaz) <a href="https://twitter.com/_masaz/status/719695964013928449">2016年4月12日</a></blockquote>
+        <blockquote data-conversation="none" class="twitter-tweet" data-lang="ja">
+          <p lang="en" dir="ltr"><a href="https://twitter.com/senopen">@senopen</a> grep " results (" | nkf -u | sed "s/.*&gt;\([^&gt;]*\) results (.*/\1/"`;echo <a
+              href="https://twitter.com/search?q=%24CS&amp;src=ctag">$CS</a>,\"$R\";sleep $(($RANDOM % 10));done <br />
+            (終り)</p>
+          今野 雅 / Masashi IMANO (@_masaz) <a href="https://twitter.com/_masaz/status/719696161653719040">2016年4月12日</a></blockquote>
+        <blockquote data-conversation="none" class="twitter-tweet" data-lang="ja">
+          <p lang="ja" dir="ltr"><a href="https://twitter.com/senopen">@senopen</a> 上位6ソルバの結果です． interFoam,15300 simpleFoam,14700 icoFoam,13100 chtMultiRegionSimpleFoam,11400 sonicFoam,6490 dsmcFoam,6280 以上です．</p>
+          今野 雅 / Masashi IMANO (@_masaz) <a href="https://twitter.com/_masaz/status/719698689837563906">2016年4月12日</a></blockquote>
+        <p>シェルスクリプトを意味のある単位にまとめると以下となる。なお，事前にOpenFOAMの設定.bashrcを読み込んでaliasのsol（OpenFOAMのソルバーディレクトリへの移動）を使えるようにしておく必要がある。</p>
+        <pre><code>sol<br />U="https://t.co/wbgv8v8uGW"<br />for CS in `find . -name files | xargs grep EXE | sed "s/\.\/\([^\/]*\).*\/\(.*\)\/Make\/.*/\1,\2/"`<br />do S=${CS#*,}<br />  R=`curl -s -e $U -A "Mozilla/4.0 (compatible; MSIE 5.5; Windows 95)" $U/search?q=%22$S%22+%22OpenFOAM%22 | grep " results (" | nkf -u | sed "s/.*&gt;\([^&gt;]*\) results (.*/\1/"`;echo $CS,\"$R\";sleep $(($RANDOM % 10))<br />done </code></pre>
+      </section>
+      <section>
+        <h2>スライド作成</h2>
+        <p>今回は初めてHTMLでスライドを作った。いくつか発見などあったのでメモしておく。</p>
+        <p>なお，今回のスライドの元ファイル一式は以下のリポジトリに格納している。</p>
+        <p><a href="https://github.com/lamsh/slide/tree/master/2016/20160409_OpenFOAM%E6%A8%99%E6%BA%96%E3%82%BD%E3%83%AB%E3%83%90%E3%83%BC%E4%BA%BA%E6%B0%97%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0">slide/2016/20160409_OpenFOAM標準ソルバー人気ランキング at master · lamsh/slide</a></p>
+        <section>
+          <h3>作成フロー</h3>
+          <p>Reveal.jsを使った。Reveal.jsの公式サイトから一式をダウンロードしてきてそのひな形をベースにした。僕はWYSIWYGで資料 を作りたいので，エディターにBlueGriffonを使ってやろうとしていた。BlueGriffonとReveal.jsを組み合わせて使ったのは僕 が初めてなんじゃないだろうか…</p>
+          <ul>
+            <li>ひな形のファイルにユーザーカスタム属性<code>data-*</code>が使われており，<em>一箇所でも</em>この属性があればBlueGriffonではファイルを編集できないようだった。なので，手動で<code>data-*</code>属性を除去した。</li>
+            <li>Reveal.jsを構成するCSSやJavaScriptを読み込むと画面が真っ暗なままで編集できない。なので，ひとまずCSSやJavaScriptの読み込み箇所は分離してsrc.htmlで作成した。</li>
+            <li>スライドは見た目が大事なので，最終表示結果を確認し微調整するがあった。<code>merge.sh</code>というシェルスクリプトで<code>head</code>要素の終端と<code>body</code>要素の終端にそれぞれCSSとJavaScriptを追記して最終表示結果<code>index.html</code>を出力する簡単なツールを作った。</li>
+          </ul>
+        </section>
+        <section>
+          <h3>HTML作成</h3>
+          <ul>
+            <li>Reveal.jsでは<code>.reveal &gt; .slides &gt; section</code>の階層を持たないといけない。ひな形はdivを使っていたが，<code>div</code>要素は気持ち悪いから使いたくないので，<code>body.reveal&gt;main.slides&gt;section</code>という構成にした。</li>
+            <li>普段使っているCSSをできるだけ使った。節番号を入れたり，表をボーダーカラーにしたり。</li>
+            <li>ただ，節番号をいれるとき，目次やタイトルには番号を入れたくなかったので<code>body&gt;main&gt;section&gt;hr</code>というようにsection要素の一行目に<code>hr</code>要素を入れた。だから，表紙と目次には白い罫線が上に付いている。</li>
+            <li>表紙の氏名にはruby要素でルビを振った。今まで使っていたLibreOffice Impressではルビが振れなかった。</li>
+            <li>表の中に長い英単語を入れると折り返されないので，単語の途中でも折り返すように，以下のスタイルを適用した。</li>
+          </ul>
+          <pre><code>th, td {
+  word-wrap: break-all;
+}</code></pre>
+        </section>
+        <section>
+          <h3>PDF生成</h3>
+          <p>PDFを出力するときは，以下のようにURLの末尾に<code>?print-pdf</code>としたページにアクセスしてC-pの印刷から背景画像にチェックを付けてファイルに印刷する。</p>
+          <p><code>http://lamsh.github.io/slide/2016/20160409_OpenFOAM%E6%A8%99%E6%BA%96%E3%82%BD%E3%83%AB%E3%83%90%E3%83%BC%E4%BA%BA%E6%B0%97%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0/index.html?print-pdf</code></p>
+          <p>PDFに出力すると余白など配置がずれることがある。例えば，p. 2のTable of Contentsの次のページに空のぺーじができたり，最終ページに白紙ページができたりする。公開時には手動でこれらの余分なページは削除している。ずれるのは，例えば3.2など鉛直方向にスライドが進むとき，親の節の部分のスペースを確保しないといけないからだろう。</p>
+        </section>
+        <section>
+          <h3>残る問題点</h3>
+          <ul>
+            <li>HTMLだと節番号が3以降増えない。</li>
+            <li>PDFだと右下のページ番号が反映されない。</li>
+            <li>配置のずれ。</li>
+            <li>画像の色がHTML版と変わる。</li>
+          </ul>
+        </section>
+        <section>
+          <h3>公開先</h3>
+          <p>作成したHTMLスライドの公開場所を少し悩んだ。SlideshareではPDFやpptx，odpといった一般的なスライドの形式しか対応していない。HTMLのスライドを公開するのによいサービスというのは思いつかなかった。</p>
+          <p>そこで，Github Pagesを利用した。これはGithubのリポジトリからWebページを生成するGithubのサービスだ。発表スライドを公開するリポジトリslideを新しく作り，ここで公開することにした。</p>
+          <p> <a href="https://github.com/lamsh/slide">https://github.com/lamsh/slide</a></p>
+          <p>今回のスライドは以下のURLでアクセスできる。</p>
+          <a href="http://lamsh.github.io/slide/2016/20160409_OpenFOAM%E6%A8%99%E6%BA%96%E3%82%BD%E3%83%AB%E3%83%90%E3%83%BC%E4%BA%BA%E6%B0%97%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0/index.html"> </a>
+          <p><a href="http://lamsh.github.io/slide/2016/20160409_OpenFOAM%E6%A8%99%E6%BA%96%E3%82%BD%E3%83%AB%E3%83%90%E3%83%BC%E4%BA%BA%E6%B0%97%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0/index.html">http://lamsh.github.io/slide/2016/20160409_OpenFOAM標準ソルバー人気ランキング/index.html</a></p>
+        </section>
+      </section>
+      <section>
+        <h2>動画作成</h2>
+        <section>
+          <h3>動画を作成・公開した意図</h3>
+          <p>動画を自分でYoutubeに公開するのは以下2点の狙いがある。</p>
+          <ol>
+            <li>自分の活動のアーカイブ。</li>
+            <li>お小遣い稼ぎ。<br />
+            </li>
+          </ol>
+          <p>1点目。勉強会で発表するというのは自分にとってはかなりの労力となる。自分の発表欲をみたすためだけにやるのはジリ貧で辛いなと思っていた。どれ もそのときの全力で作っている。その場の人だけのものにするのはもったいないなと思っていた。動画として公開しておけば，他の人にもこの先もずっと見ても らえるし，自分の活動の振り返りとしても面白いかなと思っていた。</p>
+          <p>2点目。ここ何年かでYoutuberと呼ばれる人が登場してきた。Youtubeに動画を公開して広告収入を得ている人たちのことだ。Youtubeはけっこうお金が儲かるという噂をきいていた。自由で生きていくにはやはり自分でお金を稼ぐ必要がある。自分で楽しめて，お金が稼げるならそれはよいだろう。まだ，広告収入を得る設定はしていないが，今後そういう狙いもある。よくわからないが，自分の中で広告とかでお金を稼ぐことには抵抗がある。しかし，自分の声を公開するのは少し恥ずかしいのもあるので，その対価ということで納得させている。</p>
+          <p>また，どうせ既にオープンCAE勉強会の発表動画は公開されているので，別に隠しても意味がないと判断した。声は目には見えないので，特定される形で顔写真がネット上で拡散することに比べたら，そんなに恥ずかしくはないかなと思う。</p>
+        </section>
+        <section>
+          <h3>動画作成方法</h3>
+          <p>今回は初めて自分で発表動画を作ったので，手順をメモしておく。</p>
+          <ol>
+            <li>以前から，質疑の確認や記録として発表時には音声レコーダーで自分の発表を録音していた。</li>
+            <li>画面キャプチャーソフトを使って，発表音声を聞きながら，画面を切り替えて無音声動画を録画。</li>
+            <li>音声と無音声動画を結合させて動画を作成。</li>
+          </ol>
+          具体的には以下のソフトを使った。
+          <ul>
+            <li>画面キャプチャー：kazam</li>
+            <li>音声と動画の結合：avconv </li>
+          </ul>
+          <p>初めは画面キャプチャーにメディアプレーヤーのVLCを使おうとしたが，マウスポインターがうまく映らないので断念した。また，音声と動画の結合にはOpen Shotを使ってみたが，エンコード後の動画サイズが220 MBと元の動画（50 MB）と音声（8 MB）の4倍近く肥大化したのでavconvを使った。</p>
+          <p>avconvはffmpegからForkしたものでUbuntuではffmpegではなくavconvをインストールできる。基本的には同じもののようだ。以下のコマンドで動画と音声を結合させた。</p>
+          <pre><code>avconv -i 動画.mp4 -i record.mp3 結合後動画.mp4</code></pre>
+          <p>驚くことに，avconvで結合させたらファイルサイズが20 MB程度と元動画より小さくなっていた。</p>
+        </section>
+      </section>
+      <section>
+        <h2>まとめ</h2>
+        <p>今回の勉強会での発表では以下の新しいことに挑戦できた。</p>
+        <ul>
+          <li>CSS組版によるスライド作成・公開。</li>
+          <li>発表動画の作成・公開。</li>
+        </ul>
+        <p>一部残念なことはあったが，次につなげていきたい。</p>
+      </section>
+    </section>
+  </body>
+</html>

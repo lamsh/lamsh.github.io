@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html><html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="SENOO, Ken" name="author" />
+    <link href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgo8IS0tIEF1dGhvcjogU0VOT08sIEtlbgogICAgIExpbmNlbnNlOiBDQzAKICAgICBUaGlzIHdvcmsgaXMgbGljZW5zZWQgdW5kZXIgdGhlIENDMCAxLjAgVW5pdmVyc2FsIExpbmNlbnNlIChodHRwczovL2NyZWF0aXZlY29tbW9ucy5vcmcvcHVibGljZG9tYWluL3plcm8vMS4wLykuIFRvIHRoZSBleHRlbnQgcG9zc2libGUgdW5kZXIgbGF3LCBJIGhhdmUgd2FpdmVkIGFsbCBjb3B5cmlnaHQgYW5kIHJlbGF0ZWQgb3IgbmVpZ2hib3JpbmcgcmlnaHRzIHRvIHRoaXMgd29yay4KLS0+Cgo8c3ZnCiAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIKICAgeG1sbnM6Y2M9Imh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL25zIyIKICAgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHdpZHRoPSIxMDAiCiAgIGhlaWdodD0iMTAwIgogICBpZD0ic3ZnMiIKICAgdmVyc2lvbj0iMS4xIgogICBpbmtzY2FwZTp2ZXJzaW9uPSIwLjQ4LjQgcjk5MzkiCiAgIHNvZGlwb2RpOmRvY25hbWU9InN0YXItY29sb3Iuc3ZnIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzNCI+CiAgICA8bGluZWFyR3JhZGllbnQKICAgICAgIGlkPSJsaW5lYXJHcmFkaWVudDM4MzkiPgogICAgICA8c3RvcAogICAgICAgICBzdHlsZT0ic3RvcC1jb2xvcjojZmZmZmZmO3N0b3Atb3BhY2l0eToxOyIKICAgICAgICAgb2Zmc2V0PSIwIgogICAgICAgICBpZD0ic3RvcDM4NDkiIC8+CiAgICAgIDxzdG9wCiAgICAgICAgIHN0eWxlPSJzdG9wLWNvbG9yOiMwMDAwMDA7c3RvcC1vcGFjaXR5OjE7IgogICAgICAgICBvZmZzZXQ9IjEiCiAgICAgICAgIGlkPSJzdG9wMzg0MyIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQKICAgICAgIGlkPSJsaW5lYXJHcmFkaWVudDM4MjUiPgogICAgICA8c3RvcAogICAgICAgICBzdHlsZT0ic3RvcC1jb2xvcjojN2Y5NDg5O3N0b3Atb3BhY2l0eTowLjYxOTYwNzg0OyIKICAgICAgICAgb2Zmc2V0PSIwIgogICAgICAgICBpZD0ic3RvcDM4MzciIC8+CiAgICAgIDxzdG9wCiAgICAgICAgIHN0eWxlPSJzdG9wLWNvbG9yOiNmZmRkYzA7c3RvcC1vcGFjaXR5OjAuNzQ0ODU1OTQ7IgogICAgICAgICBvZmZzZXQ9IjEiCiAgICAgICAgIGlkPSJzdG9wMzgyOSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQKICAgICAgIGlkPSJsaW5lYXJHcmFkaWVudDM3ODUiPgogICAgICA8c3RvcAogICAgICAgICBzdHlsZT0ic3RvcC1jb2xvcjojMDAwMDAwO3N0b3Atb3BhY2l0eTowLjQ5ODAzOTIyOyIKICAgICAgICAgb2Zmc2V0PSIwIgogICAgICAgICBpZD0ic3RvcDM4MTUiIC8+CiAgICAgIDxzdG9wCiAgICAgICAgIHN0eWxlPSJzdG9wLWNvbG9yOiMwMDAwMDA7c3RvcC1vcGFjaXR5OjA7IgogICAgICAgICBvZmZzZXQ9IjEiCiAgICAgICAgIGlkPSJzdG9wMzc4OSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0iYmFzZSIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiM2NjY2NjYiCiAgICAgYm9yZGVyb3BhY2l0eT0iMS4wIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTp6b29tPSIyLjY3IgogICAgIGlua3NjYXBlOmN4PSIzOS4yMjE2NzEiCiAgICAgaW5rc2NhcGU6Y3k9IjUzLjYyNTAyNiIKICAgICBpbmtzY2FwZTpkb2N1bWVudC11bml0cz0icHgiCiAgICAgaW5rc2NhcGU6Y3VycmVudC1sYXllcj0ibGF5ZXIxIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICBpbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjEyNjEiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iNjc1IgogICAgIGlua3NjYXBlOndpbmRvdy14PSIxNDQ0IgogICAgIGlua3NjYXBlOndpbmRvdy15PSI0NSIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIwIiAvPgogIDxtZXRhZGF0YQogICAgIGlkPSJtZXRhZGF0YTciPgogICAgPHJkZjpSREY+CiAgICAgIDxjYzpXb3JrCiAgICAgICAgIHJkZjphYm91dD0iIj4KICAgICAgICA8ZGM6Zm9ybWF0PmltYWdlL3N2Zyt4bWw8L2RjOmZvcm1hdD4KICAgICAgICA8ZGM6dHlwZQogICAgICAgICAgIHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL2RjL2RjbWl0eXBlL1N0aWxsSW1hZ2UiIC8+CiAgICAgICAgPGRjOnRpdGxlPjwvZGM6dGl0bGU+CiAgICAgIDwvY2M6V29yaz4KICAgIDwvcmRmOlJERj4KICA8L21ldGFkYXRhPgogIDxnCiAgICAgaW5rc2NhcGU6bGFiZWw9ImNpcmNsZSIKICAgICBpbmtzY2FwZTpncm91cG1vZGU9ImxheWVyIgogICAgIGlkPSJsYXllcjEiCiAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwtOTUyLjM2MjE4KSIKICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUiPgogICAgPHBhdGgKICAgICAgIHNvZGlwb2RpOnR5cGU9ImFyYyIKICAgICAgIHN0eWxlPSJmaWxsOiNlNmU2ZTY7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmUiCiAgICAgICBpZD0icGF0aDMwMDQiCiAgICAgICBzb2RpcG9kaTpjeD0iNTQuOTEwNzEzIgogICAgICAgc29kaXBvZGk6Y3k9IjQ3LjU4OTI4NyIKICAgICAgIHNvZGlwb2RpOnJ4PSIzMi4wNTM1NyIKICAgICAgIHNvZGlwb2RpOnJ5PSIzMi4wNTM1NyIKICAgICAgIGQ9Im0gODYuOTY0MjgzLDQ3LjU4OTI4NyBhIDMyLjA1MzU3LDMyLjA1MzU3IDAgMSAxIC02NC4xMDcxNCwwIDMyLjA1MzU3LDMyLjA1MzU3IDAgMSAxIDY0LjEwNzE0LDAgeiIKICAgICAgIHRyYW5zZm9ybT0ibWF0cml4KDEuNTU5ODg4NywwLDAsMS41NTk4ODg4LC0zNS42NTQ2MDEsOTI4LjEyODE4KSIgLz4KICA8L2c+CiAgPGcKICAgICBpbmtzY2FwZTpncm91cG1vZGU9ImxheWVyIgogICAgIGlkPSJsYXllcjIiCiAgICAgaW5rc2NhcGU6bGFiZWw9InRyaWFuZ2xlIgogICAgIHN0eWxlPSJvcGFjaXR5OjAuOTM5OTk5OTk7ZGlzcGxheTppbmxpbmUiCiAgICAgc29kaXBvZGk6aW5zZW5zaXRpdmU9InRydWUiPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOiNmZjAwMDA7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmUiCiAgICAgICBkPSJNIDUwLDAgMzUuNTYyNSwyNSA2NC40Mzc1LDI1IDUwLDAgeiIKICAgICAgIGlkPSJwYXRoNDEzMyIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiIC8+CiAgICA8cGF0aAogICAgICAgc3R5bGU9ImZpbGw6I2ZmODAwMDtmaWxsLW9wYWNpdHk6MTtmaWxsLXJ1bGU6ZXZlbm9kZDtzdHJva2U6bm9uZSIKICAgICAgIGQ9Ik0gNjQuNDM3NSwyNSA3OC44NzUsNTAgOTMuMzEyNSwyNSA2NC40Mzc1LDI1IHoiCiAgICAgICBpZD0icGF0aDQxMzEiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIiAvPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmMDA7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmUiCiAgICAgICBkPSJNIDc4Ljg3NSw1MCA2NC40Mzc1LDc1IDkzLjMxMjUsNzUgNzguODc1LDUwIHoiCiAgICAgICBpZD0icGF0aDQxMjkiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIiAvPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOiMwMGZmMDA7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmUiCiAgICAgICBkPSJNIDY0LjQzNzUsNzUgMzUuNTYyNSw3NSA1MCwxMDAgNjQuNDM3NSw3NSB6IgogICAgICAgaWQ9InBhdGg0MTI3IgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIgLz4KICAgIDxwYXRoCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMGZmO2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpldmVub2RkO3N0cm9rZTpub25lIgogICAgICAgZD0iTSAzNS41NjI1LDc1IDIxLjEyNSw1MCA2LjY4NzUsNzUgbCAyOC44NzUsMCB6IgogICAgICAgaWQ9InBhdGg0MTI1IgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIgLz4KICAgIDxwYXRoCiAgICAgICBzdHlsZT0iZmlsbDojODAwMGZmO2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpldmVub2RkO3N0cm9rZTpub25lIgogICAgICAgZD0iTSAyMS4xMjUsNTAgMzUuNTYyNSwyNSA2LjY4NzUsMjUgMjEuMTI1LDUwIHoiCiAgICAgICBpZD0icGF0aDMwMTMiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIiAvPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOm5vbmUiCiAgICAgICBkPSJtIDM1LjY4Mzc4MiwyNC45MzMyNTQgYyAwLC0wLjA1MjIgMTQuMTk5NTcsLTI0LjYzOTI2Njc2IDE0LjI3NTg2NiwtMjQuNzE5MTc4NDMgQyA1MC4wMDU1MywwLjE2NjAxOTI1IDYzLjEyNzU1NSwyMi43MjY4NzMgNjQuMjM1NzQxLDI0Ljc1OTEzMiBsIDAuMTE0NDU4LDAuMjA5OSAtMTQuMzMzMjA4LDAgYyAtNy44ODMyNjUsMCAtMTQuMzMzMjA5LC0wLjAxNjEgLTE0LjMzMzIwOSwtMC4wMzU3OCB6IgogICAgICAgaWQ9InBhdGg0MTAxIgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIgLz4KICA8L2c+Cjwvc3ZnPgo="
+      rel="icon" />
+    <title>LibreOffice Kaigi 2016.12参加・発表レポート</title>
+    <!-- <meta name="description" contents="" /> -->
+    <!-- <meta name="keywords" contents="" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="default.css" /> -->
+    <style>
+@charset "UTF-8";
+
+/** caption */
+caption::before {
+  counter-increment: table;
+  content: "表" counter(heading1) "." counter(table) " ";
+}
+figure>figcaption::before {
+  counter-increment: figure;
+  content: "図" counter(heading1) "." counter(figure) " ";
+}
+/* subfigureの開始時だけリセット */
+figure>figure:first-of-type {
+  counter-reset: subfigure;
+}
+/* そのままやると，subfigureの番号が先に登場するのでfigureと番号が不一致 */
+/* だから，subfigure内ではfigureの番号を増加させ，抜けるときに減らす */
+figure>figure>figcaption::before {
+  counter-increment: figure subfigure;
+  counter-reset: subsubfigure;
+  content: "図" counter(heading1) "." counter(figure) "(" counter(subfigure, lower-alpha) ") ";
+}
+/* 増やしたfigureの番号を減らして元に戻す */
+figure>figure figcaption::after {
+  content: "";
+  counter-increment: figure -1;
+}
+
+figure pre~figcaption::before,
+figure figcaption:first-child::before {
+  counter-increment: listing;
+  content: "リスト" counter(heading1) "." counter(listing) " ";
+}
+figure blockquote~figcaption::before {
+  content: "—";
+}
+
+/* list */
+/* listが見出し設定の後にあると見出し番号がリセットされる? */
+/* ol {                                 */
+/*   counter-reset: enum;               */
+/*   list-style-type: none;             */
+/* }                                    */
+/* li::before {                         */
+/*   counter-increment: enum;           */
+/*   content: counters(enum, ".") ". "; */
+/* }                                    */
+ol {
+  counter-reset: enum1;
+  padding-left: 1em;
+}
+ol>li {
+  list-style-type: none;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li::before {
+  counter-increment: enum1;
+  content: counter(enum1) ". ";
+}
+ol>li>ol{
+  counter-reset: enum2;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li::before {
+  counter-increment: enum2;
+  content: counter(enum1) "." counter(enum2) ". ";
+}
+ol>li>ol>li>ol{
+  counter-reset: enum3;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li::before {
+  counter-increment: enum3;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) ". ";
+}
+ol>li>ol>li>ol>li>ol{
+  counter-reset: enum4;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum4;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) ". ";
+}
+ol>li>ol>li>ol>li>ol>li>ol{
+  counter-reset: enum5;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum5;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) "." counter(enum5) ". ";
+}
+ol>li>ol>li>ol>li>ol>li>ol>li>ol{
+  counter-reset: enum6;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum6;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) "." counter(enum5) "." counter(enum6) ". ";
+}
+
+
+/* title */
+body>h1:first-of-type {
+  text-align: center;
+  font-size: xx-large;
+}
+
+/* 節番号の設定 */
+body { counter-reset: heading1; }
+
+/** article要素の見出しでカウンターをリセット */
+/* article要素はそんなに入れ子にならないから最上位の見出しだけリセット */
+article>h1:first-of-type,
+article>h2:first-of-type,
+article>h3:first-of-type,
+article>h4:first-of-type,
+article>h5:first-of-type,
+article>h6:first-of-type {
+  counter-reset: heading1;
+  font-size: 2.17em;
+}
+
+section>h1:first-of-type,
+section>h2:first-of-type,
+section>h3:first-of-type,
+section>h4:first-of-type,
+section>h5:first-of-type,
+section>h6:first-of-type {
+  counter-increment: heading1; counter-reset: heading2 figure table listing;
+  font-size: 2.0em;
+}
+
+section>h1:first-of-type::before,
+section>h2:first-of-type::before,
+section>h3:first-of-type::before,
+section>h4:first-of-type::before,
+section>h5:first-of-type::before,
+section>h6:first-of-type::before {
+  content: counter(heading1) " ";
+}
+
+section>section>h1:first-of-type,
+section>section>h2:first-of-type,
+section>section>h3:first-of-type,
+section>section>h4:first-of-type,
+section>section>h5:first-of-type,
+section>section>h6:first-of-type {
+  counter-increment: heading2; counter-reset: heading3;
+  font-size: 1.83em;
+}
+section>section>h1:first-of-type::before,
+section>section>h2:first-of-type::before,
+section>section>h3:first-of-type::before,
+section>section>h4:first-of-type::before,
+section>section>h5:first-of-type::before,
+section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) " ";
+}
+
+section>section>section>h1:first-of-type,
+section>section>section>h2:first-of-type,
+section>section>section>h3:first-of-type,
+section>section>section>h4:first-of-type,
+section>section>section>h5:first-of-type,
+section>section>section>h6:first-of-type {
+  counter-increment: heading3; counter-reset: heading4;
+  font-size: 1.67em;
+}
+section>section>section>h1:first-of-type::before,
+section>section>section>h2:first-of-type::before,
+section>section>section>h3:first-of-type::before,
+section>section>section>h4:first-of-type::before,
+section>section>section>h5:first-of-type::before,
+section>section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) "." counter(heading3) " ";
+}
+
+section>section>section>section>h1:first-of-type,
+section>section>section>section>h2:first-of-type,
+section>section>section>section>h3:first-of-type,
+section>section>section>section>h4:first-of-type,
+section>section>section>section>h5:first-of-type,
+section>section>section>section>h6:first-of-type {
+  counter-increment: heading4; counter-reset: heading5;
+  font-size: 1.50em;
+}
+section>section>section>section>h1:first-of-type::before,
+section>section>section>section>h2:first-of-type::before,
+section>section>section>section>h3:first-of-type::before,
+section>section>section>section>h4:first-of-type::before,
+section>section>section>section>h5:first-of-type::before,
+section>section>section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) "." counter(heading3) "."
+           counter(heading4) " ";
+}
+
+section>section>section>section>section>h1:first-of-type,
+section>section>section>section>section>h2:first-of-type,
+section>section>section>section>section>h3:first-of-type,
+section>section>section>section>section>h4:first-of-type,
+section>section>section>section>section>h5:first-of-type,
+section>section>section>section>section>h6:first-of-type {
+  counter-increment: heading5; counter-reset: heading6;
+  font-size: 1.33em;
+}
+section>section>section>section>section>h1:first-of-type::before,
+section>section>section>section>section>h2:first-of-type::before,
+section>section>section>section>section>h3:first-of-type::before,
+section>section>section>section>section>h4:first-of-type::before,
+section>section>section>section>section>h5:first-of-type::before,
+section>section>section>section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) "." counter(heading3) "."
+           counter(heading4) "." counter(heading5) " ";
+}
+/** heading6 だけカウンターが増えない？ */
+section>section>section>section>section>section>h1:first-of-type,
+section>section>section>section>section>section>h2:first-of-type,
+section>section>section>section>section>section>h3:first-of-type,
+section>section>section>section>section>section>h4:first-of-type,
+section>section>section>section>section>section>h5:first-of-type,
+section>section>section>section>section>section>h6:first-of-type {
+  /* 使っていなくてもheading7をリセットしないとheading6が増えないっぽい */
+  counter-increment: heading6; counter-reset: heading7;
+  font-size: 1.17em;
+}
+section>section>section>section>section>section>h1:first-of-type::before,
+section>section>section>section>section>section>h2:first-of-type::before,
+section>section>section>section>section>section>h3:first-of-type::before,
+section>section>section>section>section>section>h4:first-of-type::before,
+section>section>section>section>section>section>h5:first-of-type::before,
+section>section>section>section>section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) "." counter(heading3) "."
+           counter(heading4) "." counter(heading5) "." counter(heading6) " ";
+}
+
+
+/** Table */
+table {
+  border-collapse: collapse;
+  border: none;
+  /** centering **/
+  margin-left: auto;
+  margin-right: auto;
+}
+/** Table color **/
+tbody>tr:nth-of-type(even) {
+  background: #ffffaa;
+}
+thead>tr>th {
+  background: #ffcc99;
+  text-align: center;
+  font-weight: bold
+}
+/** Column margin **/
+td {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+/** Table border **/
+td, th {
+  border-style: none;
+}
+
+thead>tr:first-of-type {
+  border-top-style: solid;
+  border-top-width: medium;
+}
+thead>tr:last-of-type {
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+}
+tbody>tr:first-of-type {
+  border-top-style: solid;
+  border-top-width: thin;
+}
+tbody>tr:last-of-type {
+  border-bottom-style: solid;
+  border-bottom-width: medium;
+}
+
+th, td {
+  word-wrap: break-all;
+}
+
+/** Cross reference */
+[href^="#chap:"]::before {
+  content: "第";
+}
+[href^="#chap:"]::after {
+  content: "章";
+}
+[href^="#sec:"]::after, [href^="#sub"]::after {
+  content: "節";
+}
+[href^="#par:"]::after {
+  content: "段落";
+}
+[href^="#enu:"]::before {
+  content: "項目";
+}
+[href^="#eq:"]::before {
+  content: "式(";
+}
+[href^="#eq:"]::after {
+  content: ")";
+}
+[href^="#fig:"]::before {
+  content: "図";
+}
+[href^="#tab:"]::before {
+  content: "表";
+}
+[href^="#lis:"]::before {
+  content: "リスト";
+}
+
+/** Font */
+body {
+  font-family: "TeX Gyre Heros", "FreeSans", "Migu 1P", "TakaoGothic", "VL Gothic", "Yu Gothic", "Meiryo UI", sans-serif;
+}
+p {
+  text-indent: 1em;
+  word-break: break-all;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "TeX Gyre Heros", "Migu 1P", "TakaoGothic", "VL Gothic", "Yu Gothic", "Meiryo UI", sans-serif;
+  font-weight: bold;
+  /* orange */
+  /* background-color: rgb(100%,80%,0%); */
+  background-color: #e6e6ff;
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+em, strong {
+  color: red;
+  font-weight: bold;
+}
+strong {background-color: yellow;}
+
+/** PC */
+kbd, code, samp, var {
+  font-family: "Migu 1M", "Inconsolata", "DejaVu Sans Mono", "Consolas", "TakaoGothic", "VL Gothic", "HGGothicM", "MS Gothic",  monospace;
+  border-width: thin;
+  border-style: solid;
+  border-color: #cccccc;
+  border-radius: 5px;
+}
+kbd {
+  background-color: #ffe6e6;
+}
+code {
+  background-color: #e6ffe6;
+}
+samp {
+  background-color: #e6e6e6;
+}
+var {
+  background-color: #e6ffff;
+}
+pre {
+  font-family: "Migu 1M", "Inconsolata", "DejaVu Sans Mono", "Consolas", "TakaoGothic", "VL Gothic", "HGGothicM", "MS Gothic",  monospace;
+  background-color: #ffffe6;
+  overflow: auto;
+}
+
+/** Line number for source code */
+pre>code, pre>samp {
+  display: block;
+  border-style: none;
+  position: relative;
+  padding-left: 3em;
+  overflow-x: auto;
+}
+
+pre>code::before, pre>samp::before {
+  content: "   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100";
+  display: block;
+  width: 2.5em;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-y: hidden;
+  border-right: 1px solid;
+}
+
+/** Blockquote */
+blockquote {
+  background-color: #eee;
+  padding: 1.0em;
+  padding-left: 3em;
+  position: relative;
+}
+blockquote::before {
+  content: "“";
+  font-size: 600%;
+  line-height: 1em;
+  font-family: serif;
+  color: #999;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+blockquote p {
+  margin: 0;
+}
+
+/** Description element */
+dt {
+  font-weight: bold;
+  font-family: sans-serif;
+  padding-left: 0.5em;
+}
+dt, dd {
+  line-height: 1.5em;
+  word-wrap: break-word;
+}
+
+dt {
+  float: left;
+  width: 20%;
+}
+dd {
+  margin-left: 22%;
+}
+dd::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/** figure */
+figure {
+  text-align: center;
+}
+
+figure blockquote~figcaption {
+  text-align: right;
+}
+figure blockquote {
+  text-align: left;
+}
+figure pre {
+  text-align: left;
+}
+figure>dl {
+  border-radius: 0.4em;
+  border: solid  thin rgb(10%,10%,10%);
+  background-color: rgb(90%,90%,90%);
+  text-align: left;
+}
+figure>dl>dt {
+  display: block;
+  width: 100%;
+  border-top-left-radius: 0.2em;
+  border-top-right-radius: 0.2em;
+  color: white;
+  background-color: rgb(30%,30%,30%);
+  box-sizing: border-box;
+}
+figure>dl>dd {
+  padding-left: 0.5em;
+  margin: auto;
+}
+figure>dl>dd:nth-of-type(n+2) {
+  border-top-style: dashed;
+  border-top-width: thin;
+}
+.column-2 {
+  width: 45%;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.column-3 {
+  width: 30%;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.column-4 {
+  width: 20%;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+
+/** Page style */
+@page {
+  size: A4 portrait;
+  margin: 2cm;
+
+  @top-left {content: "Chapter";}
+  @top-center {content: "Title";}
+  @top-right {content: "Section";}
+  @bottom-left {content: "SENOO, Ken";}
+  @bottom-center {content: "- " counter(page) "/" counter(pages) " -";}
+  @bottom-right {content: "Date";}
+}
+    </style>
+  </head>
+  <body>
+    <section xmlns="http://www.w3.org/1999/xhtml">
+      <h1 id="20161212T0013_LibreOffice-Kaigi-2016.12参加・発表レポート">LibreOffice Kaigi 2016.12参加・発表レポート</h1>
+      <p><a href="https://twitter.com/hashtag/posixismadvent">#posixismadvent</a> この記事は以下の2個のアドベントカレンダーの11日目の記事だ。</p>
+      <ul>
+        <li><a href="http://www.adventar.org/calendars/1787">POSIX原理主義Advent Calendar</a></li>
+        <li><a href="http://www.adventar.org/calendars/1639">LibreOffice Advent Calendar 2016</a></li>
+      </ul>
+      <p>LibreOffice Kaigi 2016.12で「Standardization of Document Style」という題で発表したので参加・発表レポートを記す。</p>
+      <nav>
+        <h2>Table of Contents</h2>
+        <ol>
+          <li><a href="#20161212T0013_%E9%96%8B%E5%82%AC%E6%A6%82%E8%A6%81">開催概要</a></li>
+          <li><a href="#20161212T0013_%E7%99%BA%E8%A1%A8%E3%83%BB%E5%85%AC%E9%96%8B%E8%B3%87%E6%96%99">発表・公開資料</a></li>
+          <li><a href="#20161212T0013_%E8%87%AA%E5%88%86%E3%81%AE%E7%99%BA%E8%A1%A8%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">自分の発表について</a>
+            <ol>
+              <li><a href="#20161212T0013_%E7%99%BA%E8%A1%A8%E3%81%97%E3%81%9F%E7%90%86%E7%94%B1">発表した理由</a></li>
+              <li><a href="#20161212T0013_%E7%99%BA%E8%A1%A8%E8%B3%87%E6%96%99%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">発表資料について</a></li>
+            </ol>
+          </li>
+          <li><a href="#20161212T0013_%E4%BB%96%E3%81%AE%E4%BA%BA%E3%81%AE%E7%99%BA%E8%A1%A8%E3%81%AE%E6%84%9F%E6%83%B3">他の人の発表の感想</a>
+            <ol>
+              <li><a href="#20161212T0013_%E5%9F%BA%E8%AA%BF%E8%AC%9B%E6%BC%94%EF%BC%9AFranklin-Weng-:-LibreOffice/ODF-Migration-In-Taiwan">基調講演：Franklin Weng : LibreOffice/ODF Migration In Taiwan</a></li>
+              <li><a href="#20161212T0013_%E9%87%8E%E6%96%B9-%E7%B4%94%EF%BC%9A%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%82%92%E5%88%A9%E7%94%A8%E3%81%97%E3%81%9F%E6%96%87%E6%9B%B8%E8%A8%AD%E8%A8%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E8%80%83%E3%81%88%E3%82%8B">野方 純：スタイルを利用した文書設計について考える</a></li>
+              <li><a href="#20161212T0013_%E5%AE%89%E9%83%A8-%E6%AD%A6%E5%BF%97%EF%BC%9AMaintaining-LibreOffice-Math">安部 武志：Maintaining LibreOffice Math</a></li>
+              <li><a href="#20161212T0013_%E5%B0%8F%E7%AC%A0%E5%8E%9F-%E5%BE%B3%E5%BD%A6%EF%BC%9AMake-it-Better-Together:-%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E3%82%92%E4%B8%BB%E4%BD%93%E3%81%A8%E3%81%97%E3%81%9FLibreOffice-UI%E7%BF%BB%E8%A8%B3">小笠原 徳彦：Make it Better Together: コミュニティを主体としたLibreOffice UI翻訳</a></li>
+            </ol>
+          </li>
+          <li><a href="#20161212T0013_%E3%83%91%E3%83%8D%E3%83%AB%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3">パネルディスカッション</a></li>
+          <li><a href="#20161212T0013_%E6%87%87%E8%A6%AA%E4%BC%9A">懇親会</a></li>
+          <li><a href="#20161212T0013_%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li>
+        </ol>
+      </nav>
+      <section>
+        <h2 id="20161212T0013_開催概要">開催概要</h2>
+        <table border="1" style="width:100%;">
+          <caption>LibreOffice Kaigi 2016.12開催概要</caption>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>イベント名</td>
+              <td>LibreOffice Kaigi 2016.12</td>
+            </tr>
+            <tr>
+              <td>URL</td>
+              <td><a href="https://wiki.documentfoundation.org/JA/Events/LibOKaigi/201612">https://wiki.documentfoundation.org/JA/Events/LibOKaigi/201612</a><br />
+                <a href="https://libojapan.connpass.com/event/42685/">https://libojapan.connpass.com/event/42685/</a></td>
+            </tr>
+            <tr>
+              <td>開催地</td>
+              <td>サイボウズ株式会社（ 東京都中央区日本橋2-7-1 (東京日本橋タワー27F)）</td>
+            </tr>
+            <tr>
+              <td>開催日</td>
+              <td>2016-12-10</td>
+            </tr>
+            <tr>
+              <td>参加人数</td>
+              <td>37</td>
+            </tr>
+          </tbody>
+        </table>
+        <blockquote data-partner="tweetdeck" class="twitter-tweet">
+          <p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/LibOJP?src=hash">#LibOJP</a> カンファレンスでの戦利品。<br />
+            ノートと懇親会の参加証と登壇者に渡されるシャツ。シャツは野方さんがデザインしたって！かっこいいね。 <a href="https://t.co/n9WSvWWecV">pic.twitter.com/n9WSvWWecV</a></p>
+          — せのぺん (@senopen) <a href="https://twitter.com/senopen/status/807826005800796160">December 11, 2016</a></blockquote>
+        <p>会場はサイボウズという会社のフロアだった。なんというかBarというフロア名にそった，くだけた感じのフロアで個人的には落ち着かなかった。どこに座ればいいかわからなかったので入り口に入ってすぐの椅子に座った。到着が12:00頃と早くつきすぎた。スタッフミーティングの最中だったようだ。部屋には入れてもらえたけどなんか緊張した。</p>
+        <p>今回のカンファレンスは<em>参加人数が40人程度</em>と年次カンファレンスとしては人数が少ない印象だ。Pythonの日本の年次カンファレンスなんて700人も参加者があるというのに…LibreOfficeのユーザーでいえば100人くらいの参加はあってもおかしくないと思うのだけど，この差は一体何なのだろうか？</p>
+      </section>
+      <section>
+        <h2 id="20161212T0013_発表・公開資料">発表・公開資料</h2>
+        <p>今回は登壇者として参加した。発表資料をまずは公開する。動画以外のライセンスはCC0。僕の著作権は放棄しているので好きにしたらいい。</p>
+        <figure> <a href="http://www.slideshare.net/iesli/standardization-of-document-style-libreoffice-kaigi-201612"><img
+              src="data:image/jpeg;base64,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"
+              alt="" /></a> <figcaption>発表資料（SlideShare）</figcaption> </figure>
+        <figure><a href="http://lamsh.github.io/slide/2016/20161210_Standardization_of_Document_Style_%28LibreOffice_Kaigi_2016.10%29/slide/index.html"><img
+              src="data:image/jpeg;base64,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"
+              alt="" /></a> <figcaption>発表資料（GitHub）</figcaption> </figure>
+        <p>発表動画（音声・スライドのみ）：<a href="https://www.youtube.com/watch?v=wizPpJFOSuc">https://www.youtube.com/watch?v=wizPpJFOSuc</a></p>
+        <p>発表動画（運営撮影映像）： <a href="https://www.youtube.com/watch?v=A0D-jcKzBrk">妹尾 賢：Standardization of Document Style〜文書スタイルの適用パターン〜 - YouTube</a></p>
+        <p>その他発表関連資料一式：<a href="https://github.com/lamsh/slide/tree/master/2016/20161210_Standardization_of_Document_Style_%28LibreOffice_Kaigi_2016.10%29">https://github.com/lamsh/slide/tree/master/2016/20161210_Standardization_of_Document_Style_(LibreOffice_Kaigi_2016.10)</a></p>
+        <dl>
+          <dt>slide</dt>
+          <dd>スライド本体。HTMLとPDFの両方を格納。</dd>
+          <dt>PrintStyle.bas</dt>
+          <dd>Writerの標準スタイルの取得に使用したBasicのコード。</dd>
+          <dt>default_style.ods</dt>
+          <dd>発表のために収集・整理したWriter・Word・HTMLの標準スタイルの一覧。</dd>
+          <dt>draft.html</dt>
+          <dd>発表資料作成に際してのメモ。発表申し込みの概要など。</dd>
+          <dt>note.txt</dt>
+          <dd>カンファレンス中のメモ。</dd>
+          <dt>report.html</dt>
+          <dd>この記事。</dd>
+        </dl>
+        <p>発表レポート：
+          <a href="http://itpro.nikkeibp.co.jp/atcl/column/14/090100053/122200217/?P=5">ITpro Report - （5/5）台湾で進行するLibreOffice導入、「完全移行を強いないのがコツ」：ITpro</a></p>
+      </section>
+      <section>
+        <h2 id="20161212T0013_自分の発表について">自分の発表について</h2>
+        <section>
+          <h3 id="20161212T0013_発表した理由">発表した理由</h3>
+          <p>今回参加・発表した理由は4個ある。 </p>
+          <ol>
+            <li>POSIX原理主義の普及活動</li>
+            <li>組版についての興味関心</li>
+            <li>CSS組版の挑戦</li>
+            <li>自分の活動実績</li>
+          </ol>
+          <p>1番目の理由。まず，第一にPOSIX原理主義の普及活動だ。ここ1年ほどで登場したPOSIX原理主義という方法論を僕はとても気に入っている。<a
+              href="http://myfuturesightforpast.blogspot.jp/2016/12/what-is-posixism-posix-fundamentalism.html">初日の記事</a>でも書いたとおり，OSSに匹敵するほどの強力で素晴らしいものだと思った。だから，<a
+              href="http://www.adventar.org/calendars/1787">POSIX原理主義 Advent Calendar 2016</a>な んてものまで主催した。もっと世の中に広めていくことが正しいことだろうと思った。そこで，注目を集めるにはカンファレンスなどで発表するのがよいだろう と考えた。アドベントカレンダーの開催期間にLibreOffice Kaigi 2016.12というカンファレンスが開催されるということでタイミングが良かった。このカンファレンスに参加・発表して普及活動の始まりにしろということなのだろうと思った。</p>
+          <p>2番目の理由。LibreOfficeには以前から興味があった。結局のところ世の中に出回る文書は（MS）Office文書であることが多い。<strong>世界中で最も開発が盛んで優れた自由なOfficeソフトはLibreOfficeしかない。</strong>今後もますます重要になってくる。もっとLibreOfficeが盛り上がっていいと思っている。Office文書の中でも主なものとしてワープロ文書がある。WriterのodtやWordのdocxなどだ。この文書 にはスタイルがあるのだけれど，一体どれだけあって，それぞれどう対応しているのかという情報が不足していると思った。普段使っていて，もしかしたらもっ と適切なスタイルがあるのかもしれない。実際に，昔は自分でソースコードのスタイルがないと思っていたので，ユーザー定義スタイルを使っていた。誰か一人 が徹底的に調べて公開すれば，細かいことを気にする人の役には立つだろうと思った。少なくとも僕はこういう資料が欲しかった。「ないから諦めるのではな く，なければ自分で作る」というマインドと，文書の互換性というものを考えることはPOSIX原理主義に通じることだと思った。</p>
+          <p>3番目の理由。僕は<em>悪しきTeX組版を滅ぼして，CSS組版がこの世界の標準的な組版になってほしい</em>と願っている。そのためには3のことを心がけている。</p>
+          <ol>
+            <li>TeX組版の批判</li>
+            <li>CSS組版の勉強</li>
+            <li>CSS組版の普及</li>
+          </ol>
+          <p>この中で自分にとっては［2.のCSS組版の勉強］が主なフェーズだと思っている。CSS組版は最先端の技術であり僕も手探り状態だ。自分のCSS組版を高めるために実際にCSS組版で文書を作って公開してく必要がある。既に世の 中にはCSSやJavaScriptを使ったスライド作成技術が存在している。主要なそれらの技術を実際に試して評価するということも重要な作業だ。ただし，実際にやり始めるには動機が必要だ。その動機付けとしカンファレンスでの発表を活用している。今回は<a
+              href="https://github.com/shower/shower">Shower</a>というライブラリーを試した。</p>
+          <p>4番目の理由。今年になって社会人3年目に入り年も20代の後半に入ってきた。今までもライトニングトークとか小さな勉強会などで発表してきたけれど，もう少し大きな場で発表して自分の実績を作っていったほうがいいんじゃないかなと思った。もしかしたら，この先転職活動するときに役に立つかもしれないし，同じ考えの人が助けてくれるかもしれない。</p>
+        </section>
+        <section>
+          <h3 id="20161212T0013_発表資料について">発表資料について</h3>
+          <p>発表資料の導入で書いたイギリス政府のODF導入は非常に重要で大きなニュースだと思った。このニュースと日頃組版に思っていたスタイルの話，さらにPOSIX原理主義を組み合わせた発表にしようと決めた。題材は決まっていたが，発表資料作成は難航した。カンファレンスの丁度2周間前から調査や資料作成を開始した。</p>
+          <p>まず，Writerのスタイルに関する情報が全然見当たらなかった。どこかにスタイルついての網羅的な文書がないかなとけっこうな時間をかけて探したのだけど結局なかった。Basicでアクセスできる変数リストみたいなにでもないかなとDoxygenで作られたAPI文書を2-3日さまよい続けた。結局マクロの杜さんのBasicのコードを参考にして作った。といってもBasicの知識自体があまりなかったので理解するのにも時間がかかった。</p>
+          <p>Wordに関しても，僕が知らないだけで実はMSが公式のPDFマニュアルとか用意してくれてるんじゃないかと思ったけど，やっぱりなかった。こちらも結局はAPIから取得するしかなさそうだったのだけど，幸運なことにリストを後悔しているDocToolsという会社のサイトがあって助かった。</p>
+          <p>用意したスタイルの一覧の数が多く，表にまとめてスライドに貼り付けるだけでもけっこうな時間がかった。</p>
+          <p>そして，これは今でも納得できていないのだけど，スライドの組版がダメだった。今回の発表の理由の一つのCSS組版なのだけど，当初はImpress.jsを試すつもりでいた。しかし，これはたくさんのスライドを作るには向いていないことがわかった。そこでShowerに変えた。発表1周間前の日曜日の話だった。<a
+              href="http://lamsh.github.io/slide/2016/20160409_OpenFOAM%E6%A8%99%E6%BA%96%E3%82%BD%E3%83%AB%E3%83%90%E3%83%BC%E4%BA%BA%E6%B0%97%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0/index.html#/">4月にReveal.jsを使った資料</a>を作ったので，同じような感じでいけるのかなと思ったけど，やはり勝手が違った。そもそもCSS組版でのスライド作成のノウハウは足りておらず不十分だった。</p>
+          <p>コンテンツの位置調整だったり，ボックスでの囲み，着色など。見栄えが悪いところが多々あるのはわかっているのだけど，スライドの枚数もけっこうあったのと時間に余裕がなかったのでやむを得ずこの状態での公開となった。スライドを作成するためにCSSやマークアップを事前に検討しておく必要があると強く感じた。この失敗を次回に活かしていきたい。</p>
+          <p>ただ，Showerの感触はよかった。依存するJavaScriptは1ファイルだけであとはCSS。Reveal.jsと異なりBlueGriffonでそのまま編集できるのがとてもよかった。</p>
+          <p>今回のカンファレンスでは基調講演が英語ということで外国の人も来ることが頭にあった。また，POSIX原理主義を普及させていくうえでも英語での情報公開が大事だろうと思った。だから，スライド前半では英語や日本語との併記を心がけた。まあ，後半は余裕がなかったのでほぼ日本語になってしまったわけだけど…。だけど，これは自分の中でよい取り組みだと思った。それぞれのスライドのタイトルを英語にするだけでも十分意味があると思った。簡単な日本語を心がけていれば，それを英語にしてもみんな理解はできるだろうと思った。これは今後も心がけたい。</p>
+          <p>発表スライド自体に参考文献となる情報やURLを随所に散りばめたので，資料としてある程度価値のあるものができたんじゃないかと思っている。内容や着眼点自体はよかったと自分で思っている。</p>
+        </section>
+      </section>
+      <section>
+        <h2 id="20161212T0013_他の人の発表の感想">他の人の発表の感想</h2>
+        <p>それぞれの発表の気になった箇所のメモを掲載したり感想を記す。</p>
+        <section>
+          <h1 id="20161212T0013_基調講演：Franklin-Weng-:-LibreOffice/ODF-Migration-In-Taiwan">基調講演：Franklin Weng : LibreOffice/ODF Migration In Taiwan</h1>
+          <p>台湾政府におけるLibreOfficeの導入推進者とのこと。今回のカンファレンスで一つの<em>大きなテーマと感じたのがODF</em>だ。LibreOfficeというよりはこのODFというデータ形式が本質のように思えた。以下はメモ。</p>
+          <p>ヘルプをしないとユーザーは使えないと言ってMS Officeに戻ってしまうので，サポートが重要。</p>
+          <p>なぜODFを使うべきかの3の視点。</p>
+          <ol>
+            <li>もしOOXMLを選んだら？MS Officeは約3年おきにバージョンアップしている。Windows XPをアップデートしないといけなくなる。予算が余計にかかるし，データの互換性もなくなってしまうのではないか？</li>
+            <li>Open Standard。特定企業にサポートを打ち切られて作品やデータを殺される心配がない。</li>
+            <li>国際トレンド。イタリアの防衛省がLibreOfficeを導入→LibreOfficeの安全性が証明。</li>
+          </ol>
+          <p>LibreOffice本体よりもODFという形式に焦点を当てる必要がある。LibreOfficeというソフトに焦点を当てる場合，機能不足やMS Officeとの互換性などで簡単に反撃を受ける。だけど，ODFならそうはなりにくい。</p>
+        </section>
+        <section>
+          <h1 id="20161212T0013_野方-純：スタイルを利用した文書設計について考える">野方 純：スタイルを利用した文書設計について考える</h1>
+          <p>Designing with LibreOfficeというLibreOfficeのスタイルにだけかかれた本があり，電子書籍は無料でHPからダウンロードできるらしい。この本をベースにしてスタイルについての発表だった。スライドのデザインが洗練されていてよいと思った。</p>
+          <p>WriterやLibreOfficeでのスタイルの概念について説明していて参考になった。ただ，もう少し具体的な内容があってもよいと思った。例えば，CSSのようにWriterのスタイルは別の文書から参照できるくだりなど。たぶん知っている人のほうが少ないので具体的な手順の説明があっても良かったなと思った。</p>
+          <p>以下はメモ。</p>
+          <p>LibreOfficeのスタイルは書式とちょっと違う。</p>
+          <p>2個の役割がある。</p>
+          <ol>
+            <li>文書の構成要素を定義</li>
+            <li>その要素に書式を設定</li>
+          </ol>
+          <p>LibreOfficeもCSSのようにスタイルだけ分離できる。</p>
+          <p>MS Wordはページ設定は制御コードを入れるイメージ。</p>
+          <p>Writerは本当に1ページずつ。</p>
+          <p>Calcのセルスタイルは，継承される。</p>
+          <p>条件付き書式。Wordだと本当に書式を変える。条件付きスタイルというイメージ。</p>
+        </section>
+        <section>
+          <h1 id="20161212T0013_安部-武志：Maintaining-LibreOffice-Math">安部 武志：Maintaining LibreOffice Math</h1>
+          <p>LibreOffice Mathの開発に関する話。現実世界で久しぶりにTeXという単語をきいた（小並感）。</p>
+          <p>LibreOffice MathはStarOffice 5.0から5.2でほぼ現在の形になったとのこと。TeXと異なりWYSIWYGができるのがいい。</p>
+          <p>LibreOfficeの中では規模が小さいように見えるが，実際には低レイヤーのライブラリーが多くて簡単なわけではないとのこと。</p>
+        </section>
+        <section>
+          <h1 id="20161212T0013_小笠原-徳彦：Make-it-Better-Together:-コミュニティを主体としたLibreOffice-UI翻訳">小笠原 徳彦：Make it Better Together: コミュニティを主体としたLibreOffice UI翻訳</h1>
+          <p>LibreOfficeのユーザーインターフェースの翻訳の流れや仕組み，ルールや今後の展望などについての発表。</p>
+          <p>翻訳支援ソフトとしてOmegaTなどがあるらしいが，UIの翻訳は単発者なのであまり効果はないと考えているらしい。</p>
+          <p>LibreOffice以外の翻訳コミュニティも同じような悩みをもっているらしい。</p>
+          <p>個人的には，議論のためにメーリングリストに入ろうというのがひっかかった。というのも個人的にはメーリングリストはあまり好きでないからだ。自分に関係のない未読メールが溜まっていくのがストレスに思う。Googleグループのようにみたいときにみたり，GitHubのissueみたいに自分から能動的にみたり，関係者だけ集中して議論できたほうがいいんじゃないかなとぼんやり思ったり。</p>
+        </section>
+      </section>
+      <section>
+        <h2 id="20161212T0013_パネルディスカッション">パネルディスカッション</h2>
+        <p>発表が終わった後に運営スタッフと識者による合計3人のパネルディスカッションがあった。このセッションでもODFが一つのテーマだったように思う。</p>
+        <p>中でもドキュメントの拡張子を意識するというのがピンときた。今やMS Officeを使っている会社ではたぶんどこもdocxやdoc，xlsxとxlsなど古くて標準化されていない形式と新しい形式が混在しているだろう。しかも，互換性だとかなんとかで標準化されていないxのつかない形式を優先する風潮まであるかもしれない。ODFを採用すればこのドキュメント形式を統一できる。これもメリットだと思う。</p>
+        <p>以下にメモを載せる。</p>
+        <p>スライドシェアにアップロードするときはハイブリッドPDFがいい。</p>
+        <p>ITリテラシーのためにわざとLibreOfficeを使わせるとかあるらしい。</p>
+        <p>複数のものを使うということで勉強になるらしい。</p>
+        <p>Windows以外のOSに向けたある程度の準備ができる。</p>
+        <p>Windowsに縛られないという利点。</p>
+        <p>ヨーロッパの大規模LibreOffice導入はLinuxも同時のことが多い。</p>
+        <p>日本だとフォント周りが問題になる。というのもフォントがないので。<br />
+          1.2. ODFを導入するときの注意点</p>
+        <p>ドキュメントとか外字の問題がある。ちゃんと変換できるかを確認するのも大事。</p>
+        <p>テンプレート的なものをどんどん導入しないと，しんどくなる。</p>
+        <p>空白とかタブでレイアウトしているとコンバートするとよりひどくなる。</p>
+        <p>世界標準だけど，マイナー扱いされる。利用者が注意しておかないと，外部とのやりとりで問題が起きる。</p>
+        <p>省庁などで問われるテンプレートをどうするか。</p>
+        <p>文書構造とか論理構造，テンプレート。外界とのインターフェース。</p>
+        <p>ここからまたメタにして全体としてのコミュニケーションプラン。</p>
+        <p>なにか問題が起きたときになんで使いにくい不自由なのを使っていると文句をいわれる。</p>
+      </section>
+      <section>
+        <h2 id="20161212T0013_懇親会">懇親会</h2>
+        <p>最後にDebian mini Conferenceとの合同懇親会だった。ここで僕はPOSIX原理主義の論文を3人に配ることができた。</p>
+        <p>ただ，POSIXという言葉だけで過剰に反応する人もいて困惑した。布教しようとクリアファイルに入れた論文を机の上に置いていたのだけど，なんか目に入ったらしく興味ありそうにみていたので差し上げたのだけど。pthreadだとかsignalとかsigwaitだとかのPOSIXのシステムコールに欠陥があるだとかでなんか怒っているような感じでちょっと怖かった。初対面の見ず知らずの人同士なのになんだか無礼な人だなと思った。何一つこちらは迷惑をかけた覚えはないのに。</p>
+        <p>POSIX原理主義のPOSIXという単語にばかり気を取られていて交換可能性という重要な本質をよくわかっていないまま，POSIXに準拠したシェルスクリプトは難しいだとか，「原理主義という言葉は，従わないものは殺すくらいの強烈な意味がある」とか，そんな<a
+            href="https://ja.wikipedia.org/wiki/%E5%8E%9F%E7%90%86%E4%B8%BB%E7%BE%A9">意味はない</a>にも関わらずに勝手な思い込みで意固地になっている人もいて困惑した。しかし，理解してくれる人もいたのでよかった。</p>
+        <p>POSIX原理主義（POSIXism）とOpen Sourceは似ていると思う。Open Sourceはソフトウェアを開発するための手法であり，オープンにするというのはただの手段でしかなくて，多くの人の参加を促すことが本質なんじゃないだろうか。同じようにPOSIX原理主義というのも，POSIX規格はただの手段であり交換可能性を担保することが本質だろう。</p>
+      </section>
+      <section>
+        <h2 id="20161212T0013_まとめ">まとめ</h2>
+        <p>POSIX原理主義とODFやLibreOfficeは相性がいいと思っている。それぞれ互換性を重視しており，時空を超えることができる。結局のところ文書化されていなければ，後世や他の人に伝え残していくことはできない。自分の興味関心の一つに組版があり，HTMLと並んで今後残っていく組版技術としてODF・LibreOfficeは今後も注目していく。</p>
+        <p>POSIX原理主義とこれらの組版技術で何かコラボレートできたら面白いなと考えている。POSIX原理主義と同じように長く付き合っていけると思うので，LibreOffice Kaigiにはまた遊びに参加したいと思う。</p>
+      </section>
+    </section>
+  </body>
+</html>

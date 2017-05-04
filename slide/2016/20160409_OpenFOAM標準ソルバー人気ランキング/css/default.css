@@ -1,0 +1,398 @@
+/****************************************************************************
+ \file      template.css
+ \author    SENOO, Ken
+ \copyright CC0
+ \date      first created date: <+DATE+>
+ \date      last  updated date: 
+ ****************************************************************************/
+
+@charset "UTF-8";
+
+/* caption */
+caption::before {
+  counter-increment: table;
+  content: "表" counter(heading1) "." counter(table) " ";
+}
+figcaption::before {
+  counter-increment: figure;
+  content: "図" counter(heading1) "." counter(figure) " ";
+}
+body {counter-reset: listing;}
+figcaption[id^="lis:"]::before {
+  counter-increment: listing;
+  content: "リスト" counter(heading1) "." counter(listing) " ";
+}
+figcaption[class^="lis"]::before {
+  counter-increment: listing;
+  content: "リスト" counter(section1) "." counter(listing) " ";
+}
+
+/* list */
+/* listが見出し設定の後にあると見出し番号がリセットされる? */
+/* ol { counter-reset: enum; } */
+/* ol li { list-style-type: none; } */
+/* ol li::before {                    */
+/* counter-increment: enum;           */
+/* content: counters(enum, ".") ". "; */
+/* }                                  */
+ol {
+  counter-reset: enum1;
+  padding-left: 1em;
+}
+ol>li {
+  list-style-type: none;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li::before {
+  counter-increment: enum1;
+  content: counter(enum1) ". ";
+}
+ol>li>ol{
+  counter-reset: enum2;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li::before {
+  counter-increment: enum2;
+  content: counter(enum1) "." counter(enum2) ". ";
+}
+ol>li>ol>li>ol{
+  counter-reset: enum3;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li::before {
+  counter-increment: enum3;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) ". ";
+}
+ol>li>ol>li>ol>li>ol{
+  counter-reset: enum4;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum4;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) ". ";
+}
+ol>li>ol>li>ol>li>ol>li>ol{
+  counter-reset: enum5;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum5;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) "." counter(enum5) ". ";
+}
+ol>li>ol>li>ol>li>ol>li>ol>li>ol{
+  counter-reset: enum6;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum6;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) "." counter(enum5) "." counter(enum6) ". ";
+}
+
+
+/* title */
+body>h1:first-child {
+  text-align: center;
+  font-size: xx-large;
+}
+
+/* 節番号の設定 */
+body { counter-reset: heading1; }
+
+section>h1:first-child,
+section>h2:first-child,
+section>h3:first-child,
+section>h4:first-child,
+section>h5:first-child,
+section>h6:first-child
+{
+  counter-increment: heading1; counter-reset: heading2 table figure;
+}
+
+section>h1:first-child::before,
+section>h2:first-child::before,
+section>h3:first-child::before,
+section>h4:first-child::before,
+section>h5:first-child::before,
+section>h6:first-child::before
+{
+  content: counter(heading1) " ";
+}
+
+section>section>h1:first-child,
+section>section>h2:first-child,
+section>section>h3:first-child,
+section>section>h4:first-child,
+section>section>h5:first-child,
+section>section>h6:first-child
+{
+  counter-increment: heading2; counter-reset: heading3;
+}
+section>section>h1:first-child::before,
+section>section>h2:first-child::before,
+section>section>h3:first-child::before,
+section>section>h4:first-child::before,
+section>section>h5:first-child::before,
+section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2)  " ";
+}
+
+section>section>section>h1:first-child,
+section>section>section>h2:first-child,
+section>section>section>h3:first-child,
+section>section>section>h4:first-child,
+section>section>section>h5:first-child,
+section>section>section>h6:first-child
+{
+  counter-increment: heading3; counter-reset: heading4;
+}
+section>section>section>h1:first-child::before,
+section>section>section>h2:first-child::before,
+section>section>section>h3:first-child::before,
+section>section>section>h4:first-child::before,
+section>section>section>h5:first-child::before,
+section>section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3)
+ " ";
+}
+
+section>section>section>section>h1:first-child,
+section>section>section>section>h2:first-child,
+section>section>section>section>h3:first-child,
+section>section>section>section>h4:first-child,
+section>section>section>section>h5:first-child,
+section>section>section>section>h6:first-child
+{
+  counter-increment: heading4; counter-reset: heading5;
+}
+section>section>section>section>h1:first-child::before,
+section>section>section>section>h2:first-child::before,
+section>section>section>section>h3:first-child::before,
+section>section>section>section>h4:first-child::before,
+section>section>section>section>h5:first-child::before,
+section>section>section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3)
+"." counter(heading4)  " ";
+}
+
+section>section>section>section>section>h1:first-child,
+section>section>section>section>section>h2:first-child,
+section>section>section>section>section>h3:first-child,
+section>section>section>section>section>h4:first-child,
+section>section>section>section>section>h5:first-child,
+section>section>section>section>section>h6:first-child
+{
+  counter-increment: heading5; counter-reset: heading6;
+}
+section>section>section>section>section>h1:first-child::before,
+section>section>section>section>section>h2:first-child::before,
+section>section>section>section>section>h3:first-child::before,
+section>section>section>section>section>h4:first-child::before,
+section>section>section>section>section>h5:first-child::before,
+section>section>section>section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3)
+"." counter(heading4) "." counter(heading5)  " ";
+}
+
+section>section>section>section>section>section>h1:first-child,
+section>section>section>section>section>section>h2:first-child,
+section>section>section>section>section>section>h3:first-child,
+section>section>section>section>section>section>h4:first-child,
+section>section>section>section>section>section>h5:first-child,
+section>section>section>section>section>section>h6:first-child
+{
+  counter-increment: heading5; counter-reset: heading6;
+}
+section>section>section>section>section>section>h1:first-child::before,
+section>section>section>section>section>section>h2:first-child::before,
+section>section>section>section>section>section>h3:first-child::before,
+section>section>section>section>section>section>h4:first-child::before,
+section>section>section>section>section>section>h5:first-child::before,
+section>section>section>section>section>section>h6:first-child::before
+{
+  content: counter(heading1) "." counter(heading2) "." counter(heading3)
+"." counter(heading4) "." counter(heading5) "." counter(heading5) " ";
+}
+
+
+/* table */
+table {
+  border-collapse: collapse;
+  border: none;
+  /** centering **/
+  margin-left: auto;
+  margin-right: auto;
+}
+/** table color **/
+tbody>tr:nth-child(even) {
+  background: rgb(50%,50%,50%);
+}
+thead>tr>th {
+  background: #ff8833;
+  text-align: center;
+  font-weight: bold
+}
+/** column margin **/
+td {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+/** table border **/
+td, th {
+  border-style: none;
+}
+
+thead>tr:first-child {
+  border-top-style: solid;
+  border-top-width: medium;
+}
+thead>tr:last-child {
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+}
+tbody>tr:first-child {
+  border-top-style: solid;
+  border-top-width: thin;
+}
+tbody>tr:last-child {
+  border-bottom-style: solid;
+  border-bottom-width: medium;
+}
+
+/* cross reference */
+[href^="#chap:"]::before {
+  content: "第";
+}
+[href^="#chap:"]::after {
+  content: "章";
+}
+[href^="#sec:"]::after, [href^="#sub"]::after {
+  content: "節";
+}
+[href^="#par:"]::after {
+  content: "段落";
+}
+[href^="#enu:"]::before {
+  content: "項目";
+}
+[href^="#eq:"]::before {
+  content: "式(";
+}
+[href^="#eq:"]::after {
+  content: ")";
+}
+[href^="#fig:"]::before {
+  content: "図";
+}
+[href^="#tab:"]::before {
+  content: "表";
+}
+[href^="#lis:"]::before {
+  content: "リスト";
+}
+
+/* フォント設定 */
+p {
+  text-indent: 1em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "TeX Gyre Heros", "Migu 1P", sans-serif;
+  background-color: rgb(50%,50%,100%);
+}
+em, strong {
+  color: red;
+  font-weight: bold;
+}
+strong {
+  background-color: yellow;
+}
+
+/* PC語句 */
+kbd, code, samp, var {
+  font-family: Inconsolata, "Migu 1M", monospace;
+  border-width: thin;
+  border-style: solid;
+  border-color: #cccccc;
+  border-radius: 5px;
+}
+kbd {
+  background-color: #ffe6e6;
+}
+code {
+  background-color: rgb(10%,80%,10%);
+}
+samp {
+  background-color: #e6e6e6;
+}
+var {
+  font-style: normal;
+  background-color: #e6ffff;
+}
+pre {
+  font-family: Inconsolata, "Migu 1M", monospace;
+  background-color: #ffffe6;
+  overflow: auto;
+}
+
+/* blockquote */
+blockquote{
+  background-color: #eee;
+  padding: 1.0em;
+  padding-left: 3em;
+  position: relative;
+}
+blockquote::before{
+  content:"“";
+  font-size: 600%;
+  line-height: 1em;
+  font-family: serif;
+  color: #999;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+dt {
+  font-weight: bold;
+  padding-left: 0.5em;
+}
+dt, dd {
+  line-height: 1.5em;
+}
+
+:not(figure)>dl>dt {
+  float: left;
+  width: 20%;
+}
+:not(figure)>dl>dd {
+  margin-left: 22%;
+}
+
+figure dl {
+  border-radius: 0.4em;
+  border: solid  thin rgb(10%,10%,10%);
+  background-color: rgb(90%,90%,90%);
+}
+figure dt {
+  border-top-left-radius: 0.2em;
+  border-top-right-radius: 0.2em;
+  color: white;
+  background-color: rgb(30%,30%,30%);
+}
+figure dd {
+  padding-left: 0.5em;
+  margin: auto;
+}
+figure dl dd:nth-of-type(n+2) {
+  border-top-style: dashed;
+  border-top-width: thin;
+}

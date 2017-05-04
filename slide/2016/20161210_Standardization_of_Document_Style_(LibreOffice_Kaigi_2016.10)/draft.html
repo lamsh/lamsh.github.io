@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html><html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="SENOO, Ken" name="author" />
+    <link href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgo8IS0tIEF1dGhvcjogU0VOT08sIEtlbgogICAgIExpbmNlbnNlOiBDQzAKICAgICBUaGlzIHdvcmsgaXMgbGljZW5zZWQgdW5kZXIgdGhlIENDMCAxLjAgVW5pdmVyc2FsIExpbmNlbnNlIChodHRwczovL2NyZWF0aXZlY29tbW9ucy5vcmcvcHVibGljZG9tYWluL3plcm8vMS4wLykuIFRvIHRoZSBleHRlbnQgcG9zc2libGUgdW5kZXIgbGF3LCBJIGhhdmUgd2FpdmVkIGFsbCBjb3B5cmlnaHQgYW5kIHJlbGF0ZWQgb3IgbmVpZ2hib3JpbmcgcmlnaHRzIHRvIHRoaXMgd29yay4KLS0+Cgo8c3ZnCiAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIKICAgeG1sbnM6Y2M9Imh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL25zIyIKICAgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHdpZHRoPSIxMDAiCiAgIGhlaWdodD0iMTAwIgogICBpZD0ic3ZnMiIKICAgdmVyc2lvbj0iMS4xIgogICBpbmtzY2FwZTp2ZXJzaW9uPSIwLjQ4LjQgcjk5MzkiCiAgIHNvZGlwb2RpOmRvY25hbWU9InN0YXItY29sb3Iuc3ZnIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzNCI+CiAgICA8bGluZWFyR3JhZGllbnQKICAgICAgIGlkPSJsaW5lYXJHcmFkaWVudDM4MzkiPgogICAgICA8c3RvcAogICAgICAgICBzdHlsZT0ic3RvcC1jb2xvcjojZmZmZmZmO3N0b3Atb3BhY2l0eToxOyIKICAgICAgICAgb2Zmc2V0PSIwIgogICAgICAgICBpZD0ic3RvcDM4NDkiIC8+CiAgICAgIDxzdG9wCiAgICAgICAgIHN0eWxlPSJzdG9wLWNvbG9yOiMwMDAwMDA7c3RvcC1vcGFjaXR5OjE7IgogICAgICAgICBvZmZzZXQ9IjEiCiAgICAgICAgIGlkPSJzdG9wMzg0MyIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQKICAgICAgIGlkPSJsaW5lYXJHcmFkaWVudDM4MjUiPgogICAgICA8c3RvcAogICAgICAgICBzdHlsZT0ic3RvcC1jb2xvcjojN2Y5NDg5O3N0b3Atb3BhY2l0eTowLjYxOTYwNzg0OyIKICAgICAgICAgb2Zmc2V0PSIwIgogICAgICAgICBpZD0ic3RvcDM4MzciIC8+CiAgICAgIDxzdG9wCiAgICAgICAgIHN0eWxlPSJzdG9wLWNvbG9yOiNmZmRkYzA7c3RvcC1vcGFjaXR5OjAuNzQ0ODU1OTQ7IgogICAgICAgICBvZmZzZXQ9IjEiCiAgICAgICAgIGlkPSJzdG9wMzgyOSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQKICAgICAgIGlkPSJsaW5lYXJHcmFkaWVudDM3ODUiPgogICAgICA8c3RvcAogICAgICAgICBzdHlsZT0ic3RvcC1jb2xvcjojMDAwMDAwO3N0b3Atb3BhY2l0eTowLjQ5ODAzOTIyOyIKICAgICAgICAgb2Zmc2V0PSIwIgogICAgICAgICBpZD0ic3RvcDM4MTUiIC8+CiAgICAgIDxzdG9wCiAgICAgICAgIHN0eWxlPSJzdG9wLWNvbG9yOiMwMDAwMDA7c3RvcC1vcGFjaXR5OjA7IgogICAgICAgICBvZmZzZXQ9IjEiCiAgICAgICAgIGlkPSJzdG9wMzc4OSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0iYmFzZSIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiM2NjY2NjYiCiAgICAgYm9yZGVyb3BhY2l0eT0iMS4wIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTp6b29tPSIyLjY3IgogICAgIGlua3NjYXBlOmN4PSIzOS4yMjE2NzEiCiAgICAgaW5rc2NhcGU6Y3k9IjUzLjYyNTAyNiIKICAgICBpbmtzY2FwZTpkb2N1bWVudC11bml0cz0icHgiCiAgICAgaW5rc2NhcGU6Y3VycmVudC1sYXllcj0ibGF5ZXIxIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICBpbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjEyNjEiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iNjc1IgogICAgIGlua3NjYXBlOndpbmRvdy14PSIxNDQ0IgogICAgIGlua3NjYXBlOndpbmRvdy15PSI0NSIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIwIiAvPgogIDxtZXRhZGF0YQogICAgIGlkPSJtZXRhZGF0YTciPgogICAgPHJkZjpSREY+CiAgICAgIDxjYzpXb3JrCiAgICAgICAgIHJkZjphYm91dD0iIj4KICAgICAgICA8ZGM6Zm9ybWF0PmltYWdlL3N2Zyt4bWw8L2RjOmZvcm1hdD4KICAgICAgICA8ZGM6dHlwZQogICAgICAgICAgIHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL2RjL2RjbWl0eXBlL1N0aWxsSW1hZ2UiIC8+CiAgICAgICAgPGRjOnRpdGxlPjwvZGM6dGl0bGU+CiAgICAgIDwvY2M6V29yaz4KICAgIDwvcmRmOlJERj4KICA8L21ldGFkYXRhPgogIDxnCiAgICAgaW5rc2NhcGU6bGFiZWw9ImNpcmNsZSIKICAgICBpbmtzY2FwZTpncm91cG1vZGU9ImxheWVyIgogICAgIGlkPSJsYXllcjEiCiAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwtOTUyLjM2MjE4KSIKICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUiPgogICAgPHBhdGgKICAgICAgIHNvZGlwb2RpOnR5cGU9ImFyYyIKICAgICAgIHN0eWxlPSJmaWxsOiNlNmU2ZTY7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmUiCiAgICAgICBpZD0icGF0aDMwMDQiCiAgICAgICBzb2RpcG9kaTpjeD0iNTQuOTEwNzEzIgogICAgICAgc29kaXBvZGk6Y3k9IjQ3LjU4OTI4NyIKICAgICAgIHNvZGlwb2RpOnJ4PSIzMi4wNTM1NyIKICAgICAgIHNvZGlwb2RpOnJ5PSIzMi4wNTM1NyIKICAgICAgIGQ9Im0gODYuOTY0MjgzLDQ3LjU4OTI4NyBhIDMyLjA1MzU3LDMyLjA1MzU3IDAgMSAxIC02NC4xMDcxNCwwIDMyLjA1MzU3LDMyLjA1MzU3IDAgMSAxIDY0LjEwNzE0LDAgeiIKICAgICAgIHRyYW5zZm9ybT0ibWF0cml4KDEuNTU5ODg4NywwLDAsMS41NTk4ODg4LC0zNS42NTQ2MDEsOTI4LjEyODE4KSIgLz4KICA8L2c+CiAgPGcKICAgICBpbmtzY2FwZTpncm91cG1vZGU9ImxheWVyIgogICAgIGlkPSJsYXllcjIiCiAgICAgaW5rc2NhcGU6bGFiZWw9InRyaWFuZ2xlIgogICAgIHN0eWxlPSJvcGFjaXR5OjAuOTM5OTk5OTk7ZGlzcGxheTppbmxpbmUiCiAgICAgc29kaXBvZGk6aW5zZW5zaXRpdmU9InRydWUiPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOiNmZjAwMDA7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmUiCiAgICAgICBkPSJNIDUwLDAgMzUuNTYyNSwyNSA2NC40Mzc1LDI1IDUwLDAgeiIKICAgICAgIGlkPSJwYXRoNDEzMyIKICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiIC8+CiAgICA8cGF0aAogICAgICAgc3R5bGU9ImZpbGw6I2ZmODAwMDtmaWxsLW9wYWNpdHk6MTtmaWxsLXJ1bGU6ZXZlbm9kZDtzdHJva2U6bm9uZSIKICAgICAgIGQ9Ik0gNjQuNDM3NSwyNSA3OC44NzUsNTAgOTMuMzEyNSwyNSA2NC40Mzc1LDI1IHoiCiAgICAgICBpZD0icGF0aDQxMzEiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIiAvPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmMDA7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmUiCiAgICAgICBkPSJNIDc4Ljg3NSw1MCA2NC40Mzc1LDc1IDkzLjMxMjUsNzUgNzguODc1LDUwIHoiCiAgICAgICBpZD0icGF0aDQxMjkiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIiAvPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOiMwMGZmMDA7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmUiCiAgICAgICBkPSJNIDY0LjQzNzUsNzUgMzUuNTYyNSw3NSA1MCwxMDAgNjQuNDM3NSw3NSB6IgogICAgICAgaWQ9InBhdGg0MTI3IgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIgLz4KICAgIDxwYXRoCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMGZmO2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpldmVub2RkO3N0cm9rZTpub25lIgogICAgICAgZD0iTSAzNS41NjI1LDc1IDIxLjEyNSw1MCA2LjY4NzUsNzUgbCAyOC44NzUsMCB6IgogICAgICAgaWQ9InBhdGg0MTI1IgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIgLz4KICAgIDxwYXRoCiAgICAgICBzdHlsZT0iZmlsbDojODAwMGZmO2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpldmVub2RkO3N0cm9rZTpub25lIgogICAgICAgZD0iTSAyMS4xMjUsNTAgMzUuNTYyNSwyNSA2LjY4NzUsMjUgMjEuMTI1LDUwIHoiCiAgICAgICBpZD0icGF0aDMwMTMiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIiAvPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOm5vbmUiCiAgICAgICBkPSJtIDM1LjY4Mzc4MiwyNC45MzMyNTQgYyAwLC0wLjA1MjIgMTQuMTk5NTcsLTI0LjYzOTI2Njc2IDE0LjI3NTg2NiwtMjQuNzE5MTc4NDMgQyA1MC4wMDU1MywwLjE2NjAxOTI1IDYzLjEyNzU1NSwyMi43MjY4NzMgNjQuMjM1NzQxLDI0Ljc1OTEzMiBsIDAuMTE0NDU4LDAuMjA5OSAtMTQuMzMzMjA4LDAgYyAtNy44ODMyNjUsMCAtMTQuMzMzMjA5LC0wLjAxNjEgLTE0LjMzMzIwOSwtMC4wMzU3OCB6IgogICAgICAgaWQ9InBhdGg0MTAxIgogICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIgLz4KICA8L2c+Cjwvc3ZnPgo="
+      rel="shortcut icon" />
+    <title>LibreOffice Kaigi</title>
+    <!-- <meta name="description" contents="" /> -->
+    <!-- <meta name="keywords" contents="" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="default.css" /> -->
+    <style>
+@charset "UTF-8";
+
+/** caption */
+caption::before {
+  counter-increment: table;
+  content: "表" counter(heading1) "." counter(table) " ";
+}
+figure>figcaption::before {
+  counter-increment: figure;
+  content: "図" counter(heading1) "." counter(figure) " ";
+}
+/* subfigureの開始時だけリセット */
+figure>figure:first-of-type {
+  counter-reset: subfigure;
+}
+/* そのままやると，subfigureの番号が先に登場するのでfigureと番号が不一致 */
+/* だから，subfigure内ではfigureの番号を増加させ，抜けるときに減らす */
+figure>figure>figcaption::before {
+  counter-increment: figure subfigure;
+  counter-reset: subsubfigure;
+  content: "図" counter(heading1) "." counter(figure) "(" counter(subfigure, lower-alpha) ") ";
+}
+/* 増やしたfigureの番号を減らして元に戻す */
+figure>figure figcaption::after {
+  content: "";
+  counter-increment: figure -1;
+}
+
+figure pre~figcaption::before,
+figure figcaption:first-child::before {
+  counter-increment: listing;
+  content: "リスト" counter(heading1) "." counter(listing) " ";
+}
+figure blockquote~figcaption::before {
+  content: "—";
+}
+
+/* list */
+/* listが見出し設定の後にあると見出し番号がリセットされる? */
+/* ol {                                 */
+/*   counter-reset: enum;               */
+/*   list-style-type: none;             */
+/* }                                    */
+/* li::before {                         */
+/*   counter-increment: enum;           */
+/*   content: counters(enum, ".") ". "; */
+/* }                                    */
+ol {
+  counter-reset: enum1;
+  padding-left: 1em;
+}
+ol>li {
+  list-style-type: none;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li::before {
+  counter-increment: enum1;
+  content: counter(enum1) ". ";
+}
+ol>li>ol{
+  counter-reset: enum2;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li::before {
+  counter-increment: enum2;
+  content: counter(enum1) "." counter(enum2) ". ";
+}
+ol>li>ol>li>ol{
+  counter-reset: enum3;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li::before {
+  counter-increment: enum3;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) ". ";
+}
+ol>li>ol>li>ol>li>ol{
+  counter-reset: enum4;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum4;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) ". ";
+}
+ol>li>ol>li>ol>li>ol>li>ol{
+  counter-reset: enum5;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum5;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) "." counter(enum5) ". ";
+}
+ol>li>ol>li>ol>li>ol>li>ol>li>ol{
+  counter-reset: enum6;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+ol>li>ol>li>ol>li>ol>li>ol>li>ol>li::before {
+  counter-increment: enum6;
+  content: counter(enum1) "." counter(enum2) "." counter(enum3) "." counter(enum4) "." counter(enum5) "." counter(enum6) ". ";
+}
+
+
+/* title */
+body>h1:first-of-type {
+  text-align: center;
+  font-size: xx-large;
+}
+
+/* 節番号の設定 */
+body { counter-reset: heading1; }
+
+/** article要素の見出しでカウンターをリセット */
+/* article要素はそんなに入れ子にならないから最上位の見出しだけリセット */
+article>h1:first-of-type,
+article>h2:first-of-type,
+article>h3:first-of-type,
+article>h4:first-of-type,
+article>h5:first-of-type,
+article>h6:first-of-type {
+  counter-reset: heading1;
+  font-size: 2.17em;
+}
+
+section>h1:first-of-type,
+section>h2:first-of-type,
+section>h3:first-of-type,
+section>h4:first-of-type,
+section>h5:first-of-type,
+section>h6:first-of-type {
+  counter-increment: heading1; counter-reset: heading2 figure table listing;
+  font-size: 2.0em;
+}
+
+section>h1:first-of-type::before,
+section>h2:first-of-type::before,
+section>h3:first-of-type::before,
+section>h4:first-of-type::before,
+section>h5:first-of-type::before,
+section>h6:first-of-type::before {
+  content: counter(heading1) " ";
+}
+
+section>section>h1:first-of-type,
+section>section>h2:first-of-type,
+section>section>h3:first-of-type,
+section>section>h4:first-of-type,
+section>section>h5:first-of-type,
+section>section>h6:first-of-type {
+  counter-increment: heading2; counter-reset: heading3;
+  font-size: 1.83em;
+}
+section>section>h1:first-of-type::before,
+section>section>h2:first-of-type::before,
+section>section>h3:first-of-type::before,
+section>section>h4:first-of-type::before,
+section>section>h5:first-of-type::before,
+section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) " ";
+}
+
+section>section>section>h1:first-of-type,
+section>section>section>h2:first-of-type,
+section>section>section>h3:first-of-type,
+section>section>section>h4:first-of-type,
+section>section>section>h5:first-of-type,
+section>section>section>h6:first-of-type {
+  counter-increment: heading3; counter-reset: heading4;
+  font-size: 1.67em;
+}
+section>section>section>h1:first-of-type::before,
+section>section>section>h2:first-of-type::before,
+section>section>section>h3:first-of-type::before,
+section>section>section>h4:first-of-type::before,
+section>section>section>h5:first-of-type::before,
+section>section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) "." counter(heading3) " ";
+}
+
+section>section>section>section>h1:first-of-type,
+section>section>section>section>h2:first-of-type,
+section>section>section>section>h3:first-of-type,
+section>section>section>section>h4:first-of-type,
+section>section>section>section>h5:first-of-type,
+section>section>section>section>h6:first-of-type {
+  counter-increment: heading4; counter-reset: heading5;
+  font-size: 1.50em;
+}
+section>section>section>section>h1:first-of-type::before,
+section>section>section>section>h2:first-of-type::before,
+section>section>section>section>h3:first-of-type::before,
+section>section>section>section>h4:first-of-type::before,
+section>section>section>section>h5:first-of-type::before,
+section>section>section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) "." counter(heading3) "."
+           counter(heading4) " ";
+}
+
+section>section>section>section>section>h1:first-of-type,
+section>section>section>section>section>h2:first-of-type,
+section>section>section>section>section>h3:first-of-type,
+section>section>section>section>section>h4:first-of-type,
+section>section>section>section>section>h5:first-of-type,
+section>section>section>section>section>h6:first-of-type {
+  counter-increment: heading5; counter-reset: heading6;
+  font-size: 1.33em;
+}
+section>section>section>section>section>h1:first-of-type::before,
+section>section>section>section>section>h2:first-of-type::before,
+section>section>section>section>section>h3:first-of-type::before,
+section>section>section>section>section>h4:first-of-type::before,
+section>section>section>section>section>h5:first-of-type::before,
+section>section>section>section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) "." counter(heading3) "."
+           counter(heading4) "." counter(heading5) " ";
+}
+/** heading6 だけカウンターが増えない？ */
+section>section>section>section>section>section>h1:first-of-type,
+section>section>section>section>section>section>h2:first-of-type,
+section>section>section>section>section>section>h3:first-of-type,
+section>section>section>section>section>section>h4:first-of-type,
+section>section>section>section>section>section>h5:first-of-type,
+section>section>section>section>section>section>h6:first-of-type {
+  /* 使っていなくてもheading7をリセットしないとheading6が増えないっぽい */
+  counter-increment: heading6; counter-reset: heading7;
+  font-size: 1.17em;
+}
+section>section>section>section>section>section>h1:first-of-type::before,
+section>section>section>section>section>section>h2:first-of-type::before,
+section>section>section>section>section>section>h3:first-of-type::before,
+section>section>section>section>section>section>h4:first-of-type::before,
+section>section>section>section>section>section>h5:first-of-type::before,
+section>section>section>section>section>section>h6:first-of-type::before {
+  content: counter(heading1) "." counter(heading2) "." counter(heading3) "."
+           counter(heading4) "." counter(heading5) "." counter(heading6) " ";
+}
+
+
+/** Table */
+table {
+  border-collapse: collapse;
+  border: none;
+  /** centering **/
+  margin-left: auto;
+  margin-right: auto;
+}
+/** Table color **/
+tbody>tr:nth-of-type(even) {
+  background: #ffffaa;
+}
+thead>tr>th {
+  background: #ffcc99;
+  text-align: center;
+  font-weight: bold
+}
+/** Column margin **/
+td {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+/** Table border **/
+td, th {
+  border-style: none;
+}
+
+thead>tr:first-of-type {
+  border-top-style: solid;
+  border-top-width: medium;
+}
+thead>tr:last-of-type {
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+}
+tbody>tr:first-of-type {
+  border-top-style: solid;
+  border-top-width: thin;
+}
+tbody>tr:last-of-type {
+  border-bottom-style: solid;
+  border-bottom-width: medium;
+}
+
+th, td {
+  word-wrap: break-all;
+}
+
+/** Cross reference */
+[href^="#chap:"]::before {
+  content: "第";
+}
+[href^="#chap:"]::after {
+  content: "章";
+}
+[href^="#sec:"]::after, [href^="#sub"]::after {
+  content: "節";
+}
+[href^="#par:"]::after {
+  content: "段落";
+}
+[href^="#enu:"]::before {
+  content: "項目";
+}
+[href^="#eq:"]::before {
+  content: "式(";
+}
+[href^="#eq:"]::after {
+  content: ")";
+}
+[href^="#fig:"]::before {
+  content: "図";
+}
+[href^="#tab:"]::before {
+  content: "表";
+}
+[href^="#lis:"]::before {
+  content: "リスト";
+}
+
+/** Font */
+body {
+  font-family: "TeX Gyre Heros", "FreeSans", "Migu 1P", "TakaoGothic", "VL Gothic", "Yu Gothic", "Meiryo UI", sans-serif;
+}
+p {
+  text-indent: 1em;
+  word-break: break-all;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "TeX Gyre Heros", "Migu 1P", "TakaoGothic", "VL Gothic", "Yu Gothic", "Meiryo UI", sans-serif;
+  font-weight: bold;
+  /* orange */
+  /* background-color: rgb(100%,80%,0%); */
+  background-color: #e6e6ff;
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+em, strong {
+  color: red;
+  font-weight: bold;
+}
+strong {background-color: yellow;}
+
+/** PC */
+kbd, code, samp, var {
+  font-family: "Migu 1M", "Inconsolata", "DejaVu Sans Mono", "Consolas", "TakaoGothic", "VL Gothic", "HGGothicM", "MS Gothic",  monospace;
+  border-width: thin;
+  border-style: solid;
+  border-color: #cccccc;
+  border-radius: 5px;
+}
+kbd {
+  background-color: #ffe6e6;
+}
+code {
+  background-color: #e6ffe6;
+}
+samp {
+  background-color: #e6e6e6;
+}
+var {
+  background-color: #e6ffff;
+}
+pre {
+  font-family: "Migu 1M", "Inconsolata", "DejaVu Sans Mono", "Consolas", "TakaoGothic", "VL Gothic", "HGGothicM", "MS Gothic",  monospace;
+  background-color: #ffffe6;
+  overflow: auto;
+}
+
+/** Line number for source code */
+pre>code, pre>samp {
+  display: block;
+  border-style: none;
+  position: relative;
+  padding-left: 3em;
+  overflow-x: auto;
+}
+
+pre>code::before, pre>samp::before {
+  content: "   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100";
+  display: block;
+  width: 2.5em;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-y: hidden;
+  border-right: 1px solid;
+}
+
+/** Blockquote */
+blockquote {
+  background-color: #eee;
+  padding: 1.0em;
+  padding-left: 3em;
+  position: relative;
+}
+blockquote::before {
+  content: "“";
+  font-size: 600%;
+  line-height: 1em;
+  font-family: serif;
+  color: #999;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+blockquote p {
+  margin: 0;
+}
+
+/** Description element */
+dt {
+  font-weight: bold;
+  font-family: sans-serif;
+  padding-left: 0.5em;
+}
+dt, dd {
+  line-height: 1.5em;
+  word-wrap: break-word;
+}
+
+dt {
+  float: left;
+  width: 20%;
+}
+dd {
+  margin-left: 22%;
+}
+dd::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/** figure */
+figure {
+  text-align: center;
+}
+
+figure blockquote~figcaption {
+  text-align: right;
+}
+figure blockquote {
+  text-align: left;
+}
+figure pre {
+  text-align: left;
+}
+figure>dl {
+  border-radius: 0.4em;
+  border: solid  thin rgb(10%,10%,10%);
+  background-color: rgb(90%,90%,90%);
+  text-align: left;
+}
+figure>dl>dt {
+  display: block;
+  width: 100%;
+  border-top-left-radius: 0.2em;
+  border-top-right-radius: 0.2em;
+  color: white;
+  background-color: rgb(30%,30%,30%);
+  box-sizing: border-box;
+}
+figure>dl>dd {
+  padding-left: 0.5em;
+  margin: auto;
+}
+figure>dl>dd:nth-of-type(n+2) {
+  border-top-style: dashed;
+  border-top-width: thin;
+}
+.column-2 {
+  width: 45%;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.column-3 {
+  width: 30%;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.column-4 {
+  width: 20%;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+
+/** Page style */
+@page {
+  size: A4 portrait;
+  margin: 2cm;
+
+  @top-left {content: "Chapter";}
+  @top-center {content: "Title";}
+  @top-right {content: "Section";}
+  @bottom-left {content: "SENOO, Ken";}
+  @bottom-center {content: "- " counter(page) "/" counter(pages) " -";}
+  @bottom-right {content: "Date";}
+}
+    </style>
+    <style>      
+      .step {
+        width: 40em;
+        font-size: 3em;
+      }
+    </style>
+  </head>
+  <body class="impress-not-supported reveal">
+    <section class="fallback-message"><br />
+    </section>
+    <h1>Document Title</h1>
+    <br />
+    <ul>
+      <li>HTML5の要素</li>
+      <li>セマンティクス</li>
+      <li>WISYWYG vs. WYSIWYM</li>
+      <li>普段の文書で必要なHTML5の要素</li>
+      <li>標準スタイルを使うべき理由</li>
+      <ul>
+        <li>変換</li>
+        <li>再利用性</li>
+      </ul>
+      <li>Wordの標準スタイル</li>
+      <li>LibreOfficeの標準スタイル</li>
+    </ul>
+    対応関係。利用例。<br />
+    イギリスでの公文書の形式。<br />
+    フランスの自由ソフト。<br />
+    pandocなどでの変換の話。<br />
+    ODFの仕様書で定義を確認してみる？<br />
+    <br />
+    LibreOfficeのバージョンごとのスタイル一覧。<br />
+    <p> Standardization of Document Style〜文書スタイルの適用パターン〜</p>
+    <p>2014-07-22に英国政府における公文書として，閲覧用にPDF/AかHTML，共同作業用にODFを採用するとの指針が発表された。これにより，ODFの利用が促進されることが考えられる。しかし，現実としては組織内文書としてはMS Officeで採用されているOOXMLの数は無視できない。また，Web上に公開するに置いてはHTMLを使わざるを得ない。その他，MarkdownやreStructuredText，AsciiDoc，Wiki記法といった軽量マークアップにより文書が作成される事例も存在している。</p>
+    <p><br />
+    </p>
+    <p>近年においては，CSS組版と呼ばれるHTML+CSSによりWebページだけでなく書籍を作成するという試みが見られている。今後Web文書と紙文書が単一の文書から生成される展望が見えつつある。</p>
+    <p>申し込み時の発表概要</p>
+    <p>2014-07-22に英国政府における公文書としてODFを採用する方針が発表された。これによりLibreOfficeの利用促進が期待される。しかし，現実にはMS Officeの標準形式であるOOXMLの利用も多い。また文書をWebページに公開する上で，文書形式としてのHTMLも無視できない。そこで，LibreOffice WriterとMS Wordに存在する標準スタイルと，HTMLでの対応を確認し，相互運用性を高めるスタイルの利用方法を検討する。</p>
+    <br />
+    https://www.gov.uk/government/news/open-document-formats-selected-to-meet-user-needs<br />
+    <br />
+    <br />
+    <br />
+    <section>
+      <h1>LibreOffice Writeのスタイル</h1>
+      <p>参照： <a href="https://wiki.documentfoundation.org/Documentation/Publications">Documentation/Publications - The Document Foundation Wiki</a></p>
+      <p>LibreOffice Writer Guide<a href="https://wiki.documentfoundation.org/Documentation/Publications"> p.186<br />
+        </a></p>
+      <p>5分類</p>
+      <ol>
+        <li>段落（Paragraph）</li>
+        <li>文字（Character）</li>
+        <li>ページ（Page）</li>
+        <li>枠（Frame）</li>
+        <li>リスト（List）</li>
+      </ol>
+      <p><br />
+      </p>
+      <p>おそらくここに定義がある。</p>
+      <p> <a href="http://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1style.html">LibreOffice: com::sun::star::style Module Reference</a></p>
+      <p> <a href="http://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1style_1_1Style.html">LibreOffice: Style Service Reference</a></p>
+      <p> <a href="https://wiki.openoffice.org/wiki/Documentation/DevGuide/Text/Overall_Document_Features#Styles">Overall Document Features - Apache OpenOffice Wiki</a></p>
+      <p>DisplayNameとか</p>
+      <p><br />
+      </p>
+      <p>ParaStyleNameに使える値を見つければいいかも。</p>
+      <p>ここでスタイル名について議論がある。</p>
+      <p> <a href="https://forum.openoffice.org/en/forum/viewtopic.php?f=45&amp;t=77830">[Solved] How To Obtain Default PAra Style Name (View topic) • Apache OpenOffice Community Forum</a></p>
+      <p>基本は英語になっている。</p>
+      <p>このコードでデフォルトスタイルを全て取得できる？</p>
+      <p> <a href="http://openoffice3.web.fc2.com/OOoBasic_Writer_No2.html">Macroの杜(OpenOffice.org/LibreOffice Basic編)/ Writer No.2</a></p>
+      <pre><code>Sub oWriterStyle
+  	Dim oDoc
+  	Dim Dummy()
+  		On Error Goto oBad
+		oDoc = StarDesktop.loadComponentFromURL("private:factory/swriter", "_blank", 0, Dummy())
+		'Get the StyleFamilies
+			Dim oFamilies
+			Dim oFamilyNames
+			Dim oStyleName
+				oFamilies = oDoc.StyleFamilies
+				oFamilyNames = oFamilies.getElementNames()
+				oStyleName = oFamilies.getByName("CharacterStyles") 
+				oSElementName = oStyleName.ElementNames
+				oDisp = ""
+			'Get the Style Name
+				for i = LBound(oSElementName) to UBound(oSElementName)
+					oDisp = oDisp &amp; i &amp; ")" &amp; oSElementName(i)
+					oDisp = oDisp &amp; Chr$(10)
+				next i
+			msgbox(oDisp, 0, "Style Name")
+		Exit Sub
+	oBad:
+		Dim oErLine As Integer
+		Dim oErNum As Integer
+		Dim oErMsg As String
+			oErLine = Erl
+			oErNum = Err
+			oErMsg = Error
+		Msgbox("Error Line No. " &amp; Chr$(9) &amp; " : " &amp; oErLine &amp; Chr$(10) _
+			&amp; "Error Number " &amp; Chr$(9) &amp; " : " &amp; oErNum &amp;Chr$(10 ) _
+			&amp; "Error Message" &amp; Chr$(9) &amp; " : " &amp; oErMsg , 0, "Error Message")
+End Sub</code></pre>
+      <p>肝になっているのは，StyleFamilies，ElementNames。</p>
+      <p>StyleFamiliesというのがスタイルを全部持っているみたい。</p>
+      <p> <a href="http://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1style_1_1StyleFamilies.html">LibreOffice: StyleFamilies Service Reference</a></p>
+      <p>例：</p>
+      <p>CharacterStyles<br />
+        the container of style sheets for sequences of characters within a text<br />
+        <br />
+        ParagraphStyles<br />
+        the container of style sheets for text paragraphs<br />
+        <br />
+        FrameStyles<br />
+        the container of style sheets for text frames<br />
+        <br />
+        PageStyles<br />
+        the container of style sheets for pages<br />
+        <br />
+        NumberingStyles<br />
+        the container for style sheets for numbering<br />
+        <br />
+        CellStyles<br />
+        the container for style sheets for cells<br />
+        <br />
+        ShapeStyles<br />
+        the container for style sheets for shapes</p>
+      <p><br />
+      </p>
+      <a href="https://wiki.openoffice.org/wiki/Documentation/DevGuide/Text/Overall_Document_Features#Styles">Overall Document Features - Apache OpenOffice Wiki</a>
+      <p>XNameAccessインターフェース。これはいろいろな継承元。</p>
+      <p>これのgetByNameに，上のFamiliesの値を指定するとそいつのオブジェクトを返す。スタイル名の一覧が取れる？</p>
+      <pre><code>			Dim oStyleName
+				oFamilies = oDoc.StyleFamilies
+				oFamilyNames = oFamilies.getElementNames()
+				oStyleName = oFamilies.getByName("ParagraphStyles") 
+				oSElementName = oStyleName.ElementNames</code></pre>
+      <p>ElementNamesに名前のリストとか配列が入っているみたいなので，これを取り出している。</p>
+      <p>たとえば，ParagraphStylesでParagraphStyleオブジェクトが取れると思う。<br />
+      </p>
+      <br />
+      表示名は.DisplayNameで取れそう。配列の扱いが。<br />
+      <pre><code>				oFamilies = oDoc.StyleFamilies
+				oFamilyNames = oFamilies.getElementNames()
+				oStyleName = oFamilies.getByName("CharacterStyles") 
+				oSElementName = oStyleName.ElementNames
+				oSDisplayName = oStyleName(0).DisplayName
+'				msgbox(lbound(oStyleName))
+
+				oDisp = ""
+			'Get the Style Name
+				for i = LBound(oSElementName) to UBound(oSElementName)
+					oDisp = oDisp &amp; i &amp; ")" &amp; oSElementName(i) &amp; "," &amp; OSDisplayName
+'				for i = LBound(oStyleName) to UBound(oStyleName)
+'					oDisp = oDisp &amp; i &amp; ")" &amp; oStyleName(i).ElementName &amp; "," &amp; oStyleName(i).DisplayName
+					oDisp = oDisp &amp; Chr$(10)
+				next i</code></pre>
+      <p><br />
+      </p>
+      <p><br />
+      </p>
+      <p>Base の9 secに書いてある。</p>
+      <p>English names in macros</p>
+      <p>フォームとのデザイナーとかではロケールの言語が使えるけど，プロパティーやデータアクセスは英語名のみ。使われる。。</p>
+      <p>Basicでは英語しか使えない。</p>
+      <p><br />
+      </p>
+      <p>たぶん，ElementNamesは古いやつで，新しいのはgetElementNames()なんだと思う。</p>
+      <p> <a href="http://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1container_1_1XNameAccess.html#aafbbb82f5fe4f54bc37808e6ffa333b9">LibreOffice: XNameAccess Interface Reference</a></p>
+      <p>DisplayName</p>
+      <p><a href="http://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1container_1_1XNameAccess.html#aafbbb82f5fe4f54bc37808e6ffa333b9"> </a><a
+          href="http://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1style_1_1Style.html#aba0e038e9b973f3ba4ca520a2fb057dc">LibreOffice: Style Service Reference</a></p>
+      <p><a href="http://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1style_1_1Style.html#aba0e038e9b973f3ba4ca520a2fb057dc"><br />
+        </a></p>
+      <p><a href="http://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1style_1_1Style.html#aba0e038e9b973f3ba4ca520a2fb057dc"><br />
+        </a></p>
+      <p><a href="http://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1container_1_1XNameAccess.html#aafbbb82f5fe4f54bc37808e6ffa333b9"><br />
+        </a></p>
+    </section>
+    <main class="slides" id="impress"> <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </main>
+    <!--    <script src="impress.js"></script>
+    <script>impress().init()</script>-->
+  </body>
+</html>

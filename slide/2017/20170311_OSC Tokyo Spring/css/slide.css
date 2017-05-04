@@ -1,0 +1,252 @@
+/****************************************************************************
+ \file      slide.css
+ \author    SENOO, Ken
+ \copyright CC0
+ \date      first created date: 2017-03-09T23:27+09:00
+ ****************************************************************************/
+
+@charset "UTF-8";
+
+/** Color theme */
+.alert {
+  background-color: red;
+}
+.example {
+  background-color: lime;
+}
+.structure {
+  background-color: blue;
+}
+
+.alert, .example, .structure {
+  background-image: linear-gradient(hsla(0,0%,100%,.3), hsla(0,0%,100%,.3));
+}
+
+/** Block */
+dl ul, dl ol {
+  margin: 0;
+}
+
+
+figure:not([class])>dl {
+  background-color: rgba(0,0,0,.2);
+}
+figure>dl {
+  text-align: left;
+}
+figure>dl>dt {
+  display: block;
+  width: 100%;
+  border-top-left-radius: 0.2em;
+  border-top-right-radius: 0.2em;
+  color: white;
+  background-clip: content-box;
+  box-sizing: border-box;
+}
+figure>dl>dd {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin: auto;
+  background-image: linear-gradient(hsla(0,0%,100%,.5), hsla(0,0%,100%,.5));
+}
+figure>dl>dd:nth-of-type(n+2) {
+  border-top-style: dashed;
+  border-top-width: thin;
+}
+
+
+/** figure */
+figure {
+  text-align: center;
+}
+
+figure blockquote~figcaption {
+  text-align: right;
+}
+figure blockquote {
+  text-align: left;
+}
+figure pre {
+  text-align: left;
+}
+
+
+/** Blockquote */
+blockquote {
+  background-color: #eee;
+  padding: 0.5em;
+  padding-left: 3em;
+  position: relative;
+}
+blockquote::before {
+  content: "“";
+  font-size: 600%;
+  line-height: 0.8em;
+  font-family: serif;
+  color: #999;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+blockquote p {
+  margin: 0;
+}
+
+/** Line number for source code */
+pre>code, pre>samp {
+  display: block;
+  border-style: none;
+  position: relative;
+  padding-left: 3em;
+  overflow-x: auto;
+}
+
+pre>code::before, pre>samp::before {
+  content: "   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100";
+  display: block;
+  width: 2.5em;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-y: hidden;
+  border-right: 1px solid;
+}
+
+/** PC */
+kbd, code, samp, var {
+  font-family: "Migu 1M", "Inconsolata", "DejaVu Sans Mono", "Consolas", "TakaoGothic", "VL Gothic", "HGGothicM", "MS Gothic",  monospace;
+  border-width: thin;
+  border-style: solid;
+  border-color: #cccccc;
+  border-radius: 5px;
+}
+kbd {
+  background-color: #ffe6e6;
+}
+code {
+  background-color: #e6ffe6;
+}
+samp {
+  background-color: #e6e6e6;
+}
+var {
+  background-color: #e6ffff;
+}
+pre {
+  font-family: "Migu 1M", "Inconsolata", "DejaVu Sans Mono", "Consolas", "TakaoGothic", "VL Gothic", "HGGothicM", "MS Gothic",  monospace;
+  background-color: #ffffe6;
+  overflow: auto;
+  tab-size: 2;
+}
+
+/** Description element */
+dt {
+  font-weight: bold;
+  font-family: sans-serif;
+  padding-left: 0.5em;
+}
+
+em, strong {
+  color: red;
+  font-weight: bold;
+}
+strong {background-color: yellow;}
+
+/** Caption */
+figure>figcaption::before {
+  counter-increment: figure;
+  /* content: "Fig. " counter(figure) " "; */
+  content: "Fig. ";
+}
+
+/* body.single_slide {   */
+/*   position: relative; */
+/* }                     */
+
+/* body.single_slide {   */
+/*   position: relative; */
+/* }                     */
+
+div.slide {
+  position: relative;
+  width: 100%;
+}
+
+
+.vbox{
+  display: flex;
+  align-items: center;
+}
+
+.hbox {
+  display: flex;
+  justify-content: center;
+}
+
+section {
+  display: inline-block;
+}
+
+/** for reset slidy.css */
+div.slide h1 {
+  padding: 0;
+  margin: 0;
+}
+div.slide {
+  padding: 0;
+  margin: 0;
+  line-height: 1em;
+}
+div dt {
+  margin: 0;
+}
+
+dl {
+  margin: 0;
+}
+
+dd ul li {
+  margin-left: 1.5em;
+  line-height: 0.8em;
+}
+
+dd p {
+  margin: 0;
+}
+
+/** My custom */
+.big {
+  font-size: 2em;
+}
+
+.small {
+  font-size: 0.5em;
+}
+
+figcaption {
+  line-height: 1.0em;
+}
+
+/** Table */
+table {
+border-collapse: collapse;
+border: none;
+/** centering **/
+margin-left: auto;
+margin-right: auto;
+margin-top: 0.5em;
+margin-bottom: 0.5em;
+}
+
+h1 {
+  font-family: "TeX Gyre Heros", "Migu 1P", "TakaoGothic", "VL Gothic", "Yu Gothic", "Meiryo UI", sans-serif;
+  font-weight: bold;
+  /* orange */
+  background-color: #e6e6ff;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
