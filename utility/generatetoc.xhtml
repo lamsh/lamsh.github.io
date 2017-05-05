@@ -6,7 +6,7 @@
     <title>GenerateTOC</title>
     <meta name="author" content="SENOO, Ken" />
     <script>
-      // <![CDATA[
+      <![CDATA[
       function GenerateTOC() {
         /**
         ## 方針
@@ -66,7 +66,8 @@
           tag_name = node.tagName.toLowerCase();
           if (tag_name.match(/h[1-6]/)){
             let id = now + "_" + node.textContent;
-            id = id.replace(/\s/g, "-").replace(/"/g, "&quot;");
+            // エスケープ処理が面倒なので{}"は削除
+            id = id.replace(/\s/g, "-").replace(/[{}"]/g, "");
 
             toc += '\n<li><a href="#' + id + '">' + node.textContent + '</a></li>';
             node.id = id;
@@ -98,7 +99,7 @@ function escape_html (string) {
     }[match]
   });
 }
-      // ]]>
+      ]]>
     </script>
     <style>
 @charset "UTF-8";
