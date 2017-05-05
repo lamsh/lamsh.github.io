@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<!DOCTYPE html><html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
   <head>
     <meta charset="UTF-8" />
     <title>GenerateTOC</title>
@@ -9,13 +8,12 @@
       <![CDATA[
       function GenerateTOC() {
         /**
-        ## 方針
-        1. まず変換元HTMLテキストを取得
-        2. HTMLテキストをパース。
-        * section>h1-h6を取得
-        * 2番目のsectionの直前に<nav><h?>Table of Contents</h?><ol><li></li></ol></nav>
-         * section>h1-h6のidに"日付_h1-h6の値"を設定
-          \warning h1-h6要素に二重引用符"が使われていると，目次のリンクのエスケープができず，うまく機能しない。id属性はうまくエスケープできている。
+        ## Policy
+        1. Get input HTML text
+        2. Parse HTML text
+        * Get section>h1-h6
+        * Insert `<nav><h?>Table of Contents</h?><ol><li></li></ol></nav>` before second section
+        * Set value to YYYYMMDDThhmm in section>h1-h6 id attribute
         */
 
         // Get HTML document as DOM
@@ -44,14 +42,16 @@
         var nav = document.createElement("nav");
         insert = root.querySelectorAll("section")[1];
         insert.insertAdjacentHTML("beforeBegin", toc);
+        // insert.insertAdjacentHTML("beforeBegin", escape_html(toc));
 
         // Output
         var output = document.getElementById("output");
-        output.innerHTML = escape_html(root.innerHTML);
+        output.innerHTML = escape_html(root.innerHTML).replace(/&amp;(amp;)+/g, "&amp;amp;");
 
         // Preview  result
         var value = document.getElementById("output").value;
         var view  = document.getElementById("view");
+        console.log(value);
         view.innerHTML = value;
       }
 
@@ -60,16 +60,18 @@
         // Date prefix for YYYYMMDDThhmm format
         var date = new Date();
         var now = date.toISOString().replace(/-|T.*/g, "");
-        now += "T" + date.getHours() + date.getMinutes();
+        now += "T" + ( "0"+date.getHours() ).slice(-2) + ( "0"+date.getMinutes() ).slice(-2);
 
         for (let node of children){
           tag_name = node.tagName.toLowerCase();
           if (tag_name.match(/h[1-6]/)){
             let id = now + "_" + node.textContent;
-            // エスケープ処理が面倒なので{}"は削除
-            id = id.replace(/\s/g, "-").replace(/[{}"]/g, "");
+            id = id.replace(/\s/g, "-");
 
-            toc += '\n<li><a href="#' + id + '">' + node.textContent + '</a></li>';
+            // Remove for escape in id
+            id = id.replace(/[~^`'"(){}\\|!&<>]/g, "");
+            var nodeText = escape_html(node.textContent);
+            toc += '\n<li><a href="#' + id + '">' + nodeText + '</a></li>';
             node.id = id;
           } else if (tag_name === "section"){
             toc += "\n<ol>";
@@ -88,11 +90,10 @@ function escape_html (string) {
   if(typeof string !== 'string') {
     return string;
   }
-  return string.replace(/[&'`"<>]/g, function(match) {
+  return string.replace(/[&'"<>]/g, function(match) {
     return {
       '&': '&amp;',
-      "'": '&#x27;',
-      '`': '&#x60;',
+      "'": '&apos;',
       '"': '&quot;',
       '<': '&lt;',
       '>': '&gt;',
@@ -102,21 +103,36 @@ function escape_html (string) {
       ]]>
     </script>
     <style>
-@charset "UTF-8";
-
 /** caption */
 caption::before {
   counter-increment: table;
-  content: "表" counter(heading1) "." counter(table) " ";
+  content: "Table " counter(table) " ";
 }
-figcaption::before {
+figure>figcaption::before {
   counter-increment: figure;
-  content: "図" counter(heading1) "." counter(figure) " ";
+  content: "Figure " counter(heading1) "." counter(figure) " ";
+}
+/* subfigureの開始時だけリセット */
+figure>figure:first-of-type {
+  counter-reset: subfigure;
+}
+/* そのままやると，subfigureの番号が先に登場するのでfigureと番号が不一致 */
+/* だから，subfigure内ではfigureの番号を増加させ，抜けるときに減らす */
+figure>figure>figcaption::before {
+  counter-increment: figure subfigure;
+  counter-reset: subsubfigure;
+  content: "Figure " counter(heading1) "." counter(figure) "(" counter(subfigure, lower-alpha) ") ";
+}
+/* 増やしたfigureの番号を減らして元に戻す */
+figure>figure figcaption::after {
+  content: "";
+  counter-increment: figure -1;
 }
 
-figure pre~figcaption::before {
+figure pre~figcaption::before,
+figure figcaption:first-child::before {
   counter-increment: listing;
-  content: "リスト" counter(heading1) "." counter(listing) " ";
+  content: "List " counter(heading1) "." counter(listing) " ";
 }
 figure blockquote~figcaption::before {
   content: "—";
@@ -124,20 +140,22 @@ figure blockquote~figcaption::before {
 
 /* list */
 /* listが見出し設定の後にあると見出し番号がリセットされる? */
-/* ol { counter-reset: enum; } */
-/* ol li { list-style-type: none; } */
-/* ol li::before {                    */
-/* counter-increment: enum;           */
-/* content: counters(enum, ".") ". "; */
-/* }                                  */
+/* ol {                                 */
+/*   counter-reset: enum;               */
+/*   list-style-type: none;             */
+/* }                                    */
+/* li::before {                         */
+/*   counter-increment: enum;           */
+/*   content: counters(enum, ".") ". "; */
+/* }                                    */
 ol {
   counter-reset: enum1;
   padding-left: 1em;
 }
 ol>li {
   list-style-type: none;
-  padding-left: 1em;
-  text-indent: -1em;
+  padding-left: 0.5em;
+  text-indent: -0.5em;
 }
 ol>li::before {
   counter-increment: enum1;
@@ -206,8 +224,7 @@ article>h2:first-of-type,
 article>h3:first-of-type,
 article>h4:first-of-type,
 article>h5:first-of-type,
-article>h6:first-of-type
-{
+article>h6:first-of-type {
   counter-reset: heading1;
   font-size: 2.17em;
 }
@@ -217,9 +234,8 @@ section>h2:first-of-type,
 section>h3:first-of-type,
 section>h4:first-of-type,
 section>h5:first-of-type,
-section>h6:first-of-type
-{
-  counter-increment: heading1; counter-reset: heading2 table figure listing;
+section>h6:first-of-type {
+  counter-increment: heading1; counter-reset: heading2 figure table listing;
   font-size: 2.0em;
 }
 
@@ -228,8 +244,7 @@ section>h2:first-of-type::before,
 section>h3:first-of-type::before,
 section>h4:first-of-type::before,
 section>h5:first-of-type::before,
-section>h6:first-of-type::before
-{
+section>h6:first-of-type::before {
   content: counter(heading1) " ";
 }
 
@@ -238,8 +253,7 @@ section>section>h2:first-of-type,
 section>section>h3:first-of-type,
 section>section>h4:first-of-type,
 section>section>h5:first-of-type,
-section>section>h6:first-of-type
-{
+section>section>h6:first-of-type {
   counter-increment: heading2; counter-reset: heading3;
   font-size: 1.83em;
 }
@@ -248,8 +262,7 @@ section>section>h2:first-of-type::before,
 section>section>h3:first-of-type::before,
 section>section>h4:first-of-type::before,
 section>section>h5:first-of-type::before,
-section>section>h6:first-of-type::before
-{
+section>section>h6:first-of-type::before {
   content: counter(heading1) "." counter(heading2) " ";
 }
 
@@ -258,8 +271,7 @@ section>section>section>h2:first-of-type,
 section>section>section>h3:first-of-type,
 section>section>section>h4:first-of-type,
 section>section>section>h5:first-of-type,
-section>section>section>h6:first-of-type
-{
+section>section>section>h6:first-of-type {
   counter-increment: heading3; counter-reset: heading4;
   font-size: 1.67em;
 }
@@ -268,8 +280,7 @@ section>section>section>h2:first-of-type::before,
 section>section>section>h3:first-of-type::before,
 section>section>section>h4:first-of-type::before,
 section>section>section>h5:first-of-type::before,
-section>section>section>h6:first-of-type::before
-{
+section>section>section>h6:first-of-type::before {
   content: counter(heading1) "." counter(heading2) "." counter(heading3) " ";
 }
 
@@ -278,8 +289,7 @@ section>section>section>section>h2:first-of-type,
 section>section>section>section>h3:first-of-type,
 section>section>section>section>h4:first-of-type,
 section>section>section>section>h5:first-of-type,
-section>section>section>section>h6:first-of-type
-{
+section>section>section>section>h6:first-of-type {
   counter-increment: heading4; counter-reset: heading5;
   font-size: 1.50em;
 }
@@ -288,8 +298,7 @@ section>section>section>section>h2:first-of-type::before,
 section>section>section>section>h3:first-of-type::before,
 section>section>section>section>h4:first-of-type::before,
 section>section>section>section>h5:first-of-type::before,
-section>section>section>section>h6:first-of-type::before
-{
+section>section>section>section>h6:first-of-type::before {
   content: counter(heading1) "." counter(heading2) "." counter(heading3) "."
            counter(heading4) " ";
 }
@@ -299,8 +308,7 @@ section>section>section>section>section>h2:first-of-type,
 section>section>section>section>section>h3:first-of-type,
 section>section>section>section>section>h4:first-of-type,
 section>section>section>section>section>h5:first-of-type,
-section>section>section>section>section>h6:first-of-type
-{
+section>section>section>section>section>h6:first-of-type {
   counter-increment: heading5; counter-reset: heading6;
   font-size: 1.33em;
 }
@@ -309,8 +317,7 @@ section>section>section>section>section>h2:first-of-type::before,
 section>section>section>section>section>h3:first-of-type::before,
 section>section>section>section>section>h4:first-of-type::before,
 section>section>section>section>section>h5:first-of-type::before,
-section>section>section>section>section>h6:first-of-type::before
-{
+section>section>section>section>section>h6:first-of-type::before {
   content: counter(heading1) "." counter(heading2) "." counter(heading3) "."
            counter(heading4) "." counter(heading5) " ";
 }
@@ -320,8 +327,7 @@ section>section>section>section>section>section>h2:first-of-type,
 section>section>section>section>section>section>h3:first-of-type,
 section>section>section>section>section>section>h4:first-of-type,
 section>section>section>section>section>section>h5:first-of-type,
-section>section>section>section>section>section>h6:first-of-type
-{
+section>section>section>section>section>section>h6:first-of-type {
   /* 使っていなくてもheading7をリセットしないとheading6が増えないっぽい */
   counter-increment: heading6; counter-reset: heading7;
   font-size: 1.17em;
@@ -331,8 +337,7 @@ section>section>section>section>section>section>h2:first-of-type::before,
 section>section>section>section>section>section>h3:first-of-type::before,
 section>section>section>section>section>section>h4:first-of-type::before,
 section>section>section>section>section>section>h5:first-of-type::before,
-section>section>section>section>section>section>h6:first-of-type::before
-{
+section>section>section>section>section>section>h6:first-of-type::before {
   content: counter(heading1) "." counter(heading2) "." counter(heading3) "."
            counter(heading4) "." counter(heading5) "." counter(heading6) " ";
 }
@@ -345,6 +350,8 @@ table {
   /** centering **/
   margin-left: auto;
   margin-right: auto;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 /** Table color **/
 tbody>tr:nth-of-type(even) {
@@ -383,7 +390,7 @@ tbody>tr:last-of-type {
 }
 
 th, td {
-  word-wrap: break-all;
+  word-wrap: break-word;
 }
 
 /** Cross reference */
@@ -409,25 +416,31 @@ th, td {
   content: ")";
 }
 [href^="#fig:"]::before {
-  content: "図";
+  content: "Figure ";
 }
 [href^="#tab:"]::before {
-  content: "表";
+  content: "Table ";
 }
 [href^="#lis:"]::before {
-  content: "リスト";
+  content: "List ";
 }
 
 /** Font */
-p {text-indent: 1em;}
+body {
+  font-family: "TeX Gyre Heros", "FreeSans", "Migu 1P", "TakaoGothic", "VL Gothic", "Yu Gothic", "Meiryo UI", sans-serif;
+}
+p {
+  text-indent: 1em;
+  word-break: break-all;
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: "TeX Gyre Heros", "Migu 1P", "TakaoGothic", "VL Gothic", "Yu Gothic", "Meiryo UI", sans-serif;
   font-weight: bold;
   /* orange */
   /* background-color: rgb(100%,80%,0%); */
   background-color: #e6e6ff;
-  margin-top: 0em;
-  margin-bottom: 0em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 em, strong {
   color: red;
@@ -471,14 +484,15 @@ pre>code, pre>samp {
 }
 
 pre>code::before, pre>samp::before {
-  content: "   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100";
+  content: "0001000200030004000500060007000800090010001100120013001400150016001700180019002000210022002300240025002600270028002900300031003200330034003500360037003800390040004100420043004400450046004700480049005000510052005300540055005600570058005900600061006200630064006500660067006800690070007100720073007400750076007700780079008000810082008300840085008600870088008900900091009200930094009500960097009800990100";
   display: block;
-  width: 2.5em;
+  width: 2.4em;
   height: 100%;
   position: absolute;
   left: 0;
   white-space: pre-wrap;
   word-wrap: break-word;
+  overflow-wrap: break-word;
   word-break: break-all;
   overflow-y: hidden;
   border-right: 1px solid;
@@ -569,142 +583,249 @@ figure>dl>dd:nth-of-type(n+2) {
 .column-2 {
   width: 45%;
   display: inline-block;
-  vertical-align: top;
+  vertical-align: bottom;
   margin-left: 1em;
   margin-right: 1em;
 }
+.column-3 {
+  width: 30%;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.column-4 {
+  width: 20%;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+/** Show update date */
+[data-updated-date]::after {
+  color: gray;
+  font-size: 0.5em;
+  content: " Update: " attr(data-updated-date);
+}
+
+
+/** Page style */
+@page {
+  margin: 2cm;
+}
+
+/** Print style */
+@media print {
+  /* ShowerでPDF作成するときにChromiumでtheadが二重に表示される対策 */
+  thead {
+    display: table-row-group;
+  }
+
+  /* Show URL */
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+  a[href^="#"]::after,
+  a[href^="javascript"]::after {
+    content: "";
+  }
+}
+
     </style>
   </head>
   <body>
     <h1>GenerateTOC</h1>
     <main>
-      <p>HTML5の文章から明示的なセクション（<code>section&gt;h1-h6</code>）を抽出して目次を作成する。</p>
-      <p>単独ではXHTMLに変換できないので以下のサイトでXHTMLに変換する。
-      </p>
-      <p><a href="http://www.csgnetwork.com/cvthtml2xhtml.html">HTML To XHTML Code Converter</a></p>
-      <p>いくつか問題点がある。</p>
-      <ul>
-        <li>文字実態参照がうまく解釈できない。&lt;hoge&gt;みたいなのが，勝手に要素になってしまう。</li>
-        <li>h1-h6要素に二重引用符"が使われていると，目次のリンクのエスケープができずうまく機能しない。</li>
-      </ul>
-      <form>
-        <fieldset>
-          <legend>変換元HTML</legend>
-          <textarea id="input" placeholder="ここに記入してね。" style="width: 100%; height: 10em;">
+      <p>XHTML5の文章から<code>section</code>要素を使った<a href="https://www.w3.org/TR/html51/sections.html#headings-and-sections">明示的なセクション</a>見出し（<code>section&gt;h1-h6</code>）を抽出して目次を作成する。紹介記事：<a
+          href="http://myfuturesightforpast.blogspot.jp/2017/05/generatetoc-generator-for-table-of.html">GenerateTOC: Generator for Table of Contents from HTML Headings</a>。</p>
+      <nav>
+        <h2>Table of Contents</h2>
+        <ol>
+          <li><a href="#Input/Output-Form">Input/Output Form</a></li>
+          <li><a href="#Usage">Usage</a>
+            <ol>
+              <li><a href="#Brief">Brief</a></li>
+              <li><a href="#Details">Details</a></li>
+            </ol>
+          </li>
+          <li><a href="#Sample%20Input/Output">Sample Input/Output</a></li>
+        </ol>
+      </nav>
+      <p></p>
+      <section>
+        <h1 id="Input/Output-Form">Input/Output Form</h1>
+        <form>
+          <fieldset> <legend>Input HTML</legend> <textarea id="input"
+placeholder="Input here" style="width: 100%; height: 10em;"></textarea> <button
+              type="button" onclick="GenerateTOC();">Convert</button> </fieldset>
+        </form>
+        <form>
+          <fieldset> <legend>Output HTML</legend> <textarea id="output"
+placeholder="Output here" style="width: 100%; height: 10em;"></textarea> </fieldset>
+        </form>
+        <form>
+          <fieldset> <legend>Result View</legend> <output id="view"></output> </fieldset>
+        </form>
+      </section>
+      <section>
+        <h1 id="Usage">Usage</h1>
         <section>
-          <h3><a id="mozTocId931479" class="mozTocH3"></a>How to match grep command for all files including hidden files</h3>
-          <p><code>grep</code>コマンドでドット（.）で始まる隠しファイルを含む全ファイルを検索対象にするには，以下のどれかの書式を使う。</p>
-          <pre><code>grep -r "pattern" .[!.]* *<br />grep -r "pattern" .* * --exlucde-dir=..<br />## for bash dotglob and zsh glob_dots option enabled<br />grep -r "pattern" .[!.]* [!.]*<br />grep -r "pattern" * --exclude-dir=..</code></pre>
-          <section>
-            <h4><a id="mozTocId5597" class="mozTocH4"></a>Introduction</h4>
-          </section>
-          <p>ファイル内の文字列を検索するgrepコマンドをよく使う。ファイル名のパターンマッチであるglobを活用し，ワイルドカードの<code>*</code>と組み合わせて大量のファイルから文字列を検索できる。</p>
-          <p>しかし，globの<code>*</code>では<code>.</code>から始まる隠しファイルは検索対象にならない。つまり，以下ではドット（<code>.</code>）から始まる<code>.foo</code>，<code>.baz/baz</code>，<code>.baz/.baz</code>は検索にヒットしない。</p>
-          <pre><code>mkdir -p bar .baz<br />echo "1. file dot"             &gt;  foo<br />echo "2. file dot foo"         &gt; .foo<br />echo "3. file bar/dot bar"     &gt;  bar/bar<br />echo "4. file bar/dot bar"     &gt;  bar/.bar<br />echo "5. file dot baz/baz"     &gt; .baz/baz<br />echo "6. file dot baz/dot baz" &gt; .baz/.baz</code></pre>
-          <pre><code>grep -r "file" *</code></pre>
-          <pre><samp>bar/bar:3. file bar/dot bar
-bar/.bar:4. file bar/dot bar
-foo:1. file dot
-</samp></pre>
-          <p>globの<code>*</code>でこれらの隠しファイルにマッチさせる方法は2通りある。</p>
+          <h2 id="Brief">Brief</h2>
+          <p> </p>
           <ol>
-            <li><a href="#%E3%82%B7%E3%82%A7%E3%83%AB%E6%A9%9F%E8%83%BD%E3%82%92%E6%B4%BB%E7%94%A8">bashの<code>dotglob</code>やzshの<code>glob_dots</code>などシェル機能を活用。</a></li>
-            <li><a href="#%E3%83%AF%E3%82%A4%E3%83%AB%E3%83%89%E3%82%AB%E3%83%BC%E3%83%89%E3%82%92%E9%A7%86%E4%BD%BF">ワイルドカードを駆使。</a></li>
+            <li>［Input HTML］に目次を生成したいHTMLコードを記入する。</li>
+            <li>［Convert］を押下する。</li>
+            <li>［Output HTML］に目次とリンクの作成のために見出し要素（<code>h1-h6</code>）の<code>id</code>属性が記入されたHTMLコードが出力される。また，［Result View］に見出し追加後のHTMLコードの描画結果を表示する。</li>
           </ol>
-          <section>
-            <h4><a id="mozTocId41902" class="mozTocH4"></a>grepの隠しファイルへのマッチ方法</h4>
-            <section>
-              <h5 id="シェル機能を活用"><a id="mozTocId254935" class="mozTocH5"></a>シェル機能を活用</h5>
-              <p>bashとzshでは，ドット（.）から始まる隠しファイルにもglobの<code>*</code>がマッチできるようにするオプションがある。</p>
-              <p>以下のコマンドで機能をオンにできる。</p>
-              <pre><code>## bash (~/.bashrc)<br />shopt -s dotglob<br /><br />## zsh (~/.zshrc)<br />setopt glob_dots</code></pre>
-              <pre><code>grep -r "file" *</code></pre>
-              <pre><samp>.baz/baz:5. file dot baz/baz
-.baz/.baz:6. file dot baz/dot baz
-.foo:2. file dot foo
-bar/bar:3. file bar/dot bar
-bar/.bar:4. file bar/dot bar
-foo:1. file dot</samp></pre>
-              <p>ただ，これらの機能を設定ファイルで有効にしておくと，ターミナルからコマンドを入力したり，シェルスクリプトにも影響を与えるリスクがある。そのため，あまりこれらの機能を前提にしないほうがよいだろう。</p>
-            </section>
-            <section>
-              <h5 id="ワイルドカードを駆使"><a id="mozTocId960159" class="mozTocH5"></a>ワイルドカードを駆使</h5>
-              <p>シェルの設定に頼らずともワイルドカードを駆使すれば隠しファイルも検索対象に含めることはできる。例えば，<code>.</code>から始まるファイルは以下でマッチする。</p>
-              <pre><code>grep -r "file" .*</code></pre>
-              <p>しかし，上記コマンドは以下2点の理由から実行しないほうがいい。</p>
-              <ol>
-                <li><code>.*</code>は1階層上のディレクトリを意味する<code>..</code>にもマッチし，<strong>ファイルシステム全体を再帰的に検索</strong>してしまう。</li>
-                <li>隠しファイル以外のファイルにマッチしない。</li>
-              </ol>
-              <p>この2点をカバーするには，以下のように入力する。</p>
-              <pre><code>grep -r "file" .[!.]* *</code></pre>
-              <p>仕組みは以下のとおりだ。</p>
-              <ol>
-                <li>最初の<code>.[!.]*</code>で<code>..</code>を除く，<code>.</code>で始まる隠しファイルを検索対象とする。</li>
-                <li>最後の<code>*</code>で<code>.</code>で始まらないファイル（通常のglobの<code>*</code>の動作）を検索対象とする。</li>
-              </ol>
-              <p>なお，前述の<code>..</code>にマッチしてしまい，ファイルシステム全体を再帰的に検索することを回避するためにはgrepの<code>--exclude-dir</code>オプションで<code>..</code>を指定してもよい。</p><pre><code>grep -r "file" .* * --exclude-dir=..</code></pre>
-            </section>
-          </section>
-          <section>
-            <h4><a id="mozTocId728601" class="mozTocH4"></a>トラブルシューティング</h4>
-            <section>
-              <h5><a id="mozTocId133284" class="mozTocH5"></a>bashのdotglobとzshのglob_dots有効時の不具合</h5>
-              <p>grepでは検索対象を何回も指定できるが，間違えるとその分重複も発生するので注意する。つまり，ここでbashの<code>dotglob</code>のやzshの<code>glob_dots</code>を有効にしていると不都合が起きる。これらの機能を有効にすると，<code>*</code>が隠しファイルにもマッチするので，<code>.</code>で始まる隠しファイルが<em>2回マッチ</em>してしまう。</p>
-              <p>例えば，以下の<code>.a.dat</code>ファイルには2回ヒットする。</p>
-              <pre><code>bash<br />shopt -s dotglob<br /><br />echo "return" &gt; .a.dat<br />grep -r "return" .[!.]* *</code></pre>
-              <pre><samp>.a.dat:return<br />.a.dat:return</samp></pre>
-              <p>これを避けるには，grepの最後の<code>*</code>で隠しファイルを明示的に除外する。</p>
-              <pre><code>grep -r "return" .[!.]* [!.]*</code></pre>
-              <pre><samp>.a.dat:return</samp></pre>
-              <p>補足だが，grepでは<code>-e</code>オプションで一度に複数のキーワードを検索（OR検索）できる。</p>
-              <pre><code>grep -r -e "pattern1" .[!.]* * -e "pattern2"</code></pre>
-            </section>
-            <section>
-              <h5><a id="mozTocId179100" class="mozTocH5"></a>POSIXでの<code>[^...]</code>は未定義</h5>
-              <p>当初，以下の様にglobでのパターンマッチングに<code>!</code>ではなく<code>^</code>を使っていた。bashとzshでは動作したが，<code>sh</code>でうまく動作しなかった。</p>
-              <pre><code>grep -r "file" .[^.]* [^.]*</code></pre>
-              <p>気になって確認したところ，POSIXではワイルドカードにおける開き角括弧<code>[</code>の開始のサーカムフレックス<code>^</code>の動作（<code>[^...]</code>）は未定義のようなので，使用を控えたほうがよいだろう。</p>
-              <blockquote>
-                <p>A bracket expression starting with an unquoted &lt;circumflex&gt; character produces unspecified results. </p>
-                <p> <cite><a href="http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_13_01">Shell Command Language</a></cite> </p>
-              </blockquote>
-            </section>
-          </section>
-          <section>
-            <h4><a id="mozTocId441596" class="mozTocH4"></a>まとめ</h4>
-            <p>元々はVimでのgrep検索について調べていたのだが，気づいたらgrep検索についてはまってしまっていた。時間を余計に使ってしまったが，POSIXの仕様も確認できて勉強になった。</p>
-            <p>冒頭でも記載した通り，現在ディレクトリ以下の隠しファイルを含む全ファイルを対象に検索したければ，以下のどちらかの書式を使う。</p>
-            <pre><code>grep -r "pattern" .[!.]* *<br />## for bash dotglob and zsh glob_dots option enabled<br />grep -r "pattern" .[!.]* [!.]*</code></pre>
-            <p>2番目の書式の方がbashの<code>dotglob</code>とzshの<code>glob_dots</code>オプションに依存しないので，より確実だが，これらのオプションを考慮するのはやりすぎなような気もする。お好みで選べばよいだろう。</p>
-            <p>参考： </p>
-            <blockquote data-lang="ja" class="twitter-tweet">
-              <p lang="ja" dir="ltr">.<a href="https://twitter.com/senopen">@senopen</a> grepで一回で隠しファイルも含めて全てのファイルを検索対象にする方法を思いついた。<br />
-                grep -r hoge .[^.]* [^.]*<br />
-                ..を含むと再帰してとんでもないことになるので省かないといけない。<br />
-                少し考えたらすぐに出てくるような内容だけどね。</p>
-              — せのぺん (@senopen) <a href="https://twitter.com/senopen/status/735073026933284864">2016年5月24日</a></blockquote>
-          </section>
         </section>
-</textarea>
-          <button type="button" onclick="GenerateTOC();">変換</button>
-        </fieldset>
-      </form>
-      <form>
-        <fieldset>
-          <legend>変換後HTML</legend>
-          <textarea id="output" placeholder="ここに表示される。" style="width: 100%; height: 10em;"></textarea>
-        </fieldset>
-      </form>
-      <form>
-        <fieldset>
-          <legend>表示結果</legend>
-          <output id="view"></output>
-         </fieldset>
-      </form>
+        <section>
+          <h2 id="Details">Details</h2>
+          <p>入力として，ルートに<code>section</code>要素を持つXHTMLを与える。 </p>
+          <p>空要素に終端スラッシュがなかったり，XMLで認められない構文を使っているHTMLを使う場合は，事前に例えば以下のサイトでHTMLをXHTMLに変換しておく。 </p>
+          <blockquote>
+            <p><a href="http://www.csgnetwork.com/cvthtml2xhtml.html">HTML To XHTML Code Converter</a></p>
+          </blockquote>
+          <p>目次には，<code>section</code>要素を使った<strong><a href="https://www.w3.org/TR/html51/sections.html#headings-and-sections">明示的な見出し</a>のみを対象</strong>とする。<code>section</code>要素を使わずに，<code>h1-h6</code>要素を単独で使った<em>暗黙的な見出しは目次の対象外</em>となる。</p>
+          <figure><figcaption>Sample of Target HTML</figcaption>
+            <pre><code>&lt;section&gt;
+	&lt;h1&gt;Heading 1&lt;/h1&gt;
+	&lt;section&gt;
+		&lt;h2&gt;Heading 2&lt;/h2&gt;
+	&lt;/section&gt;
+&lt;/section&gt;
+</code></pre> </figure>
+          <p></p>
+          <figure> <figcaption>Sample of non-Target HTML</figcaption>
+            <pre><code>&lt;h1&gt;Heading 1&lt;/h1&gt;<br />&lt;h2&gt;Heading 2&lt;/h2&gt; </code></pre>
+</figure><p>目次の生成は，2個目の<code>section</code>要素（<code>section&gt;section</code>）の直前に，見出しへのリンクが付けられた番号付きリスト（<code>ol&gt;li</code>要素）を含む<code>nav</code>要素を挿入することで行う。 </p><figure>
+<figcaption>Place of Table of Contents</figcaption>
+<pre><code>&lt;section&gt;
+	&lt;h1&gt;Heading 1&lt;/h1&gt;
+	&lt;!-- Here is the place table of contents is inserted by nav element. --&gt;
+	&lt;section&gt;
+		&lt;h2&gt;Heading 2&lt;/h2&gt;
+	&lt;/section&gt;
+&lt;/section&gt;
+</code></pre>
+</figure><p></p><p>見出しへのリンクを作るために，<code>section&gt;h1-h6</code>要素の<code>id</code>属性に，実行日時（<code>YYYYMMDDThhmm</code>形式）とテキストの空白をハイフン<code>-</code>に置換した値を<strong>上書き</strong>で設定する。</p>
+                          <p>Example: <code>&lt;h1&gt;Heading 1&lt;/h1&gt;</code> -&gt; <code>&lt;h1 id="20170506T04:30_Heading-1"&gt;Heading 1&lt;/h1&gt;</code></p>
+                          <p>その際に，以下の文字はエスケープ処理が難しいので<code>id</code>属性からは削除する。</p>
+                          <pre><code>~^`'"(){}\\|!&amp;&lt;&gt;</code></pre><p>目次の見出しは最初の目次対象の見出しと同じ<code>h1-h6</code>要素を使い，テキストは<code>Table of Contents</code>となる。</p><p>［Convert］ボタンを押下して何も反応がないときは，HTMLをうまく処理できていない可能性が高い。例えば，ルートの<code>section</code>要素の終了タグを記入し忘れるなど，［Input HTML］に記入したHTMLがXHTMLとして適切かどうか確認したほうがいい。</p><pre><code></code></pre></section></section><section>
+                        <h1 id="Sample-Input/Output">Sample Input/Output</h1>
+                        <p> </p>
+                        <ul>
+                        </ul>
+                        <table border="1" style="width: 100%;">
+                          <caption>Sample Input and Output</caption>
+                          <thead>
+                            <tr>
+                              <th><br />
+                              </th>
+                              <th>Input</th>
+                              <th>Output</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Source</td>
+                              <td>
+                                <pre><code>&lt;section&gt;
+  &lt;h1&gt;Title&lt;/h1&gt;<br />  &lt;section&gt;
+    &lt;h2&gt;Heading 1~^`"'(){}\|!&amp;amp;&amp;lt;&amp;gt;[]=-+*/%;:.,?$#@_&lt;/h2&gt;
+    &lt;section&gt;
+      &lt;h3&gt;Heading 1-1&lt;/h3&gt;
+    &lt;/section&gt;
+    &lt;section&gt;
+      &lt;h3&gt;Heading 1-2&lt;/h3&gt;
+    &lt;/section&gt;
+  &lt;/section&gt;
+  &lt;section&gt;
+    &lt;h2&gt;Heading 2&lt;/h2&gt;
+  &lt;/section&gt;
+&lt;/section&gt;</code></pre>
+            </td>
+            <td>
+              <pre><code>&lt;section xmlns="http://www.w3.org/1999/xhtml"&gt;
+  &lt;h1 id="20170505T0118_Title"&gt;Title&lt;/h1&gt;
+  &lt;nav&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href="#20170505T0118_Heading-1[]=-+*/%;:.,?$#@_"&gt;Heading 1~^`"'(){}\|!&amp;amp;&amp;lt;&amp;gt;[]=-+*/%;:.,?$#@_&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="#20170505T0118_Heading-1-1"&gt;Heading 1-1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#20170505T0118_Heading-1-2"&gt;Heading 1-2&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#20170505T0118_Heading-2"&gt;Heading 2&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/nav&gt;
+&lt;section&gt;
+    &lt;h2 id="20170505T0118_Heading-1[]=-+*/%;:.,?$#@_"&gt;Heading 1~^`"'(){}\|!&amp;amp;&amp;lt;&amp;gt;[]=-+*/%;:.,?$#@_&lt;/h2&gt;
+    &lt;section&gt;
+      &lt;h3 id="20170505T0118_Heading-1-1"&gt;Heading 1-1&lt;/h3&gt;
+    &lt;/section&gt;
+    &lt;section&gt;
+      &lt;h3 id="20170505T0118_Heading-1-2"&gt;Heading 1-2&lt;/h3&gt;
+    &lt;/section&gt;
+  &lt;/section&gt;
+  &lt;section&gt;
+    &lt;h2 id="20170505T0118_Heading-2"&gt;Heading 2&lt;/h2&gt;
+  &lt;/section&gt;
+&lt;/section&gt;</code></pre>
+            </td>
+          </tr>
+          <tr>
+            <td>View</td>
+            <td>
+              <section>
+                <h1>Title</h1>
+                <section>
+                  <h2>Heading 1~^`"'(){}\|!&amp;&lt;&gt;[]=-+*/%;:.,?$#@_</h2>
+                  <section>
+                    <h3>Heading 1-1</h3>
+                  </section>
+                  <section>
+                    <h3>Heading 1-2</h3>
+                  </section>
+                </section>
+                <section>
+                  <h2>Heading 2</h2>
+                </section>
+              </section>
+            </td>
+            <td>
+              <section xmlns="http://www.w3.org/1999/xhtml">
+                <h1 id="20170505T0118_Title">Title</h1>
+                <nav>
+                  <h2>Table of Contents</h2>
+                  <ol><li><a href="#20170505T0118_Heading-[]=-+*/%;:.,?$#@_">Heading 1~^`"'(){}\|!&amp;&lt;&gt;[]=-+*/%;:.,?$#@_</a>
+                      <ol><li><a href="#20170505T0118_Heading-1-1">Heading 1-1</a></li><li><a
+href="#20170505T0118_Heading-1-2">Heading 1-2</a></li></ol>
+                    </li><li><a href="#20170505T0118_Heading-2">Heading 2</a></li></ol>
+                </nav>
+                <section>
+                  <h2 id="20170505T0118_Heading-[]=-+*/%;:.,?$#@_">Heading 1~^`"'(){}\|!&amp;&lt;&gt;[]=-+*/%;:.,?$#@_</h2>
+                  <section>
+                    <h3 id="20170505T0118_Heading-1-1">Heading 1-1</h3>
+                  </section>
+                  <section>
+                    <h3 id="20170505T0118_Heading-1-2">Heading 1-2</h3>
+                  </section>
+                </section>
+                <section>
+                  <h2 id="20170505T0118_Heading-2">Heading 2</h2>
+                </section>
+              </section>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p></p></section>
+                      
     </main>
     <footer>
-      <p> <small>Author: SENOO, Ken;  License: CC0; Created date: <time>2016-05-21</time></small></p>
+      <p> <small>Author: SENOO, Ken (<a href="https://twitter.com/senopen">@senopen</a>). License: CC0. Created date: <time>2017-05-06.</time></small></p>
     </footer>
-  </body>
+</body>
 </html>
