@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+.slide {
+  padding: 1em;
+}
+
+.slide::after {
+  padding-top: 0.5em;
+  right: 0.5em;
+  height: 4em;
+  width: 2em;
+  background: none;
+  color: black;
+}
+
+.slide {
+  font-size: 0.5em;
+}
+
+.slide table {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+
+.slide table th:first-child {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+.slide table td:first-child {
+  padding: 0;
+}
+
+.slide table th:last-child {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+.slide table td:last-child {
+  padding: 0;
+}
+
+
+/* List */
+.slide ul li {
+  text-indent: 0;
+}
+.slide ul {
+  margin: 0.5em;
+}
+
+.shower dt {
+  font-weight: bold;
+}
+
+.slide pre code {
+  margin-left: 0;
+  width: 100%;
+  line-height: 1.2;
+}
+
+li {
+  padding-left: 2em;
+}

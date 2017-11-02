@@ -1,0 +1,273 @@
+Paper submitted for the Linux200.nl conference, 9-10 Oct 2000 in Ede
+
+
+			 The continuing story of Vim
+			      by Bram Moolenaar
+
+
+The development of Vim (Vi IMproved) started in 1988 as a small program for
+the Amiga, used by one person.  It is now included with every Linux
+distribution and has been given an award for the best open-source text editor.
+This article will discuss the current status of Vim, placing it in the context
+of the past and the future.
+
+
+Vi compatible
+-------------
+
+Vim started as a replacement for Vi on the Amiga.  Being used to Vi on Unix
+systems, the author wanted to use this powerful editor on his newly obtained
+Amiga too.  There was a program called "Stevie", which lacked many commands
+and contained bugs; but since the source code was available, it was possible
+to enhance the program.  Gradually more Vi commands were added and problems
+fixed.  Then new useful commands were added that Vi didn't have: multi-level
+undo, text formatting, multiple windows, etc.  At that point it was renamed
+from "Vi IMitation" to "Vi IMproved".
+
+But Vim still tries to be very Vi compatible, if that is what you want.  For
+most commands you will not notice any difference between Vi and Vim.  But some
+Vi commands work in a clumsy way and some may be considered a leftover from
+the old days of slow computers and teletypes.  Here Vim gives the user a
+choice of doing it the old Vi way, or doing it in an improved Vim way.
+
+For example, in Vi the "u" command toggles the text between the situation
+before and after a change.  Vim offers multi-level undo.  What commands to use
+to get to the multiple levels?  One way would be to use the "." command to
+repeat the "u" command.  Nvi follows this approach.  But this is not Vi
+compatible: Typing "xxu." in Vi deletes two characters: The "u" undoes one "x"
+and the "." repeats one "x" again.  In Nvi the "." repeats the undo, thus both
+"x" commands are undone and you end up with no change.
+
+The author of Vim doesn't like these unexpected and obscure incompatibilities.
+Another solution would be to use another command to repeat the undo or redo.
+In Vim this is CTRL-R, "R" for "repeat".  Thus "xxu^R" is used to undo both
+"x" commands.  This is both Vi compatible and offers the multi-level undo
+feature.  Still, typing CTRL-R requires using two fingers.  Since undo is an
+often used function, it should be easy to type.
+
+Many people prefer to repeat the "u" command to undo more.  Then CTRL-R is
+used to redo the undone commands.  Thus "u" goes backwards in time and CTRL-R
+forward again.  Since this is not compatible with Vi, it has to be switched on
+with an option.
+
+What a user prefers often depends on his previous experience.  If he has used
+Vi for many years, his fingers are trained to hit "u" and expect the last
+change to be toggled.  But people who start with Vim find it strange that "u"
+toggles and prefer it to always perform an undo.  For these matters of user
+preference Vim offers an option.
+
+In Vim you can set "nocompatible", to make Vim behave more nicely, but in a
+not fully Vi compatible way.  If you want, you can carefully tune each
+compatibility aspect by adding flags to the 'cpoptions' option.  This is a
+typical Vim choice: offer a good default to make most people happy, and add
+options to allow tuning the behavior for personal preferences.
+
+The current version of Vim is very much Vi compatible.  One of the last things
+that has been added was the Ex mode and the "Q" command.  Not many people use
+Ex mode, it was added to be able to execute old Vi scripts.  One thing that's
+still missing is the open mode.  Since this is really only useful when you are
+using a very primitive terminal, hardly anyone will miss this - most Vi users
+don't even know what it is.
+
+There are still a number of small incompatibilities to be solved - you could
+call these bugs.  Work on these continues, but it's very likely that Vim
+already contains less bugs for Vi commands than Vi itself.
+
+
+Programmers aide
+----------------
+
+Many of the features that have been added to Vim over time are for
+programmers.  That's not unexpected, since Vim is often used to edit
+programming languages and similar structured text, and the author himself does
+a lot of programming.
+
+One of the first programming aids to be added was the "quickfix" feature.
+This was actually present in the Vi-like editor "Z" that came with the Amiga C
+compiler from Manx.  Since it was very useful, it was added to Vim, using the
+"Z" editor as an example.
+
+The "quickfix" feature allows the programmer to compile his code from within
+Vim and quickly fix the reported errors.  Instead of making the user write
+down the line numbers and messages from the compiler, Vim parses the compiler
+output and takes the user directly to the location of the error, putting the
+cursor at the position where the error was reported.  You can fix the problem
+and compile again with just a few commands.  There are commands to jump to the
+next error, list all errors, etc.  An option is used to specify how to parse
+the messages from the compiler, so that it can work with many different
+compilers.
+
+"quickfix" also works with a command like "grep", which outputs lines with a
+file name and line number.  This can be used to search for a variable and all
+places where it's used in the code, comments and documentation.  Not only does
+this reduce the time needed to make changes, it also minimizes the risk of
+missing a location.
+
+When editing programs you will type text once and read it many times.
+Therefore it is very important to easily recognize the structure of the code.
+Since everybody uses his own style of coding, and not everyone pays enough
+attention to the layout, the code may take time to understand.  Highlighting
+items in the text can be of help here.  For example, by making all comments
+blue it is easy to spot a short statement in between long comments.  It's also
+easier to recognize the structure of the file when quickly paging through it.
+
+Highlighting keywords can help spotting errors.  The author has a tendency to
+type "#defined" instead of "#define".  With highlighting switched on, the
+first one stays black, while the second one becomes brown.  That makes it easy
+to see this mistake when it happens.  Unmatched closing parentheses can be
+marked as an error, with a red background.  That is a great help when changing
+a complicated "if" statement or Lisp code.
+
+Highlighting is also useful for the last used search pattern.  For example,
+when searching for the "idx" variable in a function, all its occurrences in
+the code will get a yellow background.  That makes it very easy to see where
+it is used and check where its value is changed.
+
+The syntax highlighting is completely adjustable.  Everybody can add his own
+language if it's not already included with the Vim distribution.  But since
+there are syntax files for about 200 languages now, mostly you just have to
+switch the syntax highlighting on and your files are coloured.  Thanks to all
+the people who have submitted and are maintaining syntax files for everybody
+to use.
+
+
+Folding
+-------
+
+In 1998 Vim 5.0 was released.  The question was: What next?  A survey was held
+to ask Vim users which features they would like to see added to Vim.  This is
+the resulting top ten:
+
+1.  add folding (display only a selected part of the text) (*)
+2.  vertically split windows (side-by-side) (*)
+3.  add configurable auto-indenting for many languages (like 'cindent') (*)
+4.  fix all problems, big and small; make Vim more robust (+)
+5.  add Perl compatible search pattern
+6.  search patterns that cross line boundaries (*)
+7.  improve syntax highlighting speed (*)
+8.  improve syntax highlighting functionality (+)
+9.  add a menu that lists all buffers (*)
+10. improve the overall performance (+)
+
+The goal for Vim 6.0 was to implement a number of these items - at least the
+top three - and this has actually taken place.  The items marked with (*) have
+been implemented in Vim 6.0.  The items marked with (+) are on-going
+activities.  The number one requested feature deserves more explanation.
+
+Folding means that a range of lines is displayed as one line, with a text like
+"34 lines folded: get_arguments()", but the actual text is still there and can
+be seen by opening the fold.  It is as if the text were on a long roll of
+paper, which can be folded to hide the contents of each chapter, so that you
+only see the chapter titles.  This gives a very good overview of what a file
+contains.  A number of large functions, occupying thousands of lines, can be
+viewed as a list of function names, one per line.  You can move to the
+function you want to see and open the fold.
+
+Adding folding was a lot of work.  It has impact on all parts of Vim.  The
+displaying of text is different, and many commands work differently when the
+cursor is in a fold, but it mostly works now.  And there are actually several
+ways to use folding:
+1. Manually: use commands to create and delete folds.  This can also be used
+   in a function to fold your text in any way you like.
+2. On syntax: use the syntax highlighting mechanism to recognize different
+   items in the text and define folds with it.
+3. On indent: the further a line is indented the deeper it will be folded.
+4. By expression: define an expression that tells how deep a line is folded.
+5. By markers: put markers in the text to specify where a fold starts and
+   ends.
+
+Why so many different ways?  Well, because the preferred way of folding
+depends on both the file you are editing and the desires of the user.  Folding
+with markers is very nice to precisely define what a fold contains.  For
+example, when defining a fold for each function, a comment in between
+functions could belong to the previous or the next function.  But if you edit
+files in a version-controlled project, you are probably not allowed to add
+markers.  Then you can use syntax folding, because it works for any file in a
+certain language, but doesn't allow you to change where a fold starts or ends.
+A compromise is to first define folds from the syntax and then manually adjust
+them.  But that's more work.
+
+Thus the way folding was implemented in Vim is very flexible, to be able to
+adjust to the desires of the user.  Some related items have not been
+implemented yet, like storing the folding state of a file.  This is planned to
+be added soon, before version 6.0 goes into beta testing.
+
+
+Indenting
+---------
+
+Giving a line the right indent can be a lot of work if you do it manually.
+The first step in doing this automatically is by setting the 'autoindent'
+option.  Vi already had it.  It simply indents a line by the same amount as
+the previous line.  This still requires that you add space below an "if"
+statement and reduce space for the "else" statement.
+
+Vim's 'cindent' option does a lot more.  For C programs it indents just as you
+expect.  And it can be tuned to follow many different indenting styles.  It
+works so well that you can select a whole file and have Vim reindent it.  The
+only place where manual correction is sometimes desired is for continuation
+lines and large "if" statements.  But this only works for C code and similar
+languages like C++ and Java.
+
+Only recently a new, flexible way of indenting has been added.  It works by
+calling a user defined function that returns the preferred indent.  The
+function can be as simple or as complex as the language requires.  Since this
+feature is still new, only indenting for Vim scripts is currently included in
+the distribution.  Hopefully people will write indent functions for many
+languages and submit them to be included in the distribution, so that you can
+indent your file without having to write an indent function yourself.
+
+A disadvantage of using a user defined function is that it is interpreted,
+which can be a bit slow.  A next step would be to compile the function in some
+way to be able to execute it faster.  But since computers keep getting faster,
+and indenting manually is slow too, the current interpreted functions are very
+useful already.
+
+
+Charityware
+-----------
+
+Vim has always been an open-source program and can be used for free, even
+though it rivals many commercial editors.  Being open-source is essential for
+Vim, otherwise it would be impossible for many people to work together on
+improvements and making ports to other operating systems.  And asking money
+for a program that you can download for free is difficult.  Instead, Vim can
+be used for free, but the user is asked to consider sending the money it's
+worth to a good cause.
+
+The author got to know a project in the south of Uganda that is located in an
+area of poor farmers.  AIDS has hit hard, and many parents die, leaving behind
+their children.  The centre helps these orphans through a sponsorship program.
+There is a school, a medical centre, training for teachers, etc.  The author
+worked at the centre for a year and has seen that the aid sent there really
+helps.  There is medical help for the sick and food aid to meet the people's
+direct needs.  But the work mainly concentrates around education, in the hope
+that one day these people can take care of themselves.
+
+Then the idea popped up to ask Vim users to consider donating to the project.
+Not only will this help the lives of these children, it also makes people
+aware of the problems in Uganda and the struggle of these people to survive.
+The contrast of the wealthy computer user and the poor orphan in his mud hut
+may be extreme, but it just asks for some equalisation.
+
+More information about the project and ICCF Holland can be found at
+http://iccf-holland.org.
+
+
+Vim version 6.0 is currently in alpha testing.  New features are still being
+added and bugs in recently added commands are being fixed.  Hopefully Vim 6.0
+will be released to the world before the end of 2000.
+
+More information about Vim can be found at http://www.vim.org.  You can
+download it from ftp://ftp.vim.org/pub/vim.
+
+
+About the author
+
+Bram Moolenaar is the main author of Vim.  He writes the core Vim
+functionality and selects what code submitted by many others is included.  He
+graduated at the technical university of Delft as a computer technician.  Now
+he mainly works on software, but still knows how to handle a soldering iron.
+He is founder and treasurer of ICCF Holland, which helps orphans in Uganda.
+He does free-lance work as a systems architect, but actually spends most time
+working on Vim.
