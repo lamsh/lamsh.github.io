@@ -65,6 +65,14 @@ table>tbody>tr.alert:nth-of-type(n) {
   background-color: red;
   background-image: linear-gradient( hsla( 0,0%,100%,0.9 ), hsla( 0,0%,100%,0.9 ) );
 }
+table>tbody>tr.structure:nth-of-type(n) {
+  background-color: blue;
+  background-image: linear-gradient( hsla( 0,0%,100%,0.9 ), hsla( 0,0%,100%,0.9 ) );
+}
+table>tbody>tr.example:nth-of-type(n) {
+  background-color: green;
+  background-image: linear-gradient( hsla( 0,0%,100%,0.9 ), hsla( 0,0%,100%,0.9 ) );
+}
 
 th, td {
   line-height: 1.1em;
