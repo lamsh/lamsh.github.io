@@ -21,6 +21,11 @@ strong {background-color: yellow;}
 .alert, .example, .structure {
   background-image: linear-gradient( hsla( 0,0%,100%,0.2 ), hsla( 0,0%,100%,0.2 ) );
 }
+
+.body {
+  background-image: linear-gradient( hsla( 0,0%,100%,0.9 ), hsla( 0,0%,100%,0.9 ) );
+}
+
 /*** Reset border */
 table.alert, table.example, table.structure {
   border: none;
@@ -41,16 +46,38 @@ table.alert, table.example, table.structure {
   background-image: linear-gradient( hsla( 0,0%,100%,0.9 ), hsla( 0,0%,100%,0.9 ) );
 }
 
+
+
+
 /** Table color **/
-table.stripe tbody>tr:nth-of-type(even) {
+table.stripe>tbody>tr:nth-of-type(even) {
   background: hsla( 60,100%,50%,0.5 );
 }
-table.stripe thead>tr>th {
+.slide table.stripe>thead>tr>th {
   background: hsla( 30,100%,50%,0.5 );
   text-align: center;
   font-weight: bold;
   color: white;
 }
+
+/* table>tbody>tr.alert:nth-of-type(even) { */
+table>tbody>tr.alert:nth-of-type(n) {
+  background-color: red;
+  background-image: linear-gradient( hsla( 0,0%,100%,0.9 ), hsla( 0,0%,100%,0.9 ) );
+}
+
+th, td {
+  line-height: 1.1em;
+}
+td {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+p {
+  line-height: 1em;
+}
+
 
 /** Line number for source code */
 .slide kbd, .slide code, .slide samp, .slide var {
@@ -97,13 +124,34 @@ var {
   border-right: 1px solid;
 }
 
-/** Show update date */
-[data-updated-date]::after {
-  color: gray;
-  font-size: 0.5em;
-  content: " Update: " attr(data-updated-date);
+/** Blockquote */
+blockquote {
+  background-color: #eee;
+  padding: 1.0em;
+  padding-bottom: 1em;
+  padding-left: 4em;
+  position: relative;
+}
+blockquote::before {
+  content: "“";
+  font-size: 600%;
+  line-height: 1em;
+  font-family: serif;
+  color: #999;
+  position: absolute;
+  left: 0.3em;
+  top: 0;
+}
+blockquote p {
+  margin: 0;
 }
 
+figure blockquote~figcaption::before {
+  content: "—";
+}
+figure blockquote~figcaption {
+  text-align: right;
+}
 
 /** Page style */
 @page {

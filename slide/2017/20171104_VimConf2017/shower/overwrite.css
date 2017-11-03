@@ -14,7 +14,7 @@
 }
 
 .slide {
-  font-size: 0.5em;
+  font-size: 0.8em;
 }
 
 .slide table {
@@ -29,6 +29,8 @@
 }
 .slide table td:first-child {
   padding: 0;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .slide table th:last-child {
@@ -37,6 +39,10 @@
 }
 .slide table td:last-child {
   padding: 0;
+}
+
+.slide table tr:not(:last-of-type) > * {
+  background: none;
 }
 
 
@@ -59,10 +65,30 @@
 }
 
 li {
-  padding-left: 2em;
+  padding-left: 1em;
+  line-height: 1.5em;
+}
+.slide ul, .slide ol {
+  margin-top: 0em;
+  margin-bottom: 0.5em;
 }
 
 dd {
   padding-left: 2em;
+}
+
+blockquote {
+  margin-left: 3em;
+  margin-bottom: 1em;
+  line-height: 1.2em;
+}
+
+.slide p {
+  margin-bottom: 0.5em;
+}
+
+
+#cover::after {
+  visibility: hidden;
 }
 
