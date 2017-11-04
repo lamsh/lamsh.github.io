@@ -28,7 +28,7 @@ strong {background-color: yellow;}
 
 /*** Reset border */
 table.alert, table.example, table.structure {
-  border: none;
+  border-width: 0;
   border-collapse: collapse;
   border-spacing: 0px;
 }
@@ -161,18 +161,6 @@ figure blockquote~figcaption {
   text-align: right;
 }
 
-/** Page style */
-@page {
-  size: A4 portrait;
-  margin: 2cm;
-
-  @top-left {content: "Chapter";}
-  @top-center {content: "Title";}
-  @top-right {content: "Section";}
-  @bottom-left {content: "SENOO, Ken";}
-  @bottom-center {content: "- " counter(page) "/" counter(pages) " -";}
-  @bottom-right {content: "Date";}
-}
 
 /** Print style */
 @media print {
